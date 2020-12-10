@@ -56,6 +56,7 @@ class _SplashScreenState extends State<SplashScreen>
               child: Lottie.asset(
                 'assets/lottie/work-from-home.json',
                 controller: _controller,
+                frameRate: FrameRate(60),
                 repeat: true,
                 onLoaded: (composition) {
                   _controller..duration = composition.duration;
@@ -63,7 +64,7 @@ class _SplashScreenState extends State<SplashScreen>
               ),
             ),
             SizedBox(
-              height: 50.0,
+              height: 80.0,
             ),
             Text(
               'Taskly',
