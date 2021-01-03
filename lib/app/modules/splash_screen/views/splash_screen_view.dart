@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 import 'package:taskly/app/modules/splash_screen/controllers/splash_screen_controller.dart';
+import 'package:taskly/app/theme/color_theme.dart';
 import 'package:taskly/app/theme/text_theme.dart';
 
 class SplashScreenView extends GetView<SplashScreenController> {
@@ -31,7 +32,7 @@ class SplashScreenView extends GetView<SplashScreenController> {
               Text(
                 'Taskly',
                 style: kHeadTextStyle.copyWith(
-                  color: Color(0xff322f3d),
+                  color: primaryGrey,
                 ),
               ),
             ],

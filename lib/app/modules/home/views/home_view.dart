@@ -16,9 +16,21 @@ class HomeView extends GetView<HomeController> {
           ),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: size.width * 0.065),
-            child: Text(
-              'Hello, Jobin',
-              style: kSubHeadTextStyle,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Text(
+                  'Hello, Jobin',
+                  style: kSubHeadTextStyle,
+                ),
+                CircleAvatar(
+                  radius: size.width * 0.055,
+                  backgroundImage: NetworkImage(
+                    'https://img.icons8.com/color/48/000000/circled-user-male-skin-type-6--v1.png%22',
+                  ),
+                ),
+              ],
             ),
           ),
         ],

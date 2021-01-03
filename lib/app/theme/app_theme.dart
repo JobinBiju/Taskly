@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:taskly/app/theme/color_theme.dart';
 
 enum AppTheme {
@@ -14,11 +13,12 @@ final appThemeData = {
     brightness: Brightness.light,
     primaryColor: primaryYellow,
     scaffoldBackgroundColor: white1,
-    textTheme: GoogleFonts.latoTextTheme(),
+    primaryColorLight: secondaryGrey,
   ),
   AppTheme.YellowDark: ThemeData(
     brightness: Brightness.dark,
     primaryColor: secondaryYellow,
     scaffoldBackgroundColor: primaryGrey,
+    primaryColorDark: white2,
   ),
 };
