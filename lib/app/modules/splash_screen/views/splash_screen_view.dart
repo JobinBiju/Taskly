@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 import 'package:taskly/app/modules/splash_screen/controllers/splash_screen_controller.dart';
 
@@ -30,12 +29,10 @@ class SplashScreenView extends GetView<SplashScreenController> {
               ),
               Text(
                 'Taskly',
-                style: GoogleFonts.lato(
-                  textStyle: TextStyle(
-                    fontSize: 40.0,
-                    fontWeight: FontWeight.w700,
-                    color: Color(0xff322f3d),
-                  ),
+                style: TextStyle(
+                  fontSize: 40.0,
+                  fontWeight: FontWeight.w700,
+                  color: Color(0xff322f3d),
                 ),
               ),
             ],

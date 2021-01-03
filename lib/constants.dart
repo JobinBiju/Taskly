@@ -6,7 +6,7 @@ const kHeadTextStyle = TextStyle(
   height: 1.2,
 );
 const kSubHeadTextStyle = TextStyle(
-  fontSize: 28,
+  fontSize: 26,
   fontWeight: FontWeight.w400,
   height: 1.2,
 );
