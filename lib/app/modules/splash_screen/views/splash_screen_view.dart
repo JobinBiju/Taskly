@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 import 'package:taskly/app/modules/splash_screen/controllers/splash_screen_controller.dart';
+import 'package:taskly/app/theme/text_theme.dart';
 
 class SplashScreenView extends GetView<SplashScreenController> {
   @override
@@ -29,9 +30,7 @@ class SplashScreenView extends GetView<SplashScreenController> {
               ),
               Text(
                 'Taskly',
-                style: TextStyle(
-                  fontSize: 40.0,
-                  fontWeight: FontWeight.w700,
+                style: kHeadTextStyle.copyWith(
                   color: Color(0xff322f3d),
                 ),
               ),
