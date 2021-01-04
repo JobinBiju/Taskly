@@ -10,3 +10,9 @@ const kSubHeadTextStyle = TextStyle(
   fontWeight: FontWeight.w400,
   height: 1.2,
 );
+
+const kSub2HeadTextStyle = TextStyle(
+  fontSize: 18,
+  fontWeight: FontWeight.w400,
+  height: 1.2,
+);

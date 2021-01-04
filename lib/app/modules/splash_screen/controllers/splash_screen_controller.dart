@@ -5,7 +5,6 @@ import 'package:get/get.dart';
 
 class SplashScreenController extends GetxController
     with SingleGetTickerProviderMixin {
-  //TODO: Implement SplashScreenController
   AnimationController animationController;
 
   final count = 0.obs;

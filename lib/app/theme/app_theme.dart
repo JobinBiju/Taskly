@@ -13,12 +13,14 @@ final appThemeData = {
     brightness: Brightness.light,
     primaryColor: primaryYellow,
     scaffoldBackgroundColor: white1,
-    primaryColorLight: secondaryGrey,
+    primaryColorLight: white2,
+    primaryColorDark: secondaryGrey,
   ),
   AppTheme.YellowDark: ThemeData(
     brightness: Brightness.dark,
     primaryColor: secondaryYellow,
     scaffoldBackgroundColor: primaryGrey,
     primaryColorDark: white2,
+    primaryColorLight: secondaryGrey,
   ),
 };
