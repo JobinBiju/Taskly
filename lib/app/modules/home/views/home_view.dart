@@ -27,7 +27,7 @@ class HomeView extends GetView<HomeController> {
                 CircleAvatar(
                   radius: size.width * 0.055,
                   backgroundImage: NetworkImage(
-                    'https://img.icons8.com/color/48/000000/circled-user-male-skin-type-6--v1.png%22',
+                    'https://img.icons8.com/color/48/000000/user-male-circle--v1.png',
                   ),
                 ),
               ],
