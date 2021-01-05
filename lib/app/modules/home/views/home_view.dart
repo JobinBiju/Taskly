@@ -67,57 +67,61 @@ class HomeView extends GetView<HomeController> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {},
-        child: Icon(Icons.add),
+        child: Icon(
+          Icons.add,
+          color: Theme.of(context).primaryColorDark,
+        ),
         backgroundColor: Theme.of(context).primaryColor,
-        elevation: 5,
+        elevation: 3,
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
-      bottomNavigationBar: BubbleBottomBar(
-        opacity: 0,
-        fabLocation: BubbleBottomBarFabLocation.end,
-        currentIndex: controller.currentIndex,
-        backgroundColor: Theme.of(context).primaryColorLight,
-        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
-        hasInk: true,
-        elevation: 10,
-        inkColor: Colors.black12,
-        hasNotch: true,
-        onTap: (v) {
-          Get.put(controller.currentIndex = v);
-          Get.forceAppUpdate();
-        },
-        items: [
-          BubbleBottomBarItem(
-            backgroundColor: Colors.grey,
-            title: Text('Home'),
-            icon: Icon(
-              FontAwesomeIcons.home,
-              color: Theme.of(context).primaryColorDark,
+      bottomNavigationBar: Obx(
+        () => BubbleBottomBar(
+          opacity: 0,
+          fabLocation: BubbleBottomBarFabLocation.end,
+          currentIndex: controller.currentIndex.value,
+          backgroundColor: Theme.of(context).primaryColorLight,
+          borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
+          hasInk: false,
+          elevation: 7,
+          inkColor: Colors.black54,
+          hasNotch: true,
+          onTap: (v) {
+            controller.currentIndex.value = v;
+          },
+          items: [
+            BubbleBottomBarItem(
+              backgroundColor: Colors.grey,
+              title: Text('Home'),
+              icon: Icon(
+                FontAwesomeIcons.home,
+                color: Theme.of(context).primaryColorDark,
+              ),
+              activeIcon: Icon(FontAwesomeIcons.home,
+                  color: Theme.of(context).primaryColor),
             ),
-            activeIcon: Icon(FontAwesomeIcons.home,
-                color: Theme.of(context).primaryColor),
-          ),
-          BubbleBottomBarItem(
-            backgroundColor: Colors.grey,
-            title: Text('Today\'s Tasks'),
-            icon: Icon(
-              FontAwesomeIcons.clock,
-              color: Theme.of(context).primaryColorDark,
+            BubbleBottomBarItem(
+              backgroundColor: Colors.grey,
+              title: Text('Tasks'),
+              icon: Icon(
+                FontAwesomeIcons.clock,
+                color: Theme.of(context).primaryColorDark,
+              ),
+              activeIcon: Icon(FontAwesomeIcons.clock,
+                  color: Theme.of(context).primaryColor),
             ),
-            activeIcon: Icon(FontAwesomeIcons.clock,
-                color: Theme.of(context).primaryColor),
-          ),
-          BubbleBottomBarItem(
-            backgroundColor: Colors.grey,
-            title: Text('Settings'),
-            icon: Icon(
-              FontAwesomeIcons.cog,
-              color: Theme.of(context).primaryColorDark,
-            ),
-            activeIcon: Icon(FontAwesomeIcons.cog,
-                color: Theme.of(context).primaryColor),
-          ),
-        ],
+            // BubbleBottomBarItem(
+            //   backgroundColor: Colors.grey,
+            //   title: Text('Settings'),
+            //   icon: Icon(
+            //     FontAwesomeIcons.cog,
+            //     color: Theme.of(context).primaryColorDark,
+            //   ),
+            //   activeIcon: Icon(FontAwesomeIcons.cog,
+            //       color: Theme.of(context).primaryColor),
+            // ),
+          ],
+        ),
       ),
     );
   }

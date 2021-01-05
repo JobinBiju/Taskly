@@ -6,6 +6,8 @@ enum AppTheme {
   YellowDark,
   RedLight,
   RedDark,
+  TealLight,
+  TealDark,
 }
 
 final appThemeData = {
@@ -22,5 +24,33 @@ final appThemeData = {
     scaffoldBackgroundColor: primaryGrey,
     primaryColorDark: white2,
     primaryColorLight: secondaryGrey,
+  ),
+  AppTheme.RedLight: ThemeData(
+    brightness: Brightness.light,
+    primaryColor: primaryRed,
+    scaffoldBackgroundColor: white1,
+    primaryColorLight: white2,
+    primaryColorDark: secondaryDBlue,
+  ),
+  AppTheme.RedDark: ThemeData(
+    brightness: Brightness.dark,
+    primaryColor: primaryRed,
+    scaffoldBackgroundColor: primaryDBlue,
+    primaryColorDark: white2,
+    primaryColorLight: secondaryDBlue,
+  ),
+  AppTheme.TealLight: ThemeData(
+    brightness: Brightness.light,
+    primaryColor: primaryTeal,
+    scaffoldBackgroundColor: white1,
+    primaryColorLight: white2,
+    primaryColorDark: secondaryDBlue,
+  ),
+  AppTheme.TealDark: ThemeData(
+    brightness: Brightness.dark,
+    primaryColor: primaryTeal,
+    scaffoldBackgroundColor: primaryDGrey,
+    primaryColorDark: white2,
+    primaryColorLight: secondaryDGrey,
   ),
 };
