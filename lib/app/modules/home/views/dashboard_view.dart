@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:taskly/app/modules/profile/views/profile_view.dart';
 import 'package:taskly/app/theme/text_theme.dart';
 
 class DashboardView extends GetView {
@@ -25,10 +26,13 @@ class DashboardView extends GetView {
                   'Hello, Jobin',
                   style: kSubHeadTextStyle,
                 ),
-                CircleAvatar(
-                  radius: size.width * 0.055,
-                  backgroundImage: NetworkImage(
-                    'https://img.icons8.com/color/48/000000/user-male-circle--v1.png',
+                GestureDetector(
+                  onTap: () => Get.to(ProfileView()),
+                  child: CircleAvatar(
+                    radius: size.width * 0.055,
+                    backgroundImage: NetworkImage(
+                      'https://img.icons8.com/color/48/000000/user-male-circle--v1.png',
+                    ),
                   ),
                 ),
               ],
