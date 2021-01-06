@@ -16,7 +16,7 @@ class DashboardView extends GetView {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           SizedBox(
-            height: size.height * 0.07,
+            height: size.height * 0.08,
           ),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: size.width * 0.065),
@@ -31,7 +31,7 @@ class DashboardView extends GetView {
                 GestureDetector(
                   onTap: () => Get.to(ProfileView()),
                   child: UserAvatar(
-                    radius: size.width * 0.055,
+                    radius: size.width * 0.062,
                   ),
                 ),
               ],

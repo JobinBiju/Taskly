@@ -11,7 +11,9 @@ class UserAvatar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CircleAvatar(
-        radius: radius,
-        backgroundImage: AssetImage('assets/images/male-user-1.png'));
+      radius: radius,
+      backgroundImage: AssetImage('assets/images/male-user-1.png'),
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+    );
   }
 }

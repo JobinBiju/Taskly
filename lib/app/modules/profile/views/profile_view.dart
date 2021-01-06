@@ -14,24 +14,25 @@ class ProfileView extends GetView<ProfileController> {
       body: Container(
         height: size.height,
         width: size.width,
-        padding: EdgeInsets.only(top: size.height * 0.07),
+        padding: EdgeInsets.only(top: size.height * 0.1),
         decoration: BoxDecoration(
           color: Theme.of(context).scaffoldBackgroundColor,
         ),
         child: Column(
           children: [
             Container(
-              padding: EdgeInsets.symmetric(horizontal: 20),
-              height: size.height * 0.2,
-              width: size.width * 0.95,
+              padding: EdgeInsets.symmetric(horizontal: size.width * 0.05),
+              height: size.height * 0.18,
+              width: size.width * 0.90,
               decoration: BoxDecoration(
-                color: Theme.of(context).primaryColor,
+                color: Theme.of(context).primaryColor.withOpacity(0.85),
                 borderRadius: BorderRadius.circular(15),
+                boxShadow: [kDefaultShadow],
               ),
               child: Row(
                 children: [
-                  UserAvatar(radius: size.width * 0.09),
-                  SizedBox(width: 20),
+                  UserAvatar(radius: size.width * 0.085),
+                  SizedBox(width: size.width * 0.045),
                   Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -39,12 +40,17 @@ class ProfileView extends GetView<ProfileController> {
                       Text(
                         'Jobin Biju',
                         style: kSub2HeadTextStyle.copyWith(
-                            color: Theme.of(context).primaryColorLight),
+                          color: Theme.of(context).primaryColorDark,
+                          fontSize: 18,
+                        ),
                       ),
+                      SizedBox(height: size.height * 0.007),
                       Text(
                         'jobinbiju9090@gmail.com',
                         style: kSub2HeadTextStyle.copyWith(
-                            color: Theme.of(context).primaryColorLight),
+                          color: Theme.of(context).primaryColorDark,
+                          fontSize: 16,
+                        ),
                       ),
                     ],
                   )
@@ -56,7 +62,7 @@ class ProfileView extends GetView<ProfileController> {
             ),
             ListTile(
               contentPadding:
-                  EdgeInsets.symmetric(horizontal: size.width * 0.07),
+                  EdgeInsets.symmetric(horizontal: size.width * 0.08),
               onTap: () {},
               title: Text(
                 'Account',
@@ -71,7 +77,7 @@ class ProfileView extends GetView<ProfileController> {
             ),
             ListTile(
               contentPadding:
-                  EdgeInsets.symmetric(horizontal: size.width * 0.07),
+                  EdgeInsets.symmetric(horizontal: size.width * 0.08),
               onTap: () {
                 Get.to(SettingsView());
               },
@@ -83,6 +89,23 @@ class ProfileView extends GetView<ProfileController> {
               ),
               leading: Icon(
                 FontAwesomeIcons.cog,
+                color: Theme.of(context).primaryColorDark,
+              ),
+            ),
+            ListTile(
+              contentPadding:
+                  EdgeInsets.symmetric(horizontal: size.width * 0.08),
+              onTap: () {
+                Get.to(SettingsView());
+              },
+              title: Text(
+                'Log out',
+                style: kSub2HeadTextStyle.copyWith(
+                  color: Theme.of(context).primaryColorDark,
+                ),
+              ),
+              leading: Icon(
+                FontAwesomeIcons.signOutAlt,
                 color: Theme.of(context).primaryColorDark,
               ),
             ),

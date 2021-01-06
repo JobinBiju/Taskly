@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:taskly/app/modules/home/controllers/home_controller.dart';
 import 'package:taskly/app/modules/home/views/dashboard_view.dart';
 import 'package:taskly/app/modules/home/views/today_task_view.dart';
+import 'package:taskly/app/theme/text_theme.dart';
 
 class HomeView extends GetView<HomeController> {
   final List<Widget> homeViews = [
@@ -20,7 +21,7 @@ class HomeView extends GetView<HomeController> {
         onPressed: () {},
         child: Icon(
           Icons.add,
-          color: Theme.of(context).primaryColorDark,
+          color: Theme.of(context).scaffoldBackgroundColor,
         ),
         backgroundColor: Theme.of(context).primaryColor,
         elevation: 3,
@@ -41,7 +42,10 @@ class HomeView extends GetView<HomeController> {
           items: [
             BubbleBottomBarItem(
               backgroundColor: Colors.grey,
-              title: Text('Home'),
+              title: Text(
+                'Home',
+                style: kSub2HeadTextStyle.copyWith(fontSize: 16),
+              ),
               icon: Icon(
                 FontAwesomeIcons.home,
                 color: Theme.of(context).primaryColorDark,
@@ -51,7 +55,10 @@ class HomeView extends GetView<HomeController> {
             ),
             BubbleBottomBarItem(
               backgroundColor: Colors.grey,
-              title: Text('Tasks'),
+              title: Text(
+                'Tasks',
+                style: kSub2HeadTextStyle.copyWith(fontSize: 16),
+              ),
               icon: Icon(
                 FontAwesomeIcons.clock,
                 color: Theme.of(context).primaryColorDark,
