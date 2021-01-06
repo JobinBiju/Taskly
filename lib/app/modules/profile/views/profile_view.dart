@@ -3,7 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:taskly/app/global_widgets/user_avatar.dart';
 import 'package:taskly/app/modules/profile/controllers/profile_controller.dart';
-import 'package:taskly/app/modules/profile/views/settings_view.dart';
+import 'package:taskly/app/modules/settings/views/settings_view.dart';
 import 'package:taskly/app/theme/text_theme.dart';
 
 class ProfileView extends GetView<ProfileController> {
@@ -73,6 +73,7 @@ class ProfileView extends GetView<ProfileController> {
               leading: Icon(
                 FontAwesomeIcons.userEdit,
                 color: Theme.of(context).primaryColorDark,
+                size: size.width * 0.06,
               ),
             ),
             ListTile(
@@ -90,14 +91,13 @@ class ProfileView extends GetView<ProfileController> {
               leading: Icon(
                 FontAwesomeIcons.cog,
                 color: Theme.of(context).primaryColorDark,
+                size: size.width * 0.06,
               ),
             ),
             ListTile(
               contentPadding:
                   EdgeInsets.symmetric(horizontal: size.width * 0.08),
-              onTap: () {
-                Get.to(SettingsView());
-              },
+              onTap: () {},
               title: Text(
                 'Log out',
                 style: kSub2HeadTextStyle.copyWith(
@@ -107,6 +107,7 @@ class ProfileView extends GetView<ProfileController> {
               leading: Icon(
                 FontAwesomeIcons.signOutAlt,
                 color: Theme.of(context).primaryColorDark,
+                size: size.width * 0.06,
               ),
             ),
           ],
