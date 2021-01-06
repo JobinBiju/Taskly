@@ -40,6 +40,7 @@ class SettingsView extends GetView<SettingsController> {
                     ),
                   ),
                   GetBuilder<SettingsController>(
+                    init: SettingsController(),
                     builder: (controller) {
                       return DropdownButton(
                         value: controller.selectedTheme,
