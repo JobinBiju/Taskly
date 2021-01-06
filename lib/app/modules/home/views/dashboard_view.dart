@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:taskly/app/global_widgets/user_avatar.dart';
 import 'package:taskly/app/modules/profile/views/profile_view.dart';
 import 'package:taskly/app/theme/text_theme.dart';
 
@@ -10,6 +11,7 @@ class DashboardView extends GetView {
     return Container(
       height: size.height,
       width: size.width,
+      color: Theme.of(context).scaffoldBackgroundColor,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -28,11 +30,8 @@ class DashboardView extends GetView {
                 ),
                 GestureDetector(
                   onTap: () => Get.to(ProfileView()),
-                  child: CircleAvatar(
+                  child: UserAvatar(
                     radius: size.width * 0.055,
-                    backgroundImage: NetworkImage(
-                      'https://img.icons8.com/color/48/000000/user-male-circle--v1.png',
-                    ),
                   ),
                 ),
               ],
