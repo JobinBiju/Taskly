@@ -4,6 +4,8 @@ import 'package:taskly/app/theme/app_theme.dart';
 
 class SettingsController extends GetxController {
   final userData = GetStorage();
+
+  // list of available in the respective order of app theme in theme/app_theme.dart
   var themes = [
     "Yellow Light",
     "Yellow Dark",
@@ -16,6 +18,7 @@ class SettingsController extends GetxController {
   ];
   String selectedTheme;
 
+  // function to change theme on settings
   changeTheme(String newValue) {
     selectedTheme = newValue;
     userData.write('theme', newValue);

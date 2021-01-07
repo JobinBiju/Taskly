@@ -7,8 +7,13 @@ import 'package:taskly/app/theme/app_theme.dart';
 
 class SplashScreenController extends GetxController
     with SingleGetTickerProviderMixin {
+  // animation controller for lottie
   AnimationController animationController;
+
+  // initializing userData instance
   final userData = GetStorage();
+
+  // list of available in the respective order of app theme in theme/app_theme.dart
   var themes = [
     "Yellow Light",
     "Yellow Dark",
@@ -20,6 +25,7 @@ class SplashScreenController extends GetxController
     "Green Dark",
   ];
 
+  // function to set the user saved theme on start
   setTheme() {
     int n = themes.indexOf(userData.read('theme'));
     Get.changeTheme(appThemeData.values.elementAt(n));

@@ -3,20 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:taskly/app/modules/home/controllers/home_controller.dart';
-import 'package:taskly/app/modules/home/views/dashboard_view.dart';
-import 'package:taskly/app/modules/home/views/today_task_view.dart';
 import 'package:taskly/app/theme/text_theme.dart';
 
 class HomeView extends GetView<HomeController> {
-  final List<Widget> homeViews = [
-    DashboardView(),
-    TodayTaskView(),
-  ];
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Obx(() => homeViews.elementAt(controller.currentIndex)),
+      body: Obx(() => controller.navBarSwitcher()),
       floatingActionButton: FloatingActionButton(
         onPressed: () {},
         child: Icon(
