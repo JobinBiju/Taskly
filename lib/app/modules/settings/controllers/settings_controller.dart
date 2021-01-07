@@ -1,7 +1,9 @@
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:taskly/app/theme/app_theme.dart';
 
 class SettingsController extends GetxController {
+  final userData = GetStorage();
   var themes = [
     "Yellow Light",
     "Yellow Dark",
@@ -16,6 +18,7 @@ class SettingsController extends GetxController {
 
   changeTheme(String newValue) {
     selectedTheme = newValue;
+    userData.write('theme', newValue);
     int n = themes.indexOf(newValue);
     Get.changeTheme(appThemeData.values.elementAt(n));
     update();
@@ -24,7 +27,7 @@ class SettingsController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    selectedTheme = themes.first;
+    selectedTheme = userData.read('theme');
   }
 
   @override

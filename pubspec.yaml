@@ -19,6 +19,7 @@ dependencies:
   lottie: ^0.7.0+1
   google_fonts: ^1.1.1
   bubble_bottom_bar: ^1.2.0
+  get_storage: ^1.4.0
 
 dev_dependencies:
   flutter_test:
