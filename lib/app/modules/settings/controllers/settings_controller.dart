@@ -12,21 +12,21 @@ class SettingsController extends GetxController {
     "Green Light",
     "Green Dark",
   ];
-  var selectedTheme = "Yellow Light";
+  String selectedTheme;
 
   changeTheme(String newValue) {
     selectedTheme = newValue;
-    setTheme(newValue);
+    int n = themes.indexOf(newValue);
+    Get.changeTheme(appThemeData.values.elementAt(n));
     update();
   }
 
-  setTheme(String newTheme) {
-    int n = themes.indexOf(newTheme);
-    Get.changeTheme(appThemeData.values.elementAt(n));
+  @override
+  void onInit() {
+    super.onInit();
+    selectedTheme = themes.first;
   }
 
-  @override
-  void onInit() {}
   @override
   void onReady() {}
   @override

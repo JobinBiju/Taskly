@@ -26,7 +26,8 @@ class DashboardView extends GetView {
               children: [
                 Text(
                   'Hello, Jobin',
-                  style: kSubHeadTextStyle,
+                  style: kSubHeadTextStyle.copyWith(
+                      color: Theme.of(context).primaryColorDark),
                 ),
                 GestureDetector(
                   onTap: () => Get.to(ProfileView()),
@@ -46,7 +47,8 @@ class DashboardView extends GetView {
               children: [
                 Text(
                   'Current Task',
-                  style: kSub2HeadTextStyle,
+                  style: kSub2HeadTextStyle.copyWith(
+                      color: Theme.of(context).primaryColorDark),
                 ),
                 GestureDetector(
                   onTap: () {},
