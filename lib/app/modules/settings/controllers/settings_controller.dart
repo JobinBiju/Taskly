@@ -9,6 +9,8 @@ class SettingsController extends GetxController {
     "Red Dark",
     "Teal Light",
     "Teal Dark",
+    "Green Light",
+    "Green Dark",
   ];
   var selectedTheme = "Yellow Light";
 

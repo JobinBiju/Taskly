@@ -19,4 +19,9 @@ final primaryTeal = Color(0xff00adb5);
 final secondaryDGrey = Color(0xff393e46);
 final primaryDGrey = Color(0xff222831);
 
+// Define green colors here
+final primaryGreen = Color(0xff7bc74d);
+final secondaryBGrey = Color(0xff393e46);
+final primaryBGrey = Color(0xff222831);
+
 final authHintText = Color(0xff8E8E8E);

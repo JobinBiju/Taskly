@@ -29,7 +29,7 @@ class SettingsView extends GetView<SettingsController> {
             ),
             ListTile(
               contentPadding:
-                  EdgeInsets.symmetric(horizontal: size.width * 0.05),
+                  EdgeInsets.symmetric(horizontal: size.width * 0.04),
               title: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -55,6 +55,7 @@ class SettingsView extends GetView<SettingsController> {
                           },
                         ).toList(),
                         onChanged: controller.changeTheme,
+                        dropdownColor: Theme.of(context).primaryColorLight,
                       );
                     },
                   )
@@ -62,7 +63,7 @@ class SettingsView extends GetView<SettingsController> {
               ),
               leading: Icon(
                 FontAwesomeIcons.palette,
-                color: Theme.of(context).primaryColorDark,
+                color: Theme.of(context).primaryColor,
                 size: size.width * 0.06,
               ),
             ),
