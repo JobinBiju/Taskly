@@ -11,7 +11,7 @@ final primaryGrey = Color(0xff303841);
 
 // Define red colors here
 final primaryRed = Color(0xfff05454);
-final secondaryDBlue = Color(0xff30475e);
+final secondaryDBlue = Color(0xff3a4750);
 final primaryDBlue = Color(0xff222831);
 
 // Define teal colors here

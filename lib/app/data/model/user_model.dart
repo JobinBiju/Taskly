@@ -10,4 +10,17 @@ class User {
     this.email,
     this.isMale,
   });
+
+  User.fromJson(Map<String, dynamic> json)
+      : firstName = json['firstName'],
+        secondName = json['secondName'],
+        email = json['email'],
+        isMale = json['isMale'];
+
+  Map<String, dynamic> toJson() => {
+        'firstName': firstName,
+        'secondName': secondName,
+        'email': email,
+        'isMale': isMale,
+      };
 }
