@@ -1,5 +1,4 @@
 import 'package:get/get.dart';
-
 import 'package:taskly/app/modules/home/bindings/home_binding.dart';
 import 'package:taskly/app/modules/home/views/home_view.dart';
 import 'package:taskly/app/modules/profile/bindings/profile_binding.dart';
@@ -14,7 +13,7 @@ import 'package:taskly/app/modules/welcome/views/welcome_view.dart';
 part 'app_routes.dart';
 
 class AppPages {
-  static const INITIAL = Routes.SPLASH_SCREEN;
+  static const INITIAL = Routes.WELCOME;
 
   static final routes = [
     GetPage(
