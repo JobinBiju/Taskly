@@ -8,6 +8,8 @@ import 'package:taskly/app/modules/settings/bindings/settings_binding.dart';
 import 'package:taskly/app/modules/settings/views/settings_view.dart';
 import 'package:taskly/app/modules/splash_screen/bindings/splash_screen_binding.dart';
 import 'package:taskly/app/modules/splash_screen/views/splash_screen_view.dart';
+import 'package:taskly/app/modules/welcome/bindings/welcome_binding.dart';
+import 'package:taskly/app/modules/welcome/views/welcome_view.dart';
 
 part 'app_routes.dart';
 
@@ -34,6 +36,11 @@ class AppPages {
       name: _Paths.SETTINGS,
       page: () => SettingsView(),
       binding: SettingsBinding(),
+    ),
+    GetPage(
+      name: _Paths.WELCOME,
+      page: () => WelcomeView(),
+      binding: WelcomeBinding(),
     ),
   ];
 }

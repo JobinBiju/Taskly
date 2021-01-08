@@ -1,6 +1,13 @@
 class User {
-  String name;
+  String firstName;
+  String secondName;
   String email;
-  String password;
-  User({this.name, this.email, this.password});
+  bool isMale;
+
+  User({
+    this.firstName,
+    this.secondName,
+    this.email,
+    this.isMale,
+  });
 }
