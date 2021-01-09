@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:taskly/app/global_widgets/proceed_button.dart';
 import 'package:taskly/app/modules/welcome/controllers/welcome_controller.dart';
 import 'package:taskly/app/modules/welcome/views/login_view.dart';
 import 'package:taskly/app/theme/text_theme.dart';
@@ -46,28 +47,20 @@ class WelcomeView extends GetView<WelcomeController> {
               'Get Organized',
               style: kSub2HeadTextStyle,
             ),
-            SizedBox(height: size.height * 0.038),
+            SizedBox(height: size.height * 0.04),
             SvgPicture.asset(
               'assets/icons/laptopPerson2.svg',
-              height: size.height * 0.42,
+              height: size.height * 0.44,
             ),
-            SizedBox(height: size.height * 0.07),
+            SizedBox(height: size.height * 0.062),
             Align(
               alignment: Alignment.center,
-              child: MaterialButton(
-                onPressed: () {
+              child: ProceedButton(
+                size: size,
+                onPress: () {
                   Get.to(LoginView());
                 },
-                height: size.height * 0.07,
-                minWidth: size.width * 0.4,
-                elevation: 0,
-                child: Text(
-                  'Start',
-                  style: kSub2HeadTextStyle,
-                ),
-                color: Color(0xffffc045),
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(size.width * 0.05)),
+                title: 'Start',
               ),
             )
           ],
