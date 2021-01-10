@@ -2,6 +2,7 @@ import 'package:get/get.dart';
 
 class WelcomeController extends GetxController {
   List<bool> selectedToggleGender;
+
   @override
   void onInit() {
     super.onInit();
@@ -12,6 +13,7 @@ class WelcomeController extends GetxController {
   void onReady() {}
   @override
   void onClose() {}
+
   onToggledGender(int index) {
     if (index == 0) {
       selectedToggleGender[index] = !selectedToggleGender[index];

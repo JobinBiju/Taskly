@@ -65,7 +65,10 @@ class LoginView extends GetView {
                 ],
                 borderRadius: BorderRadius.circular(15),
                 color: Color(0xffeeeeee),
-                fillColor: Color(0xffffc045).withOpacity(0.2),
+                fillColor: Color(0xffffc045).withOpacity(0.3),
+                splashColor: Color(0xffffc045),
+                constraints: BoxConstraints.expand(
+                    height: size.height * 0.08, width: size.height * 0.08),
                 isSelected: controller.selectedToggleGender,
                 onPressed: controller.onToggledGender,
               ),
