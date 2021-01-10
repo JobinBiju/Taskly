@@ -1,14 +1,30 @@
 import 'package:get/get.dart';
 
 class WelcomeController extends GetxController {
-  //TODO: Implement WelcomeController
-
-  final count = 0.obs;
+  List<bool> selectedToggleGender;
   @override
-  void onInit() {}
+  void onInit() {
+    super.onInit();
+    selectedToggleGender = [false, false];
+  }
+
   @override
   void onReady() {}
   @override
   void onClose() {}
-  void increment() => count.value++;
+  onToggledGender(int index) {
+    if (index == 0) {
+      selectedToggleGender[index] = !selectedToggleGender[index];
+      if (selectedToggleGender[index] == true) {
+        selectedToggleGender[1] = false;
+      }
+    }
+    if (index == 1) {
+      selectedToggleGender[index] = !selectedToggleGender[index];
+      if (selectedToggleGender[index] == true) {
+        selectedToggleGender[0] = false;
+      }
+    }
+    update();
+  }
 }

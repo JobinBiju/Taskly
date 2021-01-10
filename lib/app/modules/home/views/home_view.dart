@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:taskly/app/modules/home/controllers/home_controller.dart';
+import 'package:taskly/app/modules/welcome/views/login_view.dart';
 import 'package:taskly/app/theme/text_theme.dart';
 
 class HomeView extends GetView<HomeController> {
@@ -12,7 +13,9 @@ class HomeView extends GetView<HomeController> {
     return Scaffold(
       body: Obx(() => controller.navBarSwitcher()),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          Get.to(LoginView());
+        },
         child: Icon(
           Icons.add,
           color: Theme.of(context).scaffoldBackgroundColor,

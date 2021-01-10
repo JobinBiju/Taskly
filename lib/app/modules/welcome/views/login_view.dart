@@ -4,8 +4,10 @@ import 'package:get/get.dart';
 import 'package:taskly/app/global_widgets/input_text_feild.dart';
 import 'package:taskly/app/global_widgets/proceed_button.dart';
 import 'package:taskly/app/modules/home/views/home_view.dart';
+import 'package:taskly/app/modules/welcome/controllers/welcome_controller.dart';
 
 class LoginView extends GetView {
+  final controller = Get.put(WelcomeController());
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -35,7 +37,7 @@ class LoginView extends GetView {
                 'assets/icons/taskly_logo.svg',
               ),
             ),
-            SizedBox(height: size.height * 0.1),
+            SizedBox(height: size.height * 0.08),
             InputTextFormField(
               hintText: 'First name',
             ),
@@ -46,6 +48,27 @@ class LoginView extends GetView {
             SizedBox(height: size.height * 0.03),
             InputTextFormField(
               hintText: 'Email',
+            ),
+            SizedBox(height: size.height * 0.03),
+            GetBuilder<WelcomeController>(
+              init: controller,
+              builder: (_) => ToggleButtons(
+                children: [
+                  Image(
+                    image: AssetImage('assets/images/male-user-1.png'),
+                    height: size.height * 0.06,
+                  ),
+                  Image(
+                    image: AssetImage('assets/images/female-user-1.png'),
+                    height: size.height * 0.06,
+                  ),
+                ],
+                borderRadius: BorderRadius.circular(15),
+                color: Color(0xffeeeeee),
+                fillColor: Color(0xffffc045).withOpacity(0.2),
+                isSelected: controller.selectedToggleGender,
+                onPressed: controller.onToggledGender,
+              ),
             ),
             SizedBox(height: size.height * 0.07),
             ProceedButton(
