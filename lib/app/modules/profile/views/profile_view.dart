@@ -111,7 +111,9 @@ class ProfileView extends GetView<ProfileController> {
                   confirmTextColor: Theme.of(context).primaryColorDark,
                   cancelTextColor: Theme.of(context).primaryColorDark,
                   onConfirm: () {
-                    Get.to(LoginView());
+                    Get.offAll(LoginView(),
+                        transition: Transition.leftToRightWithFade,
+                        duration: Duration(seconds: 1));
                     Get.snackbar(
                       'Logged out',
                       'Logged out successfully.',
@@ -119,7 +121,7 @@ class ProfileView extends GetView<ProfileController> {
                       backgroundColor: Theme.of(context).primaryColorLight,
                       colorText: Theme.of(context).primaryColorDark,
                       margin:
-                          EdgeInsets.symmetric(horizontal: 10, vertical: 20),
+                          EdgeInsets.symmetric(horizontal: 12, vertical: 20),
                     );
                   },
                 );

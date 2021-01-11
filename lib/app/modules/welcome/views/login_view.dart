@@ -54,21 +54,16 @@ class LoginView extends GetView {
               init: controller,
               builder: (_) => ToggleButtons(
                 children: [
-                  Image(
-                    image: AssetImage('assets/images/male-user-1.png'),
-                    height: size.height * 0.06,
-                  ),
-                  Image(
-                    image: AssetImage('assets/images/female-user-1.png'),
-                    height: size.height * 0.06,
-                  ),
+                  Image(image: AssetImage('assets/images/male-user-1.png')),
+                  Image(image: AssetImage('assets/images/female-user-1.png')),
                 ],
                 borderRadius: BorderRadius.circular(15),
                 color: Color(0xffeeeeee),
-                fillColor: Color(0xffffc045).withOpacity(0.3),
+                renderBorder: false,
+                fillColor: Color(0xffffc045).withOpacity(0.68),
                 splashColor: Color(0xffffc045),
                 constraints: BoxConstraints.expand(
-                    height: size.height * 0.08, width: size.height * 0.08),
+                    height: size.width * 0.14, width: size.width * 0.14),
                 isSelected: controller.selectedToggleGender,
                 onPressed: controller.onToggledGender,
               ),

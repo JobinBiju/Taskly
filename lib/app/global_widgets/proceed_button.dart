@@ -22,7 +22,8 @@ class ProceedButton extends StatelessWidget {
       elevation: 0,
       child: Text(
         title,
-        style: kSub2HeadTextStyle,
+        style: kSub2HeadTextStyle.copyWith(
+            color: Theme.of(context).primaryColorLight),
       ),
       color: Color(0xffffc045),
       splashColor: Color(0xfffdb827),
