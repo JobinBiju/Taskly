@@ -62,39 +62,42 @@ class DashboardView extends GetView {
           ),
           SizedBox(height: size.height * 0.04),
           DecoratedContainer(
-              height: size.height * 0.1,
-              width: double.infinity,
-              margin: EdgeInsets.only(bottom: 20),
-              color: Theme.of(context).primaryColor.withOpacity(0.8),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Container(
-                    height: 40,
-                    width: 40,
-                    padding: EdgeInsets.all(4),
-                    decoration: BoxDecoration(
-                        color: Theme.of(context)
-                            .primaryColorLight
-                            .withOpacity(0.4),
-                        borderRadius: BorderRadius.circular(5)),
-                    child: SvgPicture.asset('assets/icons/breakfast.svg'),
+            margin: EdgeInsets.only(bottom: 20),
+            color: Theme.of(context).primaryColor.withOpacity(0.8),
+            svgAsset: 'assets/icons/alarm-clock.svg',
+            title: 'Wake Up',
+            time: '7:00 am',
+          ),
+          SizedBox(height: size.height * 0.04),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Text(
+                'Upcoming Task',
+                style: kSub2HeadTextStyle.copyWith(
+                    color: Theme.of(context).primaryColorDark),
+              ),
+              GestureDetector(
+                onTap: () {},
+                child: Text(
+                  'View all tasks',
+                  style: kSub2HeadTextStyle.copyWith(
+                    color: Theme.of(context).primaryColor,
+                    fontSize: 16,
                   ),
-                  Text(
-                    'Wake Up',
-                    style: kSub2HeadTextStyle.copyWith(
-                        fontSize: 16,
-                        color: Theme.of(context).primaryColorLight),
-                  ),
-                  SizedBox(width: 40),
-                  Text(
-                    '7:00 am',
-                    style: kSub2HeadTextStyle.copyWith(
-                        fontSize: 16,
-                        color: Theme.of(context).primaryColorLight),
-                  ),
-                ],
-              )),
+                ),
+              ),
+            ],
+          ),
+          SizedBox(height: size.height * 0.04),
+          DecoratedContainer(
+            margin: EdgeInsets.only(bottom: 20),
+            color: Theme.of(context).primaryColor.withOpacity(0.8),
+            svgAsset: 'assets/icons/breakfast.svg',
+            title: 'Help a friend with homework',
+            time: '7:30 am',
+          ),
         ],
       ),
     );

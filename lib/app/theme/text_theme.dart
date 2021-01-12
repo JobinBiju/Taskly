@@ -31,7 +31,7 @@ const kDefaultShadow = BoxShadow(
 );
 
 const kLightShadow = BoxShadow(
-  offset: Offset(0, 8),
-  blurRadius: 30,
+  offset: Offset(0, 15),
+  blurRadius: 27,
   color: Colors.black12,
 );

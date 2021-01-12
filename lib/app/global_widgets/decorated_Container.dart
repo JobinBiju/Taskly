@@ -1,28 +1,29 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:taskly/app/theme/text_theme.dart';
 
 class DecoratedContainer extends StatelessWidget {
   const DecoratedContainer({
     Key key,
-    this.child,
-    this.height,
-    this.width,
     this.margin,
     this.color,
+    this.svgAsset,
+    this.title,
+    this.time,
   }) : super(key: key);
 
-  final Widget child;
-  final double height;
-  final double width;
   final EdgeInsetsGeometry margin;
   final Color color;
+  final String svgAsset;
+  final String title;
+  final String time;
 
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Container(
-      height: height,
-      width: width,
+      height: size.height * 0.1,
+      width: double.infinity,
       margin: margin,
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(15),
@@ -33,14 +34,42 @@ class DecoratedContainer extends StatelessWidget {
           boxShadow: [kLightShadow]),
       child: Container(
         alignment: Alignment.center,
-        height: height,
-        width: width,
+        height: size.height * 0.1,
+        width: double.infinity,
         padding: EdgeInsets.all(14),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(15),
           color: color,
         ),
-        child: child,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Container(
+              height: 40,
+              width: 40,
+              padding: EdgeInsets.all(4),
+              decoration: BoxDecoration(
+                  color: Theme.of(context).primaryColorLight.withOpacity(0.4),
+                  borderRadius: BorderRadius.circular(5)),
+              child: SvgPicture.asset(svgAsset),
+            ),
+            Container(
+              width: size.width * 0.38,
+              child: Text(
+                title,
+                maxLines: 2,
+                style: kSub2HeadTextStyle.copyWith(
+                    fontSize: 16, color: Theme.of(context).scaffoldBackgroundColor,),
+              ),
+            ),
+            SizedBox(width: 10),
+            Text(
+              time,
+              style: kSub2HeadTextStyle.copyWith(
+                  fontSize: 16, color: Theme.of(context).scaffoldBackgroundColor),
+            ),
+          ],
+        ),
       ),
     );
   }
