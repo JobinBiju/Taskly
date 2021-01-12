@@ -34,7 +34,10 @@ class SettingsController extends GetxController {
   }
 
   @override
-  void onReady() {}
+  void onReady() {
+    super.onReady();
+  }
+
   @override
   void onClose() {}
 }

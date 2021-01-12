@@ -10,10 +10,14 @@ class WelcomeController extends GetxController {
   }
 
   @override
-  void onReady() {}
+  void onReady() {
+    super.onReady();
+  }
+
   @override
   void onClose() {}
 
+  //function to toggle gender in log in screen
   onToggledGender(int index) {
     if (index == 0) {
       selectedToggleGender[index] = !selectedToggleGender[index];

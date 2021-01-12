@@ -63,16 +63,6 @@ class HomeView extends GetView<HomeController> {
               activeIcon: Icon(FontAwesomeIcons.clock,
                   color: Theme.of(context).primaryColor),
             ),
-            // BubbleBottomBarItem(
-            //   backgroundColor: Colors.grey,
-            //   title: Text('Settings'),
-            //   icon: Icon(
-            //     FontAwesomeIcons.cog,
-            //     color: Theme.of(context).primaryColorDark,
-            //   ),
-            //   activeIcon: Icon(FontAwesomeIcons.cog,
-            //       color: Theme.of(context).primaryColor),
-            // ),
           ],
         ),
       ),

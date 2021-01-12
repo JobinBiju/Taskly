@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:taskly/app/global_widgets/decorated_Container.dart';
 import 'package:taskly/app/global_widgets/user_avatar.dart';
 import 'package:taskly/app/modules/profile/views/profile_view.dart';
 import 'package:taskly/app/theme/text_theme.dart';
@@ -9,6 +10,7 @@ class DashboardView extends GetView {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Container(
+      padding: EdgeInsets.symmetric(horizontal: size.width * 0.065),
       height: size.height,
       width: size.width,
       color: Theme.of(context).scaffoldBackgroundColor,
@@ -18,51 +20,52 @@ class DashboardView extends GetView {
           SizedBox(
             height: size.height * 0.08,
           ),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: size.width * 0.065),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Text(
-                  'Hello, Jobin',
-                  style: kSubHeadTextStyle.copyWith(
-                      color: Theme.of(context).primaryColorDark),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Text(
+                'Hello, Jobin',
+                style: kSubHeadTextStyle.copyWith(
+                    color: Theme.of(context).primaryColorDark),
+              ),
+              GestureDetector(
+                onTap: () => Get.to(ProfileView()),
+                child: UserAvatar(
+                  radius: size.width * 0.062,
                 ),
-                GestureDetector(
-                  onTap: () => Get.to(ProfileView()),
-                  child: UserAvatar(
-                    radius: size.width * 0.062,
-                  ),
-                ),
-              ],
-            ),
+              ),
+            ],
           ),
           SizedBox(height: size.height * 0.1),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: size.width * 0.065),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Text(
-                  'Current Task',
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Text(
+                'Current Task',
+                style: kSub2HeadTextStyle.copyWith(
+                    color: Theme.of(context).primaryColorDark),
+              ),
+              GestureDetector(
+                onTap: () {},
+                child: Text(
+                  'View all tasks',
                   style: kSub2HeadTextStyle.copyWith(
-                      color: Theme.of(context).primaryColorDark),
-                ),
-                GestureDetector(
-                  onTap: () {},
-                  child: Text(
-                    'View all tasks',
-                    style: kSub2HeadTextStyle.copyWith(
-                      color: Theme.of(context).primaryColor,
-                      fontSize: 16,
-                    ),
+                    color: Theme.of(context).primaryColor,
+                    fontSize: 16,
                   ),
                 ),
-              ],
+              ),
+            ],
+          ),
+          SizedBox(height: size.height * 0.04),
+          DecoratedContainer(
+            size: size,
+            child: Row(
+              children: [],
             ),
-          )
+          ),
         ],
       ),
     );
