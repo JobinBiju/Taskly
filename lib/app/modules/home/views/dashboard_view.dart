@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:taskly/app/global_widgets/decorated_Container.dart';
 import 'package:taskly/app/global_widgets/user_avatar.dart';
@@ -61,11 +62,39 @@ class DashboardView extends GetView {
           ),
           SizedBox(height: size.height * 0.04),
           DecoratedContainer(
-            size: size,
-            child: Row(
-              children: [],
-            ),
-          ),
+              height: size.height * 0.1,
+              width: double.infinity,
+              margin: EdgeInsets.only(bottom: 20),
+              color: Theme.of(context).primaryColor.withOpacity(0.8),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Container(
+                    height: 40,
+                    width: 40,
+                    padding: EdgeInsets.all(4),
+                    decoration: BoxDecoration(
+                        color: Theme.of(context)
+                            .primaryColorLight
+                            .withOpacity(0.4),
+                        borderRadius: BorderRadius.circular(5)),
+                    child: SvgPicture.asset('assets/icons/breakfast.svg'),
+                  ),
+                  Text(
+                    'Wake Up',
+                    style: kSub2HeadTextStyle.copyWith(
+                        fontSize: 16,
+                        color: Theme.of(context).primaryColorLight),
+                  ),
+                  SizedBox(width: 40),
+                  Text(
+                    '7:00 am',
+                    style: kSub2HeadTextStyle.copyWith(
+                        fontSize: 16,
+                        color: Theme.of(context).primaryColorLight),
+                  ),
+                ],
+              )),
         ],
       ),
     );

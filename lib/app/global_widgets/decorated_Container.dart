@@ -1,33 +1,44 @@
 import 'package:flutter/material.dart';
+import 'package:taskly/app/theme/text_theme.dart';
 
 class DecoratedContainer extends StatelessWidget {
   const DecoratedContainer({
     Key key,
     this.child,
-    @required this.size,
+    this.height,
+    this.width,
+    this.margin,
+    this.color,
   }) : super(key: key);
 
-  final Size size;
   final Widget child;
+  final double height;
+  final double width;
+  final EdgeInsetsGeometry margin;
+  final Color color;
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return Container(
-      height: size.height * 0.18,
-      width: double.infinity,
+      height: height,
+      width: width,
+      margin: margin,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(15),
-        image: DecorationImage(
+          borderRadius: BorderRadius.circular(15),
+          image: DecorationImage(
             image: AssetImage('assets/images/containerMask.png'),
-            fit: BoxFit.cover),
-      ),
+            fit: BoxFit.cover,
+          ),
+          boxShadow: [kLightShadow]),
       child: Container(
-        height: size.height * 0.18,
-        width: double.infinity,
-        padding: EdgeInsets.all(15),
+        alignment: Alignment.center,
+        height: height,
+        width: width,
+        padding: EdgeInsets.all(14),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(15),
-          color: Theme.of(context).primaryColor.withOpacity(0.6),
+          color: color,
         ),
         child: child,
       ),
