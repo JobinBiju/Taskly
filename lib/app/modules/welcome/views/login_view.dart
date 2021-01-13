@@ -10,7 +10,7 @@ class LoginView extends GetView {
   final controller = Get.put(WelcomeController());
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
+    Size size = Get.size;
     return Scaffold(
       body: SingleChildScrollView(
         child: Container(

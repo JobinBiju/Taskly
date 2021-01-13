@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 import 'package:taskly/app/theme/text_theme.dart';
 
 class DecoratedContainer extends StatelessWidget {
@@ -20,7 +21,7 @@ class DecoratedContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
+    Size size = Get.size;
     return Container(
       height: size.height * 0.1,
       width: double.infinity,
@@ -36,7 +37,7 @@ class DecoratedContainer extends StatelessWidget {
         alignment: Alignment.center,
         height: size.height * 0.1,
         width: double.infinity,
-        padding: EdgeInsets.all(14),
+        padding: EdgeInsets.all(13),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(15),
           color: color,
@@ -45,11 +46,11 @@ class DecoratedContainer extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Container(
-              height: 40,
-              width: 40,
+              height: 42,
+              width: 42,
               padding: EdgeInsets.all(4),
               decoration: BoxDecoration(
-                  color: Theme.of(context).primaryColorLight.withOpacity(0.4),
+                  color: Colors.transparent,
                   borderRadius: BorderRadius.circular(5)),
               child: SvgPicture.asset(svgAsset),
             ),
@@ -59,14 +60,17 @@ class DecoratedContainer extends StatelessWidget {
                 title,
                 maxLines: 2,
                 style: kSub2HeadTextStyle.copyWith(
-                    fontSize: 16, color: Theme.of(context).scaffoldBackgroundColor,),
+                  fontSize: 16,
+                  color: Theme.of(context).scaffoldBackgroundColor,
+                ),
               ),
             ),
             SizedBox(width: 10),
             Text(
               time,
               style: kSub2HeadTextStyle.copyWith(
-                  fontSize: 16, color: Theme.of(context).scaffoldBackgroundColor),
+                  fontSize: 16,
+                  color: Theme.of(context).scaffoldBackgroundColor),
             ),
           ],
         ),

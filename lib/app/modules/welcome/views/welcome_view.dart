@@ -10,7 +10,7 @@ import 'package:taskly/app/theme/text_theme.dart';
 class WelcomeView extends GetView<WelcomeController> {
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
+    Size size = Get.size;
     return Scaffold(
       body: Container(
         height: size.height,

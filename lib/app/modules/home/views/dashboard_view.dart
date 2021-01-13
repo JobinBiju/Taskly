@@ -9,7 +9,7 @@ import 'package:taskly/app/theme/text_theme.dart';
 class DashboardView extends GetView {
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
+    Size size = Get.size;
     return Container(
       padding: EdgeInsets.symmetric(horizontal: size.width * 0.065),
       height: size.height,
@@ -63,7 +63,7 @@ class DashboardView extends GetView {
           SizedBox(height: size.height * 0.04),
           DecoratedContainer(
             margin: EdgeInsets.only(bottom: 20),
-            color: Theme.of(context).primaryColor.withOpacity(0.8),
+            color: Theme.of(context).primaryColor.withOpacity(0.85),
             svgAsset: 'assets/icons/alarm-clock.svg',
             title: 'Wake Up',
             time: '7:00 am',
@@ -93,7 +93,7 @@ class DashboardView extends GetView {
           SizedBox(height: size.height * 0.04),
           DecoratedContainer(
             margin: EdgeInsets.only(bottom: 20),
-            color: Theme.of(context).primaryColor.withOpacity(0.8),
+            color: Theme.of(context).primaryColor.withOpacity(0.85),
             svgAsset: 'assets/icons/breakfast.svg',
             title: 'Help a friend with homework',
             time: '7:30 am',

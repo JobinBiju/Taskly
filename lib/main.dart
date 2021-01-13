@@ -6,6 +6,7 @@ import 'package:taskly/app/theme/app_theme.dart';
 import 'app/routes/app_pages.dart';
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   await GetStorage.init();
   runApp(MyApp());
 }

@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:taskly/app/modules/settings/controllers/settings_controller.dart';
 import 'package:taskly/app/theme/app_theme.dart';
 
 class SplashScreenController extends GetxController
@@ -13,21 +14,10 @@ class SplashScreenController extends GetxController
   // initializing userData instance
   final userData = GetStorage();
 
-  // list of available in the respective order of app theme in theme/app_theme.dart
-  var themes = [
-    "Yellow Light",
-    "Yellow Dark",
-    "Red Light",
-    "Red Dark",
-    "Teal Light",
-    "Teal Dark",
-    "Green Light",
-    "Green Dark",
-  ];
-
   // function to set the user saved theme on start
   setTheme() {
-    int n = themes.indexOf(userData.read('theme'));
+    var control = Get.put(SettingsController());
+    int n = control.themes.indexOf(userData.read('theme'));
     Get.changeTheme(appThemeData.values.elementAt(n));
   }
 

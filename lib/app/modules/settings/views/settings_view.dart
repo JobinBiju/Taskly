@@ -7,7 +7,7 @@ import 'package:taskly/app/theme/text_theme.dart';
 class SettingsView extends GetView<SettingsController> {
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
+    Size size = Get.size;
     return Scaffold(
       body: Container(
         height: size.height,

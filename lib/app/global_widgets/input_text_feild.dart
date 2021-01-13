@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:taskly/app/theme/text_theme.dart';
 
 class InputTextFormField extends StatelessWidget {
@@ -10,7 +11,7 @@ class InputTextFormField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
+    Size size = Get.size;
     return Container(
       padding: EdgeInsets.symmetric(horizontal: size.width * 0.04),
       decoration: BoxDecoration(
