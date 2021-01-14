@@ -23,7 +23,7 @@ class DecoratedContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     Size size = Get.size;
     return Container(
-      height: size.height * 0.1,
+      height: size.height * 0.095,
       width: double.infinity,
       margin: margin,
       decoration: BoxDecoration(
@@ -35,7 +35,7 @@ class DecoratedContainer extends StatelessWidget {
           boxShadow: [kLightShadow]),
       child: Container(
         alignment: Alignment.center,
-        height: size.height * 0.1,
+        height: size.height * 0.095,
         width: double.infinity,
         padding: EdgeInsets.all(13),
         decoration: BoxDecoration(
@@ -48,14 +48,14 @@ class DecoratedContainer extends StatelessWidget {
             Container(
               height: 42,
               width: 42,
-              padding: EdgeInsets.all(4),
+              padding: EdgeInsets.all(2),
               decoration: BoxDecoration(
                   color: Colors.transparent,
                   borderRadius: BorderRadius.circular(5)),
               child: SvgPicture.asset(svgAsset),
             ),
             Container(
-              width: size.width * 0.38,
+              width: size.width * 0.4,
               child: Text(
                 title,
                 maxLines: 2,
@@ -69,7 +69,7 @@ class DecoratedContainer extends StatelessWidget {
             Text(
               time,
               style: kSub2HeadTextStyle.copyWith(
-                  fontSize: 16,
+                  fontSize: 14,
                   color: Theme.of(context).scaffoldBackgroundColor),
             ),
           ],
