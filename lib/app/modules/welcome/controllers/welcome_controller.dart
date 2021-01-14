@@ -2,6 +2,7 @@ import 'package:get/get.dart';
 
 class WelcomeController extends GetxController {
   List<bool> selectedToggleGender;
+  
 
   @override
   void onInit() {

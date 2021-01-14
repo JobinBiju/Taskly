@@ -4,10 +4,8 @@ import 'package:taskly/app/theme/text_theme.dart';
 
 class InputTextFormField extends StatelessWidget {
   final String hintText;
-  const InputTextFormField({
-    Key key,
-    this.hintText,
-  }) : super(key: key);
+  final TextEditingController controller;
+  InputTextFormField({this.hintText, this.controller});
 
   @override
   Widget build(BuildContext context) {
@@ -19,6 +17,7 @@ class InputTextFormField extends StatelessWidget {
         borderRadius: BorderRadius.circular(12),
       ),
       child: TextFormField(
+        controller: controller,
         style:
             kSub2HeadTextStyle.copyWith(color: Color(0xff3a4750), fontSize: 16),
         cursorHeight: 18,

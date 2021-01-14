@@ -6,8 +6,8 @@ import 'package:taskly/app/global_widgets/proceed_button.dart';
 import 'package:taskly/app/modules/home/views/home_view.dart';
 import 'package:taskly/app/modules/welcome/controllers/welcome_controller.dart';
 
-class LoginView extends GetView {
-  final controller = Get.put(WelcomeController());
+class LoginView extends GetView<WelcomeController> {
+  final WelcomeController controller = Get.put(WelcomeController());
   @override
   Widget build(BuildContext context) {
     Size size = Get.size;
