@@ -3,11 +3,13 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:taskly/app/global_widgets/user_avatar.dart';
 import 'package:taskly/app/modules/profile/controllers/profile_controller.dart';
+import 'package:taskly/app/modules/settings/controllers/settings_controller.dart';
 import 'package:taskly/app/modules/settings/views/settings_view.dart';
 import 'package:taskly/app/modules/welcome/views/login_view.dart';
 import 'package:taskly/app/theme/text_theme.dart';
 
 class ProfileView extends GetView<ProfileController> {
+  final SettingsController secController = Get.put(SettingsController());
   @override
   Widget build(BuildContext context) {
     Size size = Get.size;
@@ -98,6 +100,17 @@ class ProfileView extends GetView<ProfileController> {
             ListTile(
               contentPadding:
                   EdgeInsets.symmetric(horizontal: size.width * 0.08),
+              title: Text(
+                'Log out',
+                style: kSub2HeadTextStyle.copyWith(
+                  color: Theme.of(context).primaryColorDark,
+                ),
+              ),
+              leading: Icon(
+                FontAwesomeIcons.signOutAlt,
+                color: Theme.of(context).primaryColorDark,
+                size: size.width * 0.06,
+              ),
               onTap: () {
                 Get.defaultDialog(
                   title: 'Are you sure?',
@@ -114,6 +127,7 @@ class ProfileView extends GetView<ProfileController> {
                     Get.offAll(LoginView(),
                         transition: Transition.leftToRightWithFade,
                         duration: Duration(seconds: 1));
+                    secController.changeTheme('Yellow Light');
                     Get.snackbar(
                       'Logged out',
                       'Logged out successfully.',
@@ -126,17 +140,6 @@ class ProfileView extends GetView<ProfileController> {
                   },
                 );
               },
-              title: Text(
-                'Log out',
-                style: kSub2HeadTextStyle.copyWith(
-                  color: Theme.of(context).primaryColorDark,
-                ),
-              ),
-              leading: Icon(
-                FontAwesomeIcons.signOutAlt,
-                color: Theme.of(context).primaryColorDark,
-                size: size.width * 0.06,
-              ),
             ),
           ],
         ),
