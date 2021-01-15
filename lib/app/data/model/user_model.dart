@@ -1,25 +1,25 @@
 class User {
   String firstName;
-  String secondName;
+  String lastName;
   String email;
   bool isMale;
 
   User({
     this.firstName,
-    this.secondName,
+    this.lastName,
     this.email,
     this.isMale,
   });
 
   User.fromJson(Map<String, dynamic> json)
       : firstName = json['firstName'],
-        secondName = json['secondName'],
+        lastName = json['lastName'],
         email = json['email'],
         isMale = json['isMale'];
 
   Map<String, dynamic> toJson() => {
         'firstName': firstName,
-        'secondName': secondName,
+        'secondName': lastName,
         'email': email,
         'isMale': isMale,
       };
