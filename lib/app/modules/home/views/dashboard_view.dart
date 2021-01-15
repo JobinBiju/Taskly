@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:taskly/app/global_widgets/decorated_Container.dart';
 import 'package:taskly/app/global_widgets/user_avatar.dart';
