@@ -19,7 +19,7 @@ class User {
 
   Map<String, dynamic> toJson() => {
         'firstName': firstName,
-        'secondName': lastName,
+        'lastName': lastName,
         'email': email,
         'isMale': isMale,
       };
