@@ -3,14 +3,17 @@ import 'package:get/get.dart';
 
 class WelcomeController extends GetxController {
   List<bool> selectedToggleGender;
-  TextEditingController firstNameController = TextEditingController();
-  TextEditingController lastNameController = TextEditingController();
-  TextEditingController emailController = TextEditingController();
+  TextEditingController firstNameController;
+  TextEditingController lastNameController;
+  TextEditingController emailController;
 
   @override
   void onInit() {
-    super.onInit();
+    firstNameController = TextEditingController();
+    lastNameController = TextEditingController();
+    emailController = TextEditingController();
     selectedToggleGender = [false, false];
+    super.onInit();
   }
 
   @override
@@ -19,7 +22,11 @@ class WelcomeController extends GetxController {
   }
 
   @override
-  void onClose() {}
+  void onClose() {
+    firstNameController?.dispose();
+    lastNameController?.dispose();
+    emailController?.dispose();
+  }
 
   //function to toggle gender in log in screen
   onToggledGender(int index) {
