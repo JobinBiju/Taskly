@@ -3,6 +3,8 @@ import 'package:get/get.dart';
 
 class WelcomeController extends GetxController {
   List<bool> selectedToggleGender;
+
+  // Text feild controllers for login.
   TextEditingController firstNameController;
   TextEditingController lastNameController;
   TextEditingController emailController;

@@ -4,6 +4,7 @@ import 'package:taskly/app/modules/home/views/dashboard_view.dart';
 import 'package:taskly/app/modules/home/views/today_task_view.dart';
 
 class HomeController extends GetxController {
+  // bottom nav current index.
   var _currentIndex = 0.obs;
   get currentIndex => this._currentIndex.value;
   set currentIndex(index) => this._currentIndex.value = index;
