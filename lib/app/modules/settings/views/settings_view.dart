@@ -67,6 +67,13 @@ class SettingsView extends GetView<SettingsController> {
                 size: size.width * 0.06,
               ),
             ),
+            ListTile(
+              title: Text('Drink Water Notification'),
+              trailing: Switch(
+                value: null,
+                onChanged: (bool value) {},
+              ),
+            ),
           ],
         ),
       ),
