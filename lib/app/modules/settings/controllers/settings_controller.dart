@@ -5,6 +5,7 @@ import 'package:taskly/app/theme/app_theme.dart';
 class SettingsController extends GetxController {
   final userData = GetStorage();
   String selectedTheme;
+  bool drinkWater;
 
   // list of available in the respective order of app theme in theme/app_theme.dart
   var themes = [
@@ -27,10 +28,18 @@ class SettingsController extends GetxController {
     update();
   }
 
+  // Drink water notification toggle
+  toggleWater(bool value) {
+    drinkWater = value;
+    userData.write('drinkWater', value);
+    update();
+  }
+
   @override
   void onInit() {
     super.onInit();
     selectedTheme = userData.read('theme');
+    drinkWater = userData.read('drinkWater');
   }
 
   @override

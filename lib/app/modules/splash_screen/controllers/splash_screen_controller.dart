@@ -24,6 +24,7 @@ class SplashScreenController extends GetxController
   @override
   void onInit() {
     userData.writeIfNull('theme', "Yellow Light");
+    userData.writeIfNull('drinkWater',  false);
     animationController = AnimationController(
       duration: Duration(seconds: 3),
       vsync: this,

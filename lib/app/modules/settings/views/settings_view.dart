@@ -68,10 +68,29 @@ class SettingsView extends GetView<SettingsController> {
               ),
             ),
             ListTile(
-              title: Text('Drink Water Notification'),
-              trailing: Switch(
-                value: null,
-                onChanged: (bool value) {},
+              title: Text(
+                'Drink Water Notify',
+                style: kSub2HeadTextStyle.copyWith(
+                  color: Theme.of(context).primaryColorDark,
+                  fontSize: 17,
+                ),
+              ),
+              trailing: GetBuilder<SettingsController>(
+                init: controller,
+                builder: (_) {
+                  return Switch(
+                    value: controller.drinkWater,
+                    onChanged: controller.toggleWater,
+                    activeTrackColor:
+                        Theme.of(context).primaryColor.withOpacity(0.5),
+                        activeColor: Theme.of(context).primaryColor,
+                  );
+                },
+              ),
+              leading: Icon(
+                Icons.opacity,
+                color: Theme.of(context).primaryColor,
+                size: size.width * 0.07,
               ),
             ),
           ],
