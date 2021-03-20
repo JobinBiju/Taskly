@@ -58,7 +58,7 @@ class WelcomeView extends GetView<WelcomeController> {
               child: ProceedButton(
                 size: size,
                 onPress: () {
-                  Get.to(LoginView());
+                  Get.to(() => LoginView());
                 },
                 title: 'Start',
               ),

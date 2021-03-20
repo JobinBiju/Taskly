@@ -76,7 +76,7 @@ class LoginView extends GetView<WelcomeController> {
               ProceedButton(
                 size: size,
                 onPress: () {
-                  Get.offAll(HomeView());
+                  Get.offAll(() => HomeView());
                 },
                 title: 'Register',
               ),

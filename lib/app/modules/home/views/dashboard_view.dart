@@ -30,7 +30,7 @@ class DashboardView extends GetView {
                     color: Theme.of(context).primaryColorDark),
               ),
               GestureDetector(
-                onTap: () => Get.to(ProfileView()),
+                onTap: () => Get.to(() => ProfileView()),
                 child: UserAvatar(
                   radius: size.width * 0.062,
                 ),

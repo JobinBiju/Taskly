@@ -83,7 +83,7 @@ class ProfileView extends GetView<ProfileController> {
               contentPadding:
                   EdgeInsets.symmetric(horizontal: size.width * 0.08),
               onTap: () {
-                Get.to(SettingsView());
+                Get.to(() => SettingsView());
               },
               title: Text(
                 'Settings',
@@ -124,7 +124,7 @@ class ProfileView extends GetView<ProfileController> {
                   confirmTextColor: Theme.of(context).primaryColorDark,
                   cancelTextColor: Theme.of(context).primaryColorDark,
                   onConfirm: () {
-                    Get.offAll(LoginView(),
+                    Get.offAll(() => LoginView(),
                         transition: Transition.leftToRightWithFade,
                         duration: Duration(seconds: 1));
                     secController.changeTheme('Yellow Light');
