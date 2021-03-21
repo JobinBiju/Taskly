@@ -23,8 +23,11 @@ class SplashScreenController extends GetxController
 
   @override
   void onInit() {
+    super.onInit();
     userData.writeIfNull('theme', "Yellow Light");
-    userData.writeIfNull('drinkWater',  false);
+    userData.writeIfNull('drinkWater', false);
+
+    // spalsh animation config
     animationController = AnimationController(
       duration: Duration(seconds: 3),
       vsync: this,
@@ -41,7 +44,6 @@ class SplashScreenController extends GetxController
       Duration(milliseconds: 8200),
       () => Get.offNamed('/home'),
     );
-    super.onInit();
   }
 
   @override
