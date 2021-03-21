@@ -61,7 +61,7 @@ class HomeController extends GetxController {
       0,
       'Drink Water',
       'Keep yourself hydrated',
-      RepeatInterval.everyMinute,
+      RepeatInterval.hourly,
       generalNotificationDetails,
       payload: "Tasks",
     );
