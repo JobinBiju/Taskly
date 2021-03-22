@@ -14,7 +14,21 @@ class HomeView extends GetView<HomeController> {
       body: Obx(() => controller.navBarSwitcher()),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Get.to(() => LoginView());
+          showModalBottomSheet(
+              backgroundColor: Colors.transparent,
+              context: context,
+              builder: (context) {
+                return Container(
+                  height: double.infinity,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(20),
+                      topRight: Radius.circular(20),
+                    ),
+                    color: Theme.of(context).primaryColorLight,
+                  ),
+                );
+              });
         },
         child: Icon(
           Icons.add,

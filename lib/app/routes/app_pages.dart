@@ -13,7 +13,7 @@ import 'package:taskly/app/modules/welcome/views/welcome_view.dart';
 part 'app_routes.dart';
 
 class AppPages {
-  static const INITIAL = Routes.SPLASH_SCREEN;
+  static const INITIAL = Routes.HOME;
 
   static final routes = [
     GetPage(

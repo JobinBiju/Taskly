@@ -3,9 +3,8 @@ class Task {
   String taskTitle;
   String taskDesc;
   bool isCompleted;
-  String startTime;
-  String endTime;
-  String date;
+  DateTime startTime;
+  DateTime endTime;
   String repeat;
 
   Task({
@@ -14,7 +13,6 @@ class Task {
     this.taskDesc,
     this.startTime,
     this.endTime,
-    this.date,
     this.repeat,
     this.isCompleted = false,
   });
@@ -25,7 +23,6 @@ class Task {
         taskDesc = json['taskDesc'],
         startTime = json['startTime'],
         endTime = json['endTime'],
-        date = json['date'],
         isCompleted = json['isCompleted'],
         repeat = json['repeat'];
 
@@ -35,7 +32,6 @@ class Task {
         'taskDesc': taskDesc,
         'startTime': startTime,
         'endTime': endTime,
-        'date': date,
         'isCompleted': isCompleted,
         'repeat': repeat,
       };
