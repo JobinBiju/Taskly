@@ -2,7 +2,6 @@ class Task {
   String taskImage;
   String taskTitle;
   String taskDesc;
-  bool isCompleted;
   DateTime startTime;
   DateTime endTime;
   String repeat;
@@ -14,7 +13,6 @@ class Task {
     this.startTime,
     this.endTime,
     this.repeat,
-    this.isCompleted = false,
   });
 
   Task.fromJson(Map<String, dynamic> json)
@@ -23,7 +21,6 @@ class Task {
         taskDesc = json['taskDesc'],
         startTime = json['startTime'],
         endTime = json['endTime'],
-        isCompleted = json['isCompleted'],
         repeat = json['repeat'];
 
   Map<String, dynamic> toJson() => {
@@ -32,11 +29,6 @@ class Task {
         'taskDesc': taskDesc,
         'startTime': startTime,
         'endTime': endTime,
-        'isCompleted': isCompleted,
         'repeat': repeat,
       };
-
-  void toggleComplete() {
-    isCompleted = !isCompleted;
-  }
 }
