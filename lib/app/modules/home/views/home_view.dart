@@ -14,8 +14,7 @@ class HomeView extends GetView<HomeController> {
       body: Obx(() => controller.navBarSwitcher()),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          // Get.to(() => LoginView());
-          controller.showNotification();
+          Get.to(() => LoginView());
         },
         child: Icon(
           Icons.add,
