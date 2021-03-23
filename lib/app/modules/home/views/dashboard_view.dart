@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:taskly/app/global_widgets/decorated_Container.dart';
 import 'package:taskly/app/global_widgets/user_avatar.dart';
+import 'package:taskly/app/modules/home/controllers/home_controller.dart';
 import 'package:taskly/app/modules/profile/views/profile_view.dart';
 import 'package:taskly/app/theme/text_theme.dart';
 
-class DashboardView extends GetView {
+class DashboardView extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
     Size size = Get.size;

@@ -5,13 +5,12 @@ import 'package:taskly/app/theme/text_theme.dart';
 
 class DecoratedContainer extends StatelessWidget {
   const DecoratedContainer({
-    Key key,
     this.margin,
     this.color,
     this.svgAsset,
     this.title,
     this.time,
-  }) : super(key: key);
+  });
 
   final EdgeInsetsGeometry margin;
   final Color color;

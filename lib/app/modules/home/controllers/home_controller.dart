@@ -9,6 +9,9 @@ class HomeController extends GetxController {
   get currentIndex => this._currentIndex.value;
   set currentIndex(index) => this._currentIndex.value = index;
 
+  // variable for expansionTile
+  bool isExpanded = false;
+
   // the list of screens switched by bottom navBar
   final List<Widget> homeViews = [
     DashboardView(),
@@ -18,6 +21,11 @@ class HomeController extends GetxController {
   // function to return correct view on bottom navBar switch
   Widget navBarSwitcher() {
     return homeViews.elementAt(currentIndex);
+  }
+
+  void onExpand(bool value) {
+    isExpanded = value;
+    update();
   }
 
   @override

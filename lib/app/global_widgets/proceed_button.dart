@@ -4,10 +4,12 @@ import 'package:taskly/app/theme/text_theme.dart';
 class ProceedButton extends StatelessWidget {
   final String title;
   final Function onPress;
+  final Color buttonColor;
   const ProceedButton({
-    this.title,
-    this.onPress,
     @required this.size,
+    @required this.title,
+    @required this.onPress,
+    this.buttonColor,
   });
 
   final Size size;
@@ -24,9 +26,9 @@ class ProceedButton extends StatelessWidget {
         style: kSub2HeadTextStyle.copyWith(
             color: Theme.of(context).primaryColorLight),
       ),
-      color: Color(0xffffc045),
-      splashColor: Color(0xfffdb827),
-      highlightColor: Color(0xfffdb827),
+      color: buttonColor ?? Color(0xffffc045),
+      splashColor: buttonColor.withOpacity(0.8) ?? Color(0xfffdb827),
+      highlightColor: buttonColor.withOpacity(0.8) ?? Color(0xfffdb827),
       shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(size.width * 0.05)),
     );

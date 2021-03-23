@@ -60,6 +60,7 @@ class HomeView extends GetView<HomeController> {
                       ProceedButton(
                         size: Get.size,
                         title: 'Create Task',
+                        buttonColor: Theme.of(context).primaryColor,
                         onPress: () {},
                       )
                     ],
