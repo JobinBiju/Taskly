@@ -13,16 +13,19 @@ class TodayTaskView extends GetView<HomeController> {
       height: Get.height,
       width: Get.width,
       color: Theme.of(context).scaffoldBackgroundColor,
-      padding: EdgeInsets.symmetric(horizontal: 30, vertical: 50),
+      //padding: EdgeInsets.symmetric(horizontal: 30, vertical: 50),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            'Today\'s Tasks',
-            style: kSubHeadTextStyle.copyWith(
-                color: Theme.of(context).primaryColorDark),
+          Padding(
+            padding: EdgeInsets.only(top: 50, left: 25, right: 25),
+            child: Text(
+              'Today\'s Tasks',
+              style: kSubHeadTextStyle.copyWith(
+                  color: Theme.of(context).primaryColorDark),
+            ),
           ),
-          SizedBox(height: Get.height * 0.01),
+          SizedBox(height: Get.height * 0.012),
           Expanded(
             child: ListView.builder(
               itemBuilder: (context, index) {
@@ -30,7 +33,8 @@ class TodayTaskView extends GetView<HomeController> {
                   icon: 'assets/images/containerMask.png',
                   title: 'Wake Up',
                   time: '7:30 am',
-                  desc: 'Rise and shine!',
+                  desc:
+                      'Rise and shine!khfgiodfsjhjkdfjhokdfjhofjhhhjoihjrhjoirtjhiojhfdjhfdjho',
                 );
               },
               itemCount: 7,

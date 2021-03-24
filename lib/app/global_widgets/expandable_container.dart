@@ -11,12 +11,13 @@ class ExpandedContainer extends GetView<HomeController> {
   final String time;
   final String desc;
   const ExpandedContainer({
+    Key key,
     this.title,
     this.icon,
     this.time,
     this.desc,
     this.onExpaand,
-  });
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -25,14 +26,15 @@ class ExpandedContainer extends GetView<HomeController> {
       builder: (_) {
         return Container(
           width: double.infinity,
-          margin: EdgeInsets.only(bottom: 15),
+          margin: EdgeInsets.only(bottom: 18, left: 25, right: 25),
           decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(15),
-              image: DecorationImage(
-                image: AssetImage(icon),
-                fit: BoxFit.cover,
-              ),
-              boxShadow: [kLightShadow]),
+            borderRadius: BorderRadius.circular(15),
+            image: DecorationImage(
+              image: AssetImage(icon),
+              fit: BoxFit.cover,
+            ),
+            boxShadow: [kLightShadow],
+          ),
           child: Container(
             alignment: Alignment.center,
             width: double.infinity,

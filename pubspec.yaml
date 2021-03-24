@@ -11,17 +11,18 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  
   bubble_bottom_bar: ^1.2.0
   cupertino_icons: ^1.0.2
   flutter_local_notifications: ^4.0.1+2
+  flutter_native_timezone: ^1.0.10
   flutter_svg: ^0.19.3
   font_awesome_flutter: ^9.0.0
   get: ^3.26.0
   get_storage: ^1.4.0
   google_fonts: ^1.1.1
+  hive: ^2.0.0
   lottie: ^1.0.1
-  flutter_native_timezone: ^1.0.10
+  date_format: ^2.0.2
 
 dev_dependencies:
   flutter_test:

@@ -41,17 +41,17 @@ class LoginView extends GetView<WelcomeController> {
               SizedBox(height: size.height * 0.08),
               InputTextFormField(
                 hintText: 'First name',
-                controller: controller.firstNameController,
+                tController: controller.firstNameController,
               ),
               SizedBox(height: size.height * 0.03),
               InputTextFormField(
                 hintText: 'Last name (Optional)',
-                controller: controller.lastNameController,
+                tController: controller.lastNameController,
               ),
               SizedBox(height: size.height * 0.03),
               InputTextFormField(
                 hintText: 'Email',
-                controller: controller.emailController,
+                tController: controller.emailController,
               ),
               SizedBox(height: size.height * 0.03),
               GetBuilder<WelcomeController>(
