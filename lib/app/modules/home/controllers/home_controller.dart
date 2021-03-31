@@ -15,6 +15,10 @@ class HomeController extends GetxController {
   // variable for expansionTile
   bool isExpanded = false;
 
+  // bools for dashboard view
+  bool isCurrentTaskPresent = true;
+  bool isUpcommingTaskPresent = true;
+
   // controllers for bottomSheet TextFeilds
   TextEditingController titleController = TextEditingController();
   TextEditingController descController = TextEditingController();

@@ -15,18 +15,19 @@ class HomeView extends GetView<HomeController> {
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           showModalBottomSheet(
-              backgroundColor: Colors.transparent,
-              isScrollControlled: true,
-              context: context,
-              builder: (context) {
-                return BottomSheetContent(
-                  titleController: controller.titleController,
-                  descController: controller.descController,
-                  dateController: controller.dateController,
-                  timeController: controller.timeController,
-                  //selectDate: controller.selectDate,
-                );
-              });
+            backgroundColor: Colors.transparent,
+            isScrollControlled: true,
+            context: context,
+            builder: (context) {
+              return BottomSheetContent(
+                titleController: controller.titleController,
+                descController: controller.descController,
+                dateController: controller.dateController,
+                timeController: controller.timeController,
+                //selectDate: controller.selectDate,
+              );
+            },
+          );
         },
         child: Icon(
           Icons.add,

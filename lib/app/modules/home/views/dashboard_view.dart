@@ -61,14 +61,23 @@ class DashboardView extends GetView<HomeController> {
             ],
           ),
           SizedBox(height: size.height * 0.038),
-          DecoratedContainer(
-            margin: EdgeInsets.only(bottom: 20),
-            color: Theme.of(context).primaryColor.withOpacity(0.85),
-            svgAsset: 'assets/icons/alarm-clock.svg',
-            title: 'Wake Up',
-            time: '7:00 am',
-          ),
-          SizedBox(height: size.height * 0.04),
+          controller.isCurrentTaskPresent
+              ? DecoratedContainer(
+                  margin: EdgeInsets.only(bottom: 20),
+                  color: Theme.of(context).primaryColor.withOpacity(0.85),
+                  svgAsset: 'assets/icons/alarm-clock.svg',
+                  title: 'Wake Up',
+                  time: '7:00 am',
+                )
+              : Center(
+                  child: Text(
+                    "Nothing Here",
+                    style: kSub2HeadTextStyle.copyWith(
+                        fontSize: 12,
+                        color: Theme.of(context).primaryColorDark),
+                  ),
+                ),
+          SizedBox(height: size.height * 0.06),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -91,13 +100,22 @@ class DashboardView extends GetView<HomeController> {
             ],
           ),
           SizedBox(height: size.height * 0.038),
-          DecoratedContainer(
-            margin: EdgeInsets.only(bottom: 20),
-            color: Theme.of(context).primaryColor.withOpacity(0.85),
-            svgAsset: 'assets/icons/online-learning.svg',
-            title: 'Help a friend with a homework',
-            time: '7:30 am',
-          ),
+          controller.isUpcommingTaskPresent
+              ? DecoratedContainer(
+                  margin: EdgeInsets.only(bottom: 20),
+                  color: Theme.of(context).primaryColor.withOpacity(0.85),
+                  svgAsset: 'assets/icons/online-learning.svg',
+                  title: 'Help a friend with a homework',
+                  time: '7:30 am',
+                )
+              : Center(
+                  child: Text(
+                    "Nothing Here",
+                    style: kSub2HeadTextStyle.copyWith(
+                        fontSize: 12,
+                        color: Theme.of(context).primaryColorDark),
+                  ),
+                ),
         ],
       ),
     );
