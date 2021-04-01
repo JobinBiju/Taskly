@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:taskly/app/global_widgets/decorated_Container.dart';
 import 'package:taskly/app/global_widgets/expandable_container.dart';
 import 'package:taskly/app/modules/home/controllers/home_controller.dart';
 import 'package:taskly/app/theme/text_theme.dart';
@@ -26,20 +24,25 @@ class TodayTaskView extends GetView<HomeController> {
             ),
           ),
           SizedBox(height: Get.height * 0.012),
-          Expanded(
-            child: ListView.builder(
-              itemBuilder: (context, index) {
-                return ExpandedContainer(
-                  icon: 'assets/images/containerMask.png',
-                  title: 'Wake Up',
-                  time: '7:30 am',
-                  desc:
-                      'Rise and shine!khfgiodfsjhjkdfjhokdfjhofjhhhjoihjrhjoirtjhiojhfdjhfdjho',
-                );
-              },
-              itemCount: 7,
-            ),
-          )
+          GetBuilder<HomeController>(
+            id: 1,
+            builder: (controller) {
+              return Expanded(
+                child: ListView.builder(
+                  itemBuilder: (context, index) {
+                    final task = controller.allTasks[index];
+                    return ExpandedContainer(
+                      icon: task.taskImage,
+                      title: task.taskTitle,
+                      time: task.startTime,
+                      desc: task.taskDesc,
+                    );
+                  },
+                  itemCount: controller.allTasks.length,
+                ),
+              );
+            },
+          ),
         ],
       ),
     );

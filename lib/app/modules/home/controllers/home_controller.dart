@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:taskly/app/data/model/task_model.dart';
 import 'package:taskly/app/modules/home/views/dashboard_view.dart';
 import 'package:taskly/app/modules/home/views/today_task_view.dart';
 import 'package:intl/intl.dart';
@@ -19,14 +20,24 @@ class HomeController extends GetxController {
   bool isUpcommingTaskPresent = false;
 
   // controllers for bottomSheet TextFeilds
-  TextEditingController titleController = TextEditingController();
-  TextEditingController descController = TextEditingController();
-  TextEditingController dateController = TextEditingController();
-  TextEditingController timeController = TextEditingController();
+  TextEditingController titleController;
+  TextEditingController descController;
+  TextEditingController dateController;
+  TextEditingController timeController;
+  String selectedIcon;
   DateTime selectedDate;
   TimeOfDay selectedTime;
   String setTime, setDate;
   String hour, minute, time;
+  List<String> icons = [
+    'assets/icons/alarm-clock.svg',
+    'assets/icons/breakfast.svg',
+    'assets/icons/Lunch.svg',
+    'assets/icons/notepad.svg',
+    'assets/icons/online-learning.svg',
+    'assets/icons/settings.svg',
+    'assets/icons/treadmill.svg',
+  ];
 
   // the list of screens switched by bottom navBar
   final List<Widget> homeViews = [
@@ -34,9 +45,43 @@ class HomeController extends GetxController {
     TodayTaskView(),
   ];
 
+  Task tempTask;
+  // task lists
+  List<Task> allTasks = [];
+  List<Task> todayTasks = [];
+
   // function to return correct view on bottom navBar switch
   Widget navBarSwitcher() {
     return homeViews.elementAt(currentIndex);
+  }
+
+  changeIcon(String newIcon) {
+    selectedIcon = newIcon;
+    update(['dropDownIcon', true]);
+  }
+
+  addTask() {
+    tempTask = Task();
+    tempTask.taskImage = selectedIcon;
+    tempTask.taskTitle = titleController.text;
+    tempTask.taskDesc = descController.text;
+    tempTask.taskDate = selectedDate.toString();
+    tempTask.startTime = formatDate(
+        DateTime(2020, 08, 1, selectedTime.hour, selectedTime.minute),
+        [hh, ':', nn, " ", am]).toString();
+    allTasks.add(tempTask);
+    titleController.text = '';
+    descController.text = '';
+    selectedDate = DateTime.now();
+    dateController.text = DateFormat.yMMMd().format(selectedDate);
+    selectedTime = TimeOfDay(hour: 00, minute: 00);
+    timeController.text = formatDate(
+      DateTime(2020, 08, 1, selectedTime.hour, selectedTime.minute),
+      [hh, ':', nn, " ", am],
+    ).toString();
+    selectedIcon = icons.first;
+    update([1, true]);
+    Get.back();
   }
 
   // ExpandedContainer
@@ -46,7 +91,7 @@ class HomeController extends GetxController {
   }
 
   // dateFuntion bottomSheet
-  Future<void> selectDate(BuildContext context) async {
+  Future<Null> selectDate(BuildContext context) async {
     final DateTime picked = await showDatePicker(
       context: context,
       initialDate: selectedDate,
@@ -82,12 +127,17 @@ class HomeController extends GetxController {
   @override
   void onInit() {
     super.onInit();
+    titleController = TextEditingController();
+    descController = TextEditingController();
+    dateController = TextEditingController();
+    timeController = TextEditingController();
     selectedDate = DateTime.now();
     dateController.text = DateFormat.yMMMd().format(selectedDate);
     selectedTime = TimeOfDay(hour: 00, minute: 00);
     timeController.text = formatDate(
         DateTime(2020, 08, 1, selectedTime.hour, selectedTime.minute),
         [hh, ':', nn, " ", am]).toString();
+    selectedIcon = icons.first;
   }
 
   @override
@@ -96,5 +146,10 @@ class HomeController extends GetxController {
   }
 
   @override
-  void onClose() {}
+  void onClose() {
+    titleController.dispose();
+    descController.dispose();
+    dateController.dispose();
+    timeController.dispose();
+  }
 }

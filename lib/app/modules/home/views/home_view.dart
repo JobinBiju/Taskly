@@ -19,13 +19,7 @@ class HomeView extends GetView<HomeController> {
             isScrollControlled: true,
             context: context,
             builder: (context) {
-              return BottomSheetContent(
-                titleController: controller.titleController,
-                descController: controller.descController,
-                dateController: controller.dateController,
-                timeController: controller.timeController,
-                //selectDate: controller.selectDate,
-              );
+              return BottomSheetContent();
             },
           );
         },

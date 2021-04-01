@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:taskly/app/global_widgets/input_text_feild.dart';
 import 'package:taskly/app/global_widgets/proceed_button.dart';
@@ -6,18 +7,10 @@ import 'package:taskly/app/modules/home/controllers/home_controller.dart';
 import 'package:taskly/app/theme/text_theme.dart';
 
 class BottomSheetContent extends GetView<HomeController> {
-  final TextEditingController titleController;
-  final TextEditingController descController;
-  final TextEditingController dateController;
-  final TextEditingController timeController;
   final Function selectDate;
   final Function selectTime;
   const BottomSheetContent({
     Key key,
-    this.titleController,
-    this.descController,
-    this.dateController,
-    this.timeController,
     this.selectDate,
     this.selectTime,
   }) : super(key: key);
@@ -41,23 +34,50 @@ class BottomSheetContent extends GetView<HomeController> {
         children: [
           Container(
             height: 60,
-            width: 60,
+            width: 73,
             decoration: BoxDecoration(
               color: Theme.of(context).primaryColorLight,
               borderRadius: BorderRadius.circular(10),
+            ),
+            child: GetBuilder<HomeController>(
+              id: 'dropDownIcon',
+              init: HomeController(),
+              builder: (controller) {
+                return DropdownButton(
+                  value: controller.selectedIcon,
+                  underline: Container(color: Colors.transparent),
+                  hint: Padding(
+                    padding: EdgeInsets.only(left: 8, top: 8),
+                    child: SvgPicture.asset(controller.icons.first, width: 40),
+                  ),
+                  items: controller.icons.map(
+                    (String value) {
+                      return DropdownMenuItem<String>(
+                        value: value,
+                        child: Padding(
+                          padding: EdgeInsets.only(left: 8, top: 8),
+                          child: SvgPicture.asset(value, width: 40),
+                        ),
+                      );
+                    },
+                  ).toList(),
+                  onChanged: controller.changeIcon,
+                  dropdownColor: Theme.of(context).primaryColorLight,
+                );
+              },
             ),
           ),
           SizedBox(height: 30),
           InputTextFormField(
             hintText: 'Tittle',
-            tController: titleController,
+            tController: controller.titleController,
             textFeildColor: Theme.of(context).primaryColorLight,
             contentTextColor: Theme.of(context).primaryColorDark,
           ),
           SizedBox(height: 25),
           InputTextFormField(
             hintText: 'Description',
-            tController: descController,
+            tController: controller.descController,
             textFeildColor: Theme.of(context).primaryColorLight,
             contentTextColor: Theme.of(context).primaryColorDark,
           ),
@@ -70,7 +90,7 @@ class BottomSheetContent extends GetView<HomeController> {
                 },
                 child: InputTextFormField(
                   hintText: 'Date',
-                  tController: dateController,
+                  tController: controller.dateController,
                   textFeildColor: Theme.of(context).primaryColorLight,
                   contentTextColor: Theme.of(context).primaryColorDark,
                   width: Get.width * 0.371,
@@ -90,7 +110,7 @@ class BottomSheetContent extends GetView<HomeController> {
                 },
                 child: InputTextFormField(
                   hintText: 'Time',
-                  tController: timeController,
+                  tController: controller.timeController,
                   textFeildColor: Theme.of(context).primaryColorLight,
                   contentTextColor: Theme.of(context).primaryColorDark,
                   width: Get.width * 0.371,
@@ -104,7 +124,7 @@ class BottomSheetContent extends GetView<HomeController> {
             size: Get.size,
             title: 'Create Task',
             buttonColor: Theme.of(context).primaryColor.withOpacity(0.9),
-            onPress: () {},
+            onPress: controller.addTask,
           ),
         ],
       ),

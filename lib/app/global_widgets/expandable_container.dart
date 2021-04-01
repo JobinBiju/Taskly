@@ -5,7 +5,6 @@ import 'package:taskly/app/modules/home/controllers/home_controller.dart';
 import 'package:taskly/app/theme/text_theme.dart';
 
 class ExpandedContainer extends GetView<HomeController> {
-  final Function onExpaand;
   final String icon;
   final String title;
   final String time;
@@ -16,7 +15,6 @@ class ExpandedContainer extends GetView<HomeController> {
     this.icon,
     this.time,
     this.desc,
-    this.onExpaand,
   }) : super(key: key);
 
   @override
@@ -30,7 +28,7 @@ class ExpandedContainer extends GetView<HomeController> {
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(15),
             image: DecorationImage(
-              image: AssetImage(icon),
+              image: AssetImage('assets/images/containerMask.png'),
               fit: BoxFit.cover,
             ),
             boxShadow: [kLightShadow],
@@ -58,7 +56,7 @@ class ExpandedContainer extends GetView<HomeController> {
                   decoration: BoxDecoration(
                       color: Colors.transparent,
                       borderRadius: BorderRadius.circular(5)),
-                  child: SvgPicture.asset('assets/icons/alarm-clock.svg'),
+                  child: SvgPicture.asset(icon),
                 ),
                 title: Text(
                   title,
