@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:taskly/app/data/model/task_model.dart';
 import 'package:taskly/app/modules/home/views/dashboard_view.dart';
 import 'package:taskly/app/modules/home/views/today_task_view.dart';
@@ -12,6 +13,8 @@ class HomeController extends GetxController {
   get currentIndex => this._currentIndex.value;
   set currentIndex(index) => this._currentIndex.value = index;
 
+  final taskData = GetStorage();
+
   // variable for expansionTile
   bool isExpanded = false;
 
@@ -19,7 +22,7 @@ class HomeController extends GetxController {
   bool isCurrentTaskPresent = false;
   bool isUpcommingTaskPresent = false;
 
-  // controllers for bottomSheet TextFeilds
+  // controllers and var for bottomSheet TextFeilds
   TextEditingController titleController;
   TextEditingController descController;
   TextEditingController dateController;
@@ -55,11 +58,13 @@ class HomeController extends GetxController {
     return homeViews.elementAt(currentIndex);
   }
 
+  // change icon in bottomSheet
   changeIcon(String newIcon) {
     selectedIcon = newIcon;
     update(['dropDownIcon', true]);
   }
 
+  // function to add task via bottomSheet
   addTask() {
     tempTask = Task();
     tempTask.taskImage = selectedIcon;

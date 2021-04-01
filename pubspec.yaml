@@ -17,10 +17,11 @@ dependencies:
   flutter_native_timezone: ^1.0.10
   flutter_svg: ^0.19.3
   font_awesome_flutter: ^9.0.0
-  get: ^3.26.0
-  get_storage: ^1.4.0
+  get: ^4.0.0
+  get_storage: ^2.0.2
   google_fonts: ^1.1.1
   hive: ^2.0.0
+  intl: ^0.17.0
   lottie: ^1.0.1
   date_format: ^2.0.2
 
