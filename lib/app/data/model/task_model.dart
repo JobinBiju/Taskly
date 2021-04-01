@@ -1,26 +1,32 @@
+import 'package:flutter/material.dart';
+
 class Task {
   String taskImage;
   String taskTitle;
   String taskDesc;
-  DateTime startTime;
+  TimeOfDay startTime;
+  DateTime taskDate;
 
   Task({
     this.taskImage,
     this.taskTitle,
     this.taskDesc,
     this.startTime,
+    this.taskDate,
   });
 
   Task.fromJson(Map<String, dynamic> json)
       : taskImage = json['taskImage'],
         taskTitle = json['taskTitle'],
         taskDesc = json['taskDesc'],
-        startTime = json['startTime'];
+        startTime = json['startTime'],
+        taskDate = json['taskDate'];
 
   Map<String, dynamic> toJson() => {
         'taskImage': taskImage,
         'taskTitle': taskTitle,
         'taskDesc': taskDesc,
         'startTime': startTime,
+        'taskDate': taskDate,
       };
 }
