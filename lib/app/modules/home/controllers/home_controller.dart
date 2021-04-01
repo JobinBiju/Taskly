@@ -4,7 +4,6 @@ import 'package:taskly/app/modules/home/views/dashboard_view.dart';
 import 'package:taskly/app/modules/home/views/today_task_view.dart';
 import 'package:intl/intl.dart';
 import 'package:date_format/date_format.dart';
-import 'package:taskly/app/theme/app_theme.dart';
 
 class HomeController extends GetxController {
   // bottom nav current index.
@@ -16,16 +15,16 @@ class HomeController extends GetxController {
   bool isExpanded = false;
 
   // bools for dashboard view
-  bool isCurrentTaskPresent = true;
-  bool isUpcommingTaskPresent = true;
+  bool isCurrentTaskPresent = false;
+  bool isUpcommingTaskPresent = false;
 
   // controllers for bottomSheet TextFeilds
   TextEditingController titleController = TextEditingController();
   TextEditingController descController = TextEditingController();
   TextEditingController dateController = TextEditingController();
   TextEditingController timeController = TextEditingController();
-  DateTime selectedDate = DateTime.now();
-  TimeOfDay selectedTime = TimeOfDay(hour: 00, minute: 00);
+  DateTime selectedDate;
+  TimeOfDay selectedTime;
   String setTime, setDate;
   String hour, minute, time;
 
@@ -56,7 +55,7 @@ class HomeController extends GetxController {
     );
     if (picked != null) {
       selectedDate = picked;
-      dateController.text = DateFormat.yMd().format(selectedDate);
+      dateController.text = DateFormat.yMMMd().format(selectedDate);
       update();
     }
   }
@@ -73,7 +72,7 @@ class HomeController extends GetxController {
       time = hour + ' : ' + minute;
       timeController.text = time;
       timeController.text = formatDate(
-          DateTime(2019, 08, 1, selectedTime.hour, selectedTime.minute),
+          DateTime(2020, 08, 1, selectedTime.hour, selectedTime.minute),
           [hh, ':', nn, " ", am]).toString();
       update();
     }
@@ -82,6 +81,12 @@ class HomeController extends GetxController {
   @override
   void onInit() {
     super.onInit();
+    selectedDate = DateTime.now();
+    dateController.text = DateFormat.yMMMd().format(selectedDate);
+    selectedTime = TimeOfDay(hour: 00, minute: 00);
+    timeController.text = formatDate(
+        DateTime(2020, 08, 1, selectedTime.hour, selectedTime.minute),
+        [hh, ':', nn, " ", am]).toString();
   }
 
   @override
