@@ -39,6 +39,7 @@ class HomeController extends GetxController {
     return homeViews.elementAt(currentIndex);
   }
 
+  // ExpandedContainer
   void onExpand(bool value) {
     isExpanded = value;
     update();

@@ -4,8 +4,8 @@ class Task {
   String taskImage;
   String taskTitle;
   String taskDesc;
-  TimeOfDay startTime;
-  DateTime taskDate;
+  String startTime;
+  String taskDate;
 
   Task({
     this.taskImage,
