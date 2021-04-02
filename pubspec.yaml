@@ -20,9 +20,10 @@ dependencies:
   get: ^4.0.0
   get_storage: ^2.0.2
   google_fonts: ^1.1.1
-  hive: ^2.0.0
+  hive: ^2.0.2
   intl: ^0.17.0
   lottie: ^1.0.1
+  path_provider: ^2.0.1
   date_format: ^2.0.2
 
 dev_dependencies:

@@ -1,6 +1,9 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
+import 'package:hive/hive.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:taskly/app/data/model/task_model.dart';
 import 'package:taskly/app/modules/home/views/dashboard_view.dart';
 import 'package:taskly/app/modules/home/views/today_task_view.dart';
@@ -13,7 +16,8 @@ class HomeController extends GetxController {
   get currentIndex => this._currentIndex.value;
   set currentIndex(index) => this._currentIndex.value = index;
 
-  final taskData = GetStorage();
+  String taskBox = 'tasks';
+  int taskIds = 0;
 
   // variable for expansionTile
   bool isExpanded = false;
@@ -65,8 +69,9 @@ class HomeController extends GetxController {
   }
 
   // function to add task via bottomSheet
-  addTask() {
+  addTask() async {
     tempTask = Task();
+    var box = await Hive.openBox(taskBox);
     tempTask.taskImage = selectedIcon;
     tempTask.taskTitle = titleController.text;
     tempTask.taskDesc = descController.text;
@@ -75,6 +80,10 @@ class HomeController extends GetxController {
         DateTime(2020, 08, 1, selectedTime.hour, selectedTime.minute),
         [hh, ':', nn, " ", am]).toString();
     allTasks.add(tempTask);
+    Map<String, dynamic> taskMap = tempTask.toJson();
+    int idOfTask = await box.add(taskMap);
+    taskIds = idOfTask;
+    Hive.close();
     titleController.text = '';
     descController.text = '';
     selectedDate = DateTime.now();
@@ -87,6 +96,36 @@ class HomeController extends GetxController {
     selectedIcon = icons.first;
     update([1, true]);
     Get.back();
+  }
+
+  updateTask(int index, Task task1) async {
+    var box = await Hive.openBox(taskBox);
+    var newTaskMap = task1.toJson();
+    box.putAt(index, newTaskMap);
+    Hive.close();
+  }
+
+  Future<List<Task>> getTasks() async {
+    var box = await Hive.openBox(taskBox);
+    List<Task> taskList = [];
+    for (int i = 0; i < box.length; i++) {
+      var taskMap = box.getAt(i).map((k, e) => MapEntry(k.toString(), e));
+      Task tmp = Task();
+      tmp.taskImage = taskMap['taskImage'];
+      tmp.taskTitle = taskMap['taskTitle'];
+      tmp.taskDesc = taskMap['taskDesc'];
+      tmp.startTime = taskMap['startTime'];
+      tmp.taskDate = taskMap['taskDate'];
+      taskList.add(tmp);
+      print(taskMap);
+    }
+    print(taskList);
+    return taskList;
+  }
+
+  deleteTask(int taskId) async {
+    var box = await Hive.openBox(taskBox);
+    await box.deleteAt(taskId);
   }
 
   // ExpandedContainer
@@ -130,8 +169,12 @@ class HomeController extends GetxController {
   }
 
   @override
-  void onInit() {
+  void onInit() async {
     super.onInit();
+    Directory appDocDir = await getApplicationDocumentsDirectory();
+    Hive.init(appDocDir.path);
+    allTasks = await getTasks();
+    update([1, true]);
     titleController = TextEditingController();
     descController = TextEditingController();
     dateController = TextEditingController();

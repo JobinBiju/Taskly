@@ -124,7 +124,9 @@ class BottomSheetContent extends GetView<HomeController> {
             size: Get.size,
             title: 'Create Task',
             buttonColor: Theme.of(context).primaryColor.withOpacity(0.9),
-            onPress: controller.addTask,
+            onPress: () {
+              controller.addTask();
+            },
           ),
         ],
       ),

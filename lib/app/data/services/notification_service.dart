@@ -18,7 +18,7 @@ class NotificationPlugin {
   }
 
   Future showNotification() async {
-    var scheduledTime = DateTime.now().add(Duration(seconds: 5));
+    //var scheduledTime = DateTime.now().add(Duration(seconds: 5));
 
     var androidDetails = AndroidNotificationDetails(
       'Channel ID 0',
