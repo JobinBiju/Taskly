@@ -45,6 +45,9 @@ class HomeController extends GetxController {
     'assets/icons/online-learning.svg',
     'assets/icons/settings.svg',
     'assets/icons/treadmill.svg',
+    'assets/icons/shopping.svg',
+    'assets/icons/celeb.svg',
+    'assets/icons/travel.svg',
   ];
 
   // the list of screens switched by bottom navBar
