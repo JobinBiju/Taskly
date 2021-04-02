@@ -37,6 +37,7 @@ class HomeController extends GetxController {
   TimeOfDay selectedTime;
   String setTime, setDate;
   String hour, minute, time;
+  bool isRepeat = false;
   List<String> icons = [
     'assets/icons/alarm-clock.svg',
     'assets/icons/breakfast.svg',
@@ -72,6 +73,11 @@ class HomeController extends GetxController {
   changeIcon(String newIcon) {
     selectedIcon = newIcon;
     update(['dropDownIcon', true]);
+  }
+
+  toggleRepeat(bool newValue) {
+    isRepeat = newValue;
+    update(['isRepeat', true]);
   }
 
   // function to add task via bottomSheet

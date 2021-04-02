@@ -18,7 +18,7 @@ class BottomSheetContent extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 30),
+      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
       height: Get.height * 0.6,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.only(
@@ -34,7 +34,7 @@ class BottomSheetContent extends GetView<HomeController> {
         children: [
           Container(
             height: 60,
-            width: 73,
+            width: 60,
             decoration: BoxDecoration(
               color: Theme.of(context).primaryColorLight,
               borderRadius: BorderRadius.circular(10),
@@ -44,19 +44,29 @@ class BottomSheetContent extends GetView<HomeController> {
               init: HomeController(),
               builder: (controller) {
                 return DropdownButton(
+                  iconSize: 0,
+                  elevation: 6,
                   value: controller.selectedIcon,
                   underline: Container(color: Colors.transparent),
                   hint: Padding(
-                    padding: EdgeInsets.only(left: 8, top: 8),
-                    child: SvgPicture.asset(controller.icons.first, width: 40),
+                    padding: EdgeInsets.only(left: 10, top: 10),
+                    child: SvgPicture.asset(
+                      controller.icons.first,
+                      width: 40,
+                      height: 40,
+                    ),
                   ),
                   items: controller.icons.map(
                     (String value) {
                       return DropdownMenuItem<String>(
                         value: value,
                         child: Padding(
-                          padding: EdgeInsets.only(left: 8, top: 8),
-                          child: SvgPicture.asset(value, width: 40),
+                          padding: EdgeInsets.only(left: 10, top: 10),
+                          child: Container(
+                            width: 40,
+                            child:
+                                SvgPicture.asset(value, width: 40, height: 40),
+                          ),
                         ),
                       );
                     },
@@ -67,7 +77,7 @@ class BottomSheetContent extends GetView<HomeController> {
               },
             ),
           ),
-          SizedBox(height: 30),
+          SizedBox(height: Get.height * 0.03),
           InputTextFormField(
             hintText: 'Tittle',
             tController: controller.titleController,
@@ -81,7 +91,7 @@ class BottomSheetContent extends GetView<HomeController> {
             textFeildColor: Theme.of(context).primaryColorLight,
             contentTextColor: Theme.of(context).primaryColorDark,
           ),
-          SizedBox(height: 25),
+          SizedBox(height: Get.height * 0.03),
           Row(
             children: [
               InkWell(
@@ -119,7 +129,36 @@ class BottomSheetContent extends GetView<HomeController> {
               ),
             ],
           ),
-          SizedBox(height: 45),
+          SizedBox(height: Get.height * 0.015),
+          Container(
+            width: Get.width * 0.378,
+            child: Row(
+              children: [
+                Text(
+                  'Repeat Daily',
+                  style: kSub2HeadTextStyle.copyWith(
+                    color: Theme.of(context).primaryColorDark,
+                    fontSize: 16,
+                  ),
+                ),
+                GetBuilder<HomeController>(
+                  id: 'isRepeat',
+                  init: HomeController(),
+                  initState: (_) {},
+                  builder: (_) {
+                    return Switch(
+                      value: controller.isRepeat,
+                      onChanged: controller.toggleRepeat,
+                      activeTrackColor:
+                          Theme.of(context).primaryColor.withOpacity(0.5),
+                      activeColor: Theme.of(context).primaryColor,
+                    );
+                  },
+                ),
+              ],
+            ),
+          ),
+          SizedBox(height: Get.height * 0.02),
           ProceedButton(
             size: Get.size,
             title: 'Create Task',
