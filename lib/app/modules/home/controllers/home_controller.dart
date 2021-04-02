@@ -16,6 +16,7 @@ class HomeController extends GetxController {
   get currentIndex => this._currentIndex.value;
   set currentIndex(index) => this._currentIndex.value = index;
 
+  // Hive DB var
   String taskBox = 'tasks';
   int taskIds = 0;
 
@@ -52,7 +53,9 @@ class HomeController extends GetxController {
     TodayTaskView(),
   ];
 
+  // temp var to create each task
   Task tempTask;
+
   // task lists
   List<Task> allTasks = [];
   List<Task> todayTasks = [];
@@ -98,6 +101,7 @@ class HomeController extends GetxController {
     Get.back();
   }
 
+  // function to update task
   updateTask(int index, Task task1) async {
     var box = await Hive.openBox(taskBox);
     var newTaskMap = task1.toJson();
@@ -105,6 +109,7 @@ class HomeController extends GetxController {
     Hive.close();
   }
 
+  // function to read task from database
   Future<List<Task>> getTasks() async {
     var box = await Hive.openBox(taskBox);
     List<Task> taskList = [];
@@ -123,6 +128,7 @@ class HomeController extends GetxController {
     return taskList;
   }
 
+  // function to delete task by ID
   deleteTask(int taskId) async {
     var box = await Hive.openBox(taskBox);
     await box.deleteAt(taskId);
@@ -134,7 +140,7 @@ class HomeController extends GetxController {
     update();
   }
 
-  // dateFuntion bottomSheet
+  // setDateFuntion bottomSheet
   Future<Null> selectDate(BuildContext context) async {
     final DateTime picked = await showDatePicker(
       context: context,
@@ -150,6 +156,7 @@ class HomeController extends GetxController {
     }
   }
 
+  // setTimeFuntion bottomSheet
   Future<Null> selectTime(BuildContext context) async {
     final TimeOfDay picked = await showTimePicker(
       context: context,
