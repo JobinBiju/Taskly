@@ -237,6 +237,7 @@ class HomeController extends GetxController {
     }
   }
 
+  // function to convert time from string to TimeOfDay
   TimeOfDay timeConvert(String normTime) {
     int hour;
     int minute;
