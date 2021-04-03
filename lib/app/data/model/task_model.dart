@@ -1,9 +1,12 @@
+import 'package:flutter/material.dart';
+
 class Task {
   String taskImage;
   String taskTitle;
   String taskDesc;
   String startTime;
-  String taskDate;
+  DateTime taskDate;
+  bool isRepeat;
 
   Task({
     this.taskImage,
@@ -11,6 +14,7 @@ class Task {
     this.taskDesc,
     this.startTime,
     this.taskDate,
+    this.isRepeat,
   });
 
   Task.fromJson(Map<String, dynamic> json)
@@ -18,7 +22,8 @@ class Task {
         taskTitle = json['taskTitle'],
         taskDesc = json['taskDesc'],
         startTime = json['startTime'],
-        taskDate = json['taskDate'];
+        taskDate = json['taskDate'],
+        isRepeat = json['isRepeat'];
 
   Map<String, dynamic> toJson() => {
         'taskImage': taskImage,
@@ -26,5 +31,6 @@ class Task {
         'taskDesc': taskDesc,
         'startTime': startTime,
         'taskDate': taskDate,
+        'isRepeat': isRepeat,
       };
 }

@@ -80,6 +80,30 @@ class HomeController extends GetxController {
     update(['isRepeat', true]);
   }
 
+  // convert time to minutes
+  double toDouble(TimeOfDay myTime) => myTime.hour + myTime.minute / 60.0;
+
+  // Funtion to generate dailyTask
+  dailyTask() {
+    var currDt = DateTime.now();
+    allTasks.forEach((element) {
+      if (element.taskDate.day == currDt.day &&
+              element.taskDate.month == currDt.month &&
+              element.taskDate.year == currDt.year ||
+          element.isRepeat == true) {
+        todayTasks.add(element);
+      }
+    });
+    todayTasks.sort((a, b) {
+      var aT = toDouble(timeConvert(a.startTime));
+      var bT = toDouble(timeConvert(b.startTime));
+      return aT.compareTo(bT);
+    });
+    todayTasks.forEach((element) {
+      print(element.startTime);
+    });
+  }
+
   // function to add task via bottomSheet
   addTask() async {
     tempTask = Task();
@@ -87,10 +111,11 @@ class HomeController extends GetxController {
     tempTask.taskImage = selectedIcon;
     tempTask.taskTitle = titleController.text;
     tempTask.taskDesc = descController.text;
-    tempTask.taskDate = selectedDate.toString();
+    tempTask.taskDate = selectedDate;
     tempTask.startTime = formatDate(
         DateTime(2020, 08, 1, selectedTime.hour, selectedTime.minute),
         [hh, ':', nn, " ", am]).toString();
+    tempTask.isRepeat = isRepeat;
     allTasks.add(tempTask);
     Map<String, dynamic> taskMap = tempTask.toJson();
     int idOfTask = await box.add(taskMap);
@@ -106,6 +131,7 @@ class HomeController extends GetxController {
       [hh, ':', nn, " ", am],
     ).toString();
     selectedIcon = icons.first;
+    dailyTask();
     update([1, true]);
     Get.back();
   }
@@ -116,6 +142,7 @@ class HomeController extends GetxController {
     var newTaskMap = task1.toJson();
     box.putAt(index, newTaskMap);
     Hive.close();
+    dailyTask();
   }
 
   // function to read task from database
@@ -130,10 +157,10 @@ class HomeController extends GetxController {
       tmp.taskDesc = taskMap['taskDesc'];
       tmp.startTime = taskMap['startTime'];
       tmp.taskDate = taskMap['taskDate'];
+      tmp.isRepeat = taskMap['isRepeat'];
       taskList.add(tmp);
       print(taskMap);
     }
-    print(taskList);
     return taskList;
   }
 
@@ -141,6 +168,7 @@ class HomeController extends GetxController {
   deleteTask(int taskId) async {
     var box = await Hive.openBox(taskBox);
     await box.deleteAt(taskId);
+    dailyTask();
   }
 
   // ExpandedContainer
@@ -184,12 +212,32 @@ class HomeController extends GetxController {
     }
   }
 
+  TimeOfDay timeConvert(String normTime) {
+    int hour;
+    int minute;
+    String ampm = normTime.substring(normTime.length - 2);
+    String result = normTime.substring(0, normTime.indexOf(' '));
+    if (ampm == 'AM' && int.parse(result.split(":")[1]) != 12) {
+      hour = int.parse(result.split(':')[0]);
+      if (hour == 12) hour = 0;
+      minute = int.parse(result.split(":")[1]);
+    } else {
+      hour = int.parse(result.split(':')[0]) - 12;
+      if (hour <= 0) {
+        hour = 24 + hour;
+      }
+      minute = int.parse(result.split(":")[1]);
+    }
+    return TimeOfDay(hour: hour, minute: minute);
+  }
+
   @override
   void onInit() async {
     super.onInit();
     Directory appDocDir = await getApplicationDocumentsDirectory();
     Hive.init(appDocDir.path);
     allTasks = await getTasks();
+    dailyTask();
     update([1, true]);
     titleController = TextEditingController();
     descController = TextEditingController();

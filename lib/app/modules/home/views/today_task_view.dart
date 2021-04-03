@@ -1,5 +1,7 @@
+import 'package:date_format/date_format.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:taskly/app/global_widgets/expandable_container.dart';
 import 'package:taskly/app/modules/home/controllers/home_controller.dart';
 import 'package:taskly/app/theme/text_theme.dart';
@@ -30,7 +32,7 @@ class TodayTaskView extends GetView<HomeController> {
               return Expanded(
                 child: ListView.builder(
                   itemBuilder: (context, index) {
-                    final task = controller.allTasks[index];
+                    final task = controller.todayTasks[index];
                     return ExpandedContainer(
                       icon: task.taskImage,
                       title: task.taskTitle,
@@ -38,7 +40,7 @@ class TodayTaskView extends GetView<HomeController> {
                       desc: task.taskDesc,
                     );
                   },
-                  itemCount: controller.allTasks.length,
+                  itemCount: controller.todayTasks.length,
                 ),
               );
             },
