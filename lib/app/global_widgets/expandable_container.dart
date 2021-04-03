@@ -8,13 +8,17 @@ class ExpandedContainer extends GetView<HomeController> {
   final String icon;
   final String title;
   final String time;
+  final String date;
   final String desc;
+  final bool ifDate;
   const ExpandedContainer({
     Key key,
     this.title,
     this.icon,
     this.time,
+    this.date,
     this.desc,
+    this.ifDate = false,
   }) : super(key: key);
 
   @override
@@ -66,11 +70,26 @@ class ExpandedContainer extends GetView<HomeController> {
                     color: Theme.of(context).scaffoldBackgroundColor,
                   ),
                 ),
-                trailing: Text(
-                  time,
-                  style: kSub2HeadTextStyle.copyWith(
-                      fontSize: 14,
-                      color: Theme.of(context).scaffoldBackgroundColor),
+                trailing: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    ifDate
+                        ? Text(
+                            date,
+                            style: kSub2HeadTextStyle.copyWith(
+                                fontSize: 14,
+                                color:
+                                    Theme.of(context).scaffoldBackgroundColor),
+                          )
+                        : SizedBox(),
+                    ifDate ? SizedBox(height: 5) : SizedBox(),
+                    Text(
+                      time,
+                      style: kSub2HeadTextStyle.copyWith(
+                          fontSize: 14,
+                          color: Theme.of(context).scaffoldBackgroundColor),
+                    ),
+                  ],
                 ),
                 children: [
                   Text(

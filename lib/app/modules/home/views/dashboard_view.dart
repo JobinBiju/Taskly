@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:taskly/app/global_widgets/decorated_Container.dart';
 import 'package:taskly/app/global_widgets/user_avatar.dart';
 import 'package:taskly/app/modules/home/controllers/home_controller.dart';
+import 'package:taskly/app/modules/home/views/all_tasks_view.dart';
 import 'package:taskly/app/modules/profile/views/profile_view.dart';
 import 'package:taskly/app/theme/text_theme.dart';
 
@@ -49,7 +50,9 @@ class DashboardView extends GetView<HomeController> {
                     color: Theme.of(context).primaryColorDark),
               ),
               GestureDetector(
-                onTap: () {},
+                onTap: () {
+                  Get.to(() => AllTasksView());
+                },
                 child: Text(
                   'View all tasks',
                   style: kSub2HeadTextStyle.copyWith(
@@ -88,7 +91,9 @@ class DashboardView extends GetView<HomeController> {
                     color: Theme.of(context).primaryColorDark),
               ),
               GestureDetector(
-                onTap: () {},
+                onTap: () {
+                  Get.to(() => AllTasksView());
+                },
                 child: Text(
                   'View all tasks',
                   style: kSub2HeadTextStyle.copyWith(

@@ -26,6 +26,8 @@ class HomeController extends GetxController {
   // bools for dashboard view
   bool isCurrentTaskPresent = false;
   bool isUpcommingTaskPresent = false;
+  Task currentTask;
+  Task upcomingTask;
 
   // controllers and var for bottomSheet TextFeilds
   TextEditingController titleController;
@@ -85,22 +87,34 @@ class HomeController extends GetxController {
 
   // Funtion to generate dailyTask
   dailyTask() {
+    todayTasks = [];
     var currDt = DateTime.now();
-    allTasks.forEach((element) {
-      if (element.taskDate.day == currDt.day &&
-              element.taskDate.month == currDt.month &&
-              element.taskDate.year == currDt.year ||
-          element.isRepeat == true) {
-        todayTasks.add(element);
-      }
-    });
-    todayTasks.sort((a, b) {
-      var aT = toDouble(timeConvert(a.startTime));
-      var bT = toDouble(timeConvert(b.startTime));
-      return aT.compareTo(bT);
-    });
-    todayTasks.forEach((element) {
-      print(element.startTime);
+    if (allTasks.length != 0) {
+      allTasks.forEach((element) {
+        if (element.taskDate.day == currDt.day &&
+                element.taskDate.month == currDt.month &&
+                element.taskDate.year == currDt.year ||
+            element.isRepeat == true) {
+          todayTasks.add(element);
+        }
+      });
+      todayTasks.sort((a, b) {
+        var aT = toDouble(timeConvert(a.startTime));
+        var bT = toDouble(timeConvert(b.startTime));
+        return aT.compareTo(bT);
+      });
+      todayTasks.forEach((element) {
+        print(element.startTime);
+      });
+      update([1, true]);
+    }
+  }
+
+  sortAllTasks() {
+    allTasks.sort((a, b) {
+      var aD = a.taskDate.toString();
+      var bD = b.taskDate.toString();
+      return aD.compareTo(bD);
     });
   }
 
@@ -108,14 +122,22 @@ class HomeController extends GetxController {
   addTask() async {
     tempTask = Task();
     var box = await Hive.openBox(taskBox);
+    var modDate = DateTime(
+      selectedDate.year,
+      selectedDate.month,
+      selectedDate.day,
+      selectedTime.hour,
+      selectedTime.minute,
+    );
     tempTask.taskImage = selectedIcon;
     tempTask.taskTitle = titleController.text;
     tempTask.taskDesc = descController.text;
-    tempTask.taskDate = selectedDate;
+    tempTask.taskDate = modDate;
     tempTask.startTime = formatDate(
         DateTime(2020, 08, 1, selectedTime.hour, selectedTime.minute),
         [hh, ':', nn, " ", am]).toString();
     tempTask.isRepeat = isRepeat;
+    print(modDate.toString());
     allTasks.add(tempTask);
     Map<String, dynamic> taskMap = tempTask.toJson();
     int idOfTask = await box.add(taskMap);
@@ -131,6 +153,7 @@ class HomeController extends GetxController {
       [hh, ':', nn, " ", am],
     ).toString();
     selectedIcon = icons.first;
+    sortAllTasks();
     dailyTask();
     update([1, true]);
     Get.back();
@@ -237,6 +260,7 @@ class HomeController extends GetxController {
     Directory appDocDir = await getApplicationDocumentsDirectory();
     Hive.init(appDocDir.path);
     allTasks = await getTasks();
+    sortAllTasks();
     dailyTask();
     update([1, true]);
     titleController = TextEditingController();
