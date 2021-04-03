@@ -77,6 +77,7 @@ class HomeController extends GetxController {
     update(['dropDownIcon', true]);
   }
 
+  // function to toggle repeat switch in BottomSheet
   toggleRepeat(bool newValue) {
     isRepeat = newValue;
     update(['isRepeat', true]);
@@ -110,6 +111,7 @@ class HomeController extends GetxController {
     }
   }
 
+  // function to sort allTasks based on date & time.
   sortAllTasks() {
     allTasks.sort((a, b) {
       var aD = a.taskDate.toString();
