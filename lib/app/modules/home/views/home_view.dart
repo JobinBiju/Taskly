@@ -14,6 +14,7 @@ class HomeView extends GetView<HomeController> {
       body: Obx(() => controller.navBarSwitcher()),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
+          controller.controllerReset();
           showModalBottomSheet(
             backgroundColor: Colors.transparent,
             isScrollControlled: true,

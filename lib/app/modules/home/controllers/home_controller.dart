@@ -167,16 +167,7 @@ class HomeController extends GetxController {
     int idOfTask = await box.add(taskMap);
     taskIds = idOfTask;
     Hive.close();
-    titleController.text = '';
-    descController.text = '';
-    selectedDate = DateTime.now();
-    dateController.text = DateFormat.yMMMd().format(selectedDate);
-    selectedTime = TimeOfDay(hour: 00, minute: 00);
-    timeController.text = formatDate(
-      DateTime(2020, 08, 1, selectedTime.hour, selectedTime.minute),
-      [hh, ':', nn, " ", am],
-    ).toString();
-    selectedIcon = icons.first;
+    controllerReset();
     sortAllTasks();
     dailyTask();
     update([1, true]);
@@ -185,6 +176,9 @@ class HomeController extends GetxController {
 
   // function to update task
   updateTask(Task task) async {
+    allTasks.forEach((element) {
+      if (element == task) {}
+    });
     sortAllTasks();
     dailyTask();
     update([1, true]);
@@ -226,6 +220,20 @@ class HomeController extends GetxController {
       int idOfTask = await box.add(newTaskMap);
     });
     Hive.close();
+  }
+
+  controllerReset() {
+    titleController.text = '';
+    descController.text = '';
+    selectedDate = DateTime.now();
+    dateController.text = DateFormat.yMMMd().format(selectedDate);
+    selectedTime = TimeOfDay(hour: 00, minute: 00);
+    timeController.text = formatDate(
+      DateTime(2020, 08, 1, selectedTime.hour, selectedTime.minute),
+      [hh, ':', nn, " ", am],
+    ).toString();
+    selectedIcon = icons.first;
+    isRepeat = false;
   }
 
   // setDateFuntion bottomSheet
