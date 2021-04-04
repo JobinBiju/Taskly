@@ -86,6 +86,28 @@ class HomeController extends GetxController {
   // convert time to minutes
   double toDouble(TimeOfDay myTime) => myTime.hour + myTime.minute / 60.0;
 
+  // function to sort allTasks based on date & time.
+  sortAllTasks() {
+    var currDt = DateTime.now();
+    allTasks.forEach((ele) {
+      if (ele.isRepeat == true) {
+        var tmp = ele.taskDate;
+        ele.taskDate = DateTime(
+          currDt.year,
+          currDt.month,
+          currDt.day,
+          tmp.hour,
+          tmp.minute,
+        );
+      }
+    });
+    allTasks.sort((a, b) {
+      var aD = a.taskDate.toString();
+      var bD = b.taskDate.toString();
+      return aD.compareTo(bD);
+    });
+  }
+
   // Funtion to generate dailyTask
   dailyTask() {
     todayTasks = [];
@@ -93,9 +115,8 @@ class HomeController extends GetxController {
     if (allTasks.length != 0) {
       allTasks.forEach((element) {
         if (element.taskDate.day == currDt.day &&
-                element.taskDate.month == currDt.month &&
-                element.taskDate.year == currDt.year ||
-            element.isRepeat == true) {
+            element.taskDate.month == currDt.month &&
+            element.taskDate.year == currDt.year) {
           todayTasks.add(element);
         }
       });
@@ -109,15 +130,6 @@ class HomeController extends GetxController {
       });
       update([1, true]);
     }
-  }
-
-  // function to sort allTasks based on date & time.
-  sortAllTasks() {
-    allTasks.sort((a, b) {
-      var aD = a.taskDate.toString();
-      var bD = b.taskDate.toString();
-      return aD.compareTo(bD);
-    });
   }
 
   // function to add task via bottomSheet
@@ -162,12 +174,10 @@ class HomeController extends GetxController {
   }
 
   // function to update task
-  updateTask(int index, Task task1) async {
-    var box = await Hive.openBox(taskBox);
-    var newTaskMap = task1.toJson();
-    box.putAt(index, newTaskMap);
-    Hive.close();
+  updateTask(String taskName, String desc) async {
+    sortAllTasks();
     dailyTask();
+    update([1, true]);
   }
 
   // function to read task from database
@@ -194,6 +204,16 @@ class HomeController extends GetxController {
     var box = await Hive.openBox(taskBox);
     await box.deleteAt(taskId);
     dailyTask();
+  }
+
+  reWriteTasks() async {
+    var box = await Hive.openBox(taskBox);
+    int id = await box.clear();
+    allTasks.forEach((element) async {
+      Map<String, dynamic> newTaskMap = element.toJson();
+      int idOfTask = await box.add(newTaskMap);
+    });
+    Hive.close();
   }
 
   // ExpandedContainer
@@ -264,6 +284,7 @@ class HomeController extends GetxController {
     Hive.init(appDocDir.path);
     allTasks = await getTasks();
     sortAllTasks();
+    reWriteTasks();
     dailyTask();
     update([1, true]);
     titleController = TextEditingController();
