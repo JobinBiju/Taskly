@@ -46,7 +46,10 @@ class TodayTaskView extends GetView<HomeController> {
                           padding: EdgeInsets.only(bottom: 20, left: 20),
                           child: IconButton(
                               icon: Icon(Icons.edit, size: 30),
-                              onPressed: () {}),
+                              onPressed: () {
+                                controller.slideC.activeState?.close();
+                                Slidable.of(context)?.close();
+                              }),
                         ),
                       ],
                       secondaryActions: [
@@ -54,7 +57,10 @@ class TodayTaskView extends GetView<HomeController> {
                           padding: EdgeInsets.only(bottom: 20, right: 30),
                           child: IconButton(
                               icon: Icon(Icons.delete, size: 30),
-                              onPressed: () {}),
+                              onPressed: () {
+                                controller.slideC.activeState?.close();
+                                Slidable.of(context)?.close();
+                              }),
                         ),
                       ],
                     );
