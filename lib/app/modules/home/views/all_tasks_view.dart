@@ -67,6 +67,7 @@ class AllTasksView extends GetView<HomeController> {
                                 onPressed: () {
                                   controller.slideC.activeState?.close();
                                   Slidable.of(context)?.close();
+                                  controller.deleteTask(task);
                                 }),
                           ),
                         ],

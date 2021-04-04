@@ -204,10 +204,14 @@ class HomeController extends GetxController {
   }
 
   // function to delete task by ID
-  deleteTask(int taskId) async {
-    var box = await Hive.openBox(taskBox);
-    await box.deleteAt(taskId);
+  deleteTask(Task task) async {
+    int index = allTasks.indexOf(task);
+    allTasks.removeAt(index);
+    sortAllTasks();
+    reWriteTasks();
     dailyTask();
+    update([1, true]);
+    print(index);
   }
 
   reWriteTasks() async {
