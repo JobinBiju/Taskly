@@ -174,7 +174,7 @@ class HomeController extends GetxController {
   }
 
   // function to update task
-  updateTask(String taskName, String desc) async {
+  updateTask(Task task) async {
     sortAllTasks();
     dailyTask();
     update([1, true]);
@@ -208,9 +208,11 @@ class HomeController extends GetxController {
 
   reWriteTasks() async {
     var box = await Hive.openBox(taskBox);
+    // ignore: unused_local_variable
     int id = await box.clear();
     allTasks.forEach((element) async {
       Map<String, dynamic> newTaskMap = element.toJson();
+      // ignore: unused_local_variable
       int idOfTask = await box.add(newTaskMap);
     });
     Hive.close();

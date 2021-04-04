@@ -10,6 +10,7 @@ class InputTextFormField extends StatelessWidget {
   final Color textFeildColor;
   final double width;
   final bool isEnabled;
+  final Function onChanged;
   InputTextFormField({
     Key key,
     @required this.hintText,
@@ -19,6 +20,7 @@ class InputTextFormField extends StatelessWidget {
     this.textFeildColor,
     this.width,
     this.isEnabled,
+    this.onChanged,
   }) : super(key: key);
 
   @override
@@ -49,6 +51,7 @@ class InputTextFormField extends StatelessWidget {
           enabledBorder: InputBorder.none,
           focusedBorder: InputBorder.none,
         ),
+        onChanged: onChanged,
       ),
     );
   }

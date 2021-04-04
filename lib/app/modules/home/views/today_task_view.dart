@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:get/get.dart';
 import 'package:taskly/app/global_widgets/expandable_container.dart';
 import 'package:taskly/app/modules/home/controllers/home_controller.dart';
@@ -31,11 +32,31 @@ class TodayTaskView extends GetView<HomeController> {
                 child: ListView.builder(
                   itemBuilder: (context, index) {
                     final task = controller.todayTasks[index];
-                    return ExpandedContainer(
-                      icon: task.taskImage,
-                      title: task.taskTitle,
-                      time: task.startTime,
-                      desc: task.taskDesc,
+                    return Slidable(
+                      actionPane: SlidableDrawerActionPane(),
+                      actionExtentRatio: 0.15,
+                      child: ExpandedContainer(
+                        icon: task.taskImage,
+                        title: task.taskTitle,
+                        time: task.startTime,
+                        desc: task.taskDesc,
+                      ),
+                      actions: [
+                        Padding(
+                          padding: EdgeInsets.only(bottom: 20, left: 20),
+                          child: IconButton(
+                              icon: Icon(Icons.edit, size: 30),
+                              onPressed: () {}),
+                        ),
+                      ],
+                      secondaryActions: [
+                        Padding(
+                          padding: EdgeInsets.only(bottom: 20, right: 30),
+                          child: IconButton(
+                              icon: Icon(Icons.delete, size: 30),
+                              onPressed: () {}),
+                        ),
+                      ],
                     );
                   },
                   itemCount: controller.todayTasks.length,

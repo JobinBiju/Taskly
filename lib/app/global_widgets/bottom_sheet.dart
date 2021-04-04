@@ -7,16 +7,10 @@ import 'package:taskly/app/modules/home/controllers/home_controller.dart';
 import 'package:taskly/app/theme/text_theme.dart';
 
 class BottomSheetContent extends GetView<HomeController> {
-  final Function selectDate;
-  final Function selectTime;
-  const BottomSheetContent({
-    Key key,
-    this.selectDate,
-    this.selectTime,
-  }) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
+    String title;
+    String desc;
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
       height: Get.height * 0.6,
@@ -80,16 +74,22 @@ class BottomSheetContent extends GetView<HomeController> {
           SizedBox(height: Get.height * 0.03),
           InputTextFormField(
             hintText: 'Tittle',
-            tController: controller.titleController,
+            //tController: titleC,
             textFeildColor: Theme.of(context).primaryColorLight,
             contentTextColor: Theme.of(context).primaryColorDark,
+            onChanged: (val) {
+              title = val;
+            },
           ),
           SizedBox(height: 25),
           InputTextFormField(
             hintText: 'Description',
-            tController: controller.descController,
+            //tController: controller.descController,
             textFeildColor: Theme.of(context).primaryColorLight,
             contentTextColor: Theme.of(context).primaryColorDark,
+            onChanged: (val) {
+              desc = val;
+            },
           ),
           SizedBox(height: Get.height * 0.03),
           Row(
@@ -164,6 +164,8 @@ class BottomSheetContent extends GetView<HomeController> {
             title: 'Create Task',
             buttonColor: Theme.of(context).primaryColor.withOpacity(0.9),
             onPress: () {
+              controller.titleController.text = title;
+              controller.descController.text = desc;
               controller.addTask();
             },
           ),
