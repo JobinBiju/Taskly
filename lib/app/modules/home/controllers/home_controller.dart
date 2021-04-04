@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:get/get.dart';
 import 'package:hive/hive.dart';
 import 'package:path_provider/path_provider.dart';
@@ -53,6 +54,9 @@ class HomeController extends GetxController {
     'assets/icons/travel.svg',
   ];
 
+  // allTasks slidable
+  SlidableController slideC;
+
   // the list of screens switched by bottom navBar
   final List<Widget> homeViews = [
     DashboardView(),
@@ -69,6 +73,12 @@ class HomeController extends GetxController {
   // function to return correct view on bottom navBar switch
   Widget navBarSwitcher() {
     return homeViews.elementAt(currentIndex);
+  }
+
+  // ExpandedContainer
+  void onExpand(bool value) {
+    isExpanded = value;
+    update();
   }
 
   // change icon in bottomSheet
@@ -218,12 +228,6 @@ class HomeController extends GetxController {
     Hive.close();
   }
 
-  // ExpandedContainer
-  void onExpand(bool value) {
-    isExpanded = value;
-    update();
-  }
-
   // setDateFuntion bottomSheet
   Future<Null> selectDate(BuildContext context) async {
     final DateTime picked = await showDatePicker(
@@ -293,6 +297,7 @@ class HomeController extends GetxController {
     descController = TextEditingController();
     dateController = TextEditingController();
     timeController = TextEditingController();
+    slideC = SlidableController();
     selectedDate = DateTime.now();
     dateController.text = DateFormat.yMMMd().format(selectedDate);
     selectedTime = TimeOfDay(hour: 00, minute: 00);
