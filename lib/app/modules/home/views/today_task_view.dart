@@ -35,6 +35,7 @@ class TodayTaskView extends GetView<HomeController> {
                     return Slidable(
                       actionPane: SlidableDrawerActionPane(),
                       actionExtentRatio: 0.15,
+                      controller: controller.slideC,
                       child: ExpandedContainer(
                         icon: task.taskImage,
                         title: task.taskTitle,
