@@ -41,7 +41,7 @@ class SplashScreenController extends GetxController
       }
     });
     Timer(
-      Duration(milliseconds: 6200),
+      Duration(milliseconds: 5400),
       () => Get.offNamed('/home'),
     );
   }

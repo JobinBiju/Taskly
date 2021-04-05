@@ -188,7 +188,7 @@ class HomeController extends GetxController {
     isRepeat = task.isRepeat;
   }
 
-  // function to update task
+  // function to update task via bottomSheet
   updateTask(Task task) async {
     tempTask = Task();
     var modDate = DateTime(
