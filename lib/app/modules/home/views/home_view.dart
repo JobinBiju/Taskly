@@ -20,7 +20,12 @@ class HomeView extends GetView<HomeController> {
             isScrollControlled: true,
             context: context,
             builder: (context) {
-              return BottomSheetContent();
+              return BottomSheetContent(
+                buttonText: 'Create Task',
+                onSubmit: () {
+                  controller.addTask();
+                },
+              );
             },
           );
         },

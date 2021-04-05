@@ -7,6 +7,11 @@ import 'package:taskly/app/modules/home/controllers/home_controller.dart';
 import 'package:taskly/app/theme/text_theme.dart';
 
 class BottomSheetContent extends GetView<HomeController> {
+  final Function onSubmit;
+  final String buttonText;
+
+  BottomSheetContent({this.onSubmit, this.buttonText});
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -153,11 +158,9 @@ class BottomSheetContent extends GetView<HomeController> {
           SizedBox(height: Get.height * 0.02),
           ProceedButton(
             size: Get.size,
-            title: 'Create Task',
+            title: buttonText,
             buttonColor: Theme.of(context).primaryColor.withOpacity(0.9),
-            onPress: () {
-              controller.addTask();
-            },
+            onPress: onSubmit,
           ),
         ],
       ),

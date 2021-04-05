@@ -174,14 +174,46 @@ class HomeController extends GetxController {
     Get.back();
   }
 
+  // preUpdates
+  preUpdateTask(Task task) {
+    selectedIcon = task.taskImage;
+    titleController.text = task.taskTitle;
+    descController.text = task.taskDesc;
+    selectedTime = timeConvert(task.startTime);
+    timeController.text = formatDate(
+        DateTime(2020, 08, 1, selectedTime.hour, selectedTime.minute),
+        [hh, ':', nn, " ", am]).toString();
+    selectedDate = task.taskDate;
+    dateController.text = DateFormat.yMMMd().format(selectedDate);
+    isRepeat = task.isRepeat;
+  }
+
   // function to update task
   updateTask(Task task) async {
-    allTasks.forEach((element) {
-      if (element == task) {}
-    });
+    tempTask = Task();
+    var modDate = DateTime(
+      selectedDate.year,
+      selectedDate.month,
+      selectedDate.day,
+      selectedTime.hour,
+      selectedTime.minute,
+    );
+    tempTask.taskImage = selectedIcon;
+    tempTask.taskTitle = titleController.text;
+    tempTask.taskDesc = descController.text;
+    tempTask.taskDate = modDate;
+    tempTask.startTime = formatDate(
+        DateTime(2020, 08, 1, selectedTime.hour, selectedTime.minute),
+        [hh, ':', nn, " ", am]).toString();
+    tempTask.isRepeat = isRepeat;
+    int index = allTasks.indexOf(task);
+    allTasks.setAll(index, [tempTask]);
     sortAllTasks();
+    reWriteTasks();
     dailyTask();
     update([1, true]);
+    Get.back();
+    print(index);
   }
 
   // function to read task from database

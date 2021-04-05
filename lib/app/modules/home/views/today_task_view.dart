@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:get/get.dart';
+import 'package:taskly/app/global_widgets/bottom_sheet.dart';
 import 'package:taskly/app/global_widgets/expandable_container.dart';
 import 'package:taskly/app/modules/home/controllers/home_controller.dart';
 import 'package:taskly/app/theme/text_theme.dart';
@@ -50,6 +51,20 @@ class TodayTaskView extends GetView<HomeController> {
                               onPressed: () {
                                 controller.slideC.activeState?.close();
                                 Slidable.of(context)?.close();
+                                controller.preUpdateTask(task);
+                                showModalBottomSheet(
+                                  backgroundColor: Colors.transparent,
+                                  isScrollControlled: true,
+                                  context: context,
+                                  builder: (context) {
+                                    return BottomSheetContent(
+                                      buttonText: 'Update Task',
+                                      onSubmit: () {
+                                        controller.updateTask(task);
+                                      },
+                                    );
+                                  },
+                                );
                               }),
                         ),
                       ],
