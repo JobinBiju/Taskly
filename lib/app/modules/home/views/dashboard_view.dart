@@ -64,22 +64,26 @@ class DashboardView extends GetView<HomeController> {
             ],
           ),
           SizedBox(height: size.height * 0.038),
-          controller.isCurrentTaskPresent
-              ? DecoratedContainer(
-                  margin: EdgeInsets.only(bottom: 20),
-                  color: Theme.of(context).primaryColor.withOpacity(0.85),
-                  svgAsset: 'assets/icons/alarm-clock.svg',
-                  title: 'Wake Up',
-                  time: '7:00 am',
-                )
-              : Center(
-                  child: Text(
-                    "Nothing Here",
-                    style: kSub2HeadTextStyle.copyWith(
-                        fontSize: 12,
-                        color: Theme.of(context).primaryColorDark),
-                  ),
-                ),
+          GetBuilder<HomeController>(
+              id: 3,
+              builder: (_) {
+                return controller.isCurrentTaskPresent
+                    ? DecoratedContainer(
+                        margin: EdgeInsets.only(bottom: 20),
+                        color: Theme.of(context).primaryColor.withOpacity(0.85),
+                        svgAsset: controller.currentTask.taskImage,
+                        title: controller.currentTask.taskTitle,
+                        time: controller.currentTask.startTime,
+                      )
+                    : Center(
+                        child: Text(
+                          "Nothing Here",
+                          style: kSub2HeadTextStyle.copyWith(
+                              fontSize: 12,
+                              color: Theme.of(context).primaryColorDark),
+                        ),
+                      );
+              }),
           SizedBox(height: size.height * 0.06),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -105,22 +109,26 @@ class DashboardView extends GetView<HomeController> {
             ],
           ),
           SizedBox(height: size.height * 0.038),
-          controller.isUpcommingTaskPresent
-              ? DecoratedContainer(
-                  margin: EdgeInsets.only(bottom: 20),
-                  color: Theme.of(context).primaryColor.withOpacity(0.85),
-                  svgAsset: 'assets/icons/online-learning.svg',
-                  title: 'Help a friend with a homework',
-                  time: '7:30 am',
-                )
-              : Center(
-                  child: Text(
-                    "Nothing Here",
-                    style: kSub2HeadTextStyle.copyWith(
-                        fontSize: 12,
-                        color: Theme.of(context).primaryColorDark),
-                  ),
-                ),
+          GetBuilder<HomeController>(
+              id: 3,
+              builder: (_) {
+                return controller.isUpcommingTaskPresent
+                    ? DecoratedContainer(
+                        margin: EdgeInsets.only(bottom: 20),
+                        color: Theme.of(context).primaryColor.withOpacity(0.85),
+                        svgAsset: controller.upcomingTask.taskImage,
+                        title: controller.upcomingTask.taskTitle,
+                        time: controller.upcomingTask.startTime,
+                      )
+                    : Center(
+                        child: Text(
+                          "Nothing Here",
+                          style: kSub2HeadTextStyle.copyWith(
+                              fontSize: 12,
+                              color: Theme.of(context).primaryColorDark),
+                        ),
+                      );
+              }),
         ],
       ),
     );

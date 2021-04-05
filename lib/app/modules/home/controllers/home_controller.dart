@@ -170,6 +170,8 @@ class HomeController extends GetxController {
     controllerReset();
     sortAllTasks();
     dailyTask();
+    setCurrentTask();
+    setUpcomingTask();
     update([1, true]);
     Get.back();
   }
@@ -211,6 +213,8 @@ class HomeController extends GetxController {
     sortAllTasks();
     reWriteTasks();
     dailyTask();
+    setCurrentTask();
+    setUpcomingTask();
     update([1, true]);
     Get.back();
     print(index);
@@ -242,6 +246,8 @@ class HomeController extends GetxController {
     sortAllTasks();
     reWriteTasks();
     dailyTask();
+    setCurrentTask();
+    setUpcomingTask();
     update([1, true]);
     print(index);
   }
@@ -327,6 +333,39 @@ class HomeController extends GetxController {
     return TimeOfDay(hour: hour, minute: minute);
   }
 
+  // function to set currentTask
+  setCurrentTask() {
+    var cDt = DateTime.now();
+    isCurrentTaskPresent = false;
+    if (todayTasks.length != 0) {
+      todayTasks.forEach((element) {
+        if (element.taskDate.compareTo(cDt) <= 0) {
+          currentTask = element;
+          isCurrentTaskPresent = true;
+        } else {}
+        update([3, true]);
+      });
+    }
+  }
+
+  // function to set upcomingTask
+  setUpcomingTask() {
+    isUpcommingTaskPresent = false;
+    var cDt = DateTime.now();
+    if (todayTasks.length != 0) {
+      for (int i = 0; i < todayTasks.length - 1; i++) {
+        if (todayTasks[i + 1].taskDate.isAfter(cDt)) {
+          var index = todayTasks.indexOf(currentTask);
+          upcomingTask = todayTasks.elementAt(index + 1);
+          isUpcommingTaskPresent = true;
+          break;
+        }
+      }
+    }
+
+    update([3, true]);
+  }
+
   @override
   void onInit() async {
     super.onInit();
@@ -336,6 +375,8 @@ class HomeController extends GetxController {
     sortAllTasks();
     reWriteTasks();
     dailyTask();
+    setCurrentTask();
+    setUpcomingTask();
     update([1, true]);
     titleController = TextEditingController();
     descController = TextEditingController();
