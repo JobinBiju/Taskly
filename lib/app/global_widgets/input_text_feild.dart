@@ -34,7 +34,7 @@ class InputTextFormField extends StatelessWidget {
         borderRadius: BorderRadius.circular(12),
       ),
       child: TextFormField(
-        textCapitalization: TextCapitalization.words,
+        textCapitalization: TextCapitalization.sentences,
         controller: tController,
         enabled: isEnabled,
         textAlign: TextAlign.center,
