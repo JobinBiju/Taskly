@@ -51,38 +51,62 @@ class AllTasksView extends GetView<HomeController> {
                         actions: [
                           Padding(
                             padding: EdgeInsets.only(bottom: 20, left: 20),
-                            child: IconButton(
-                                icon: Icon(Icons.edit, size: 30),
-                                onPressed: () {
-                                  controller.slideC.activeState?.close();
-                                  Slidable.of(context)?.close();
-                                  controller.preUpdateTask(task);
-                                  showModalBottomSheet(
-                                    backgroundColor: Colors.transparent,
-                                    isScrollControlled: true,
-                                    context: context,
-                                    builder: (context) {
-                                      return BottomSheetContent(
-                                        buttonText: 'Update Task',
-                                        onSubmit: () {
-                                          controller.updateTask(task);
-                                        },
-                                      );
-                                    },
-                                  );
-                                }),
+                            child: Container(
+                              padding: EdgeInsets.all(0),
+                              width: 40,
+                              height: 40,
+                              decoration: BoxDecoration(
+                                  color: Theme.of(context).primaryColorLight,
+                                  borderRadius: BorderRadius.circular(10)),
+                              child: IconButton(
+                                  icon: Icon(
+                                    Icons.edit,
+                                    size: 26,
+                                    color: Theme.of(context).primaryColorDark,
+                                  ),
+                                  onPressed: () {
+                                    controller.slideC.activeState?.close();
+                                    Slidable.of(context)?.close();
+                                    controller.preUpdateTask(task);
+                                    showModalBottomSheet(
+                                      backgroundColor: Colors.transparent,
+                                      isScrollControlled: true,
+                                      context: context,
+                                      builder: (context) {
+                                        return BottomSheetContent(
+                                          buttonText: 'Update Task',
+                                          onSubmit: () {
+                                            controller.updateTask(task);
+                                          },
+                                        );
+                                      },
+                                    );
+                                  }),
+                            ),
                           ),
                         ],
                         secondaryActions: [
                           Padding(
-                            padding: EdgeInsets.only(bottom: 20, right: 30),
-                            child: IconButton(
-                                icon: Icon(Icons.delete, size: 30),
-                                onPressed: () {
-                                  controller.slideC.activeState?.close();
-                                  Slidable.of(context)?.close();
-                                  controller.deleteTask(task);
-                                }),
+                            padding: EdgeInsets.only(bottom: 21, right: 18),
+                            child: Container(
+                              padding: EdgeInsets.all(0),
+                              width: 40,
+                              height: 40,
+                              decoration: BoxDecoration(
+                                  color: Theme.of(context).primaryColorLight,
+                                  borderRadius: BorderRadius.circular(10)),
+                              child: IconButton(
+                                  icon: Icon(
+                                    Icons.delete,
+                                    size: 26,
+                                    color: Theme.of(context).primaryColorDark,
+                                  ),
+                                  onPressed: () {
+                                    controller.slideC.activeState?.close();
+                                    Slidable.of(context)?.close();
+                                    controller.deleteTask(task);
+                                  }),
+                            ),
                           ),
                         ],
                       );
