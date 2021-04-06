@@ -10,6 +10,7 @@ import 'package:taskly/app/theme/text_theme.dart';
 
 class ProfileView extends GetView<ProfileController> {
   final SettingsController secController = Get.put(SettingsController());
+  final ProfileController fController = Get.put(ProfileController());
   @override
   Widget build(BuildContext context) {
     Size size = Get.size;
@@ -34,14 +35,17 @@ class ProfileView extends GetView<ProfileController> {
               ),
               child: Row(
                 children: [
-                  UserAvatar(radius: size.width * 0.085),
+                  UserAvatar(
+                    radius: size.width * 0.085,
+                    ismale: fController.isMale,
+                  ),
                   SizedBox(width: size.width * 0.045),
                   Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Jobin Biju',
+                        '${fController.fName} ${fController.lName}',
                         style: kSub2HeadTextStyle.copyWith(
                           color: Theme.of(context).primaryColorDark,
                           fontSize: 18,
@@ -49,7 +53,7 @@ class ProfileView extends GetView<ProfileController> {
                       ),
                       SizedBox(height: size.height * 0.007),
                       Text(
-                        'jobinbiju9090@gmail.com',
+                        fController.email,
                         style: kSub2HeadTextStyle.copyWith(
                           color: Theme.of(context).primaryColorDark,
                           fontSize: 16,
@@ -124,6 +128,7 @@ class ProfileView extends GetView<ProfileController> {
                   confirmTextColor: Theme.of(context).primaryColorDark,
                   cancelTextColor: Theme.of(context).primaryColorDark,
                   onConfirm: () {
+                    fController.resetUser();
                     Get.offAll(() => LoginView(),
                         transition: Transition.leftToRightWithFade,
                         duration: Duration(seconds: 1));

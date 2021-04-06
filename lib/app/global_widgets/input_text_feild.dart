@@ -10,7 +10,7 @@ class InputTextFormField extends StatelessWidget {
   final Color textFeildColor;
   final double width;
   final bool isEnabled;
-  final Function onChanged;
+  final Function validator;
   InputTextFormField({
     Key key,
     @required this.hintText,
@@ -20,7 +20,7 @@ class InputTextFormField extends StatelessWidget {
     this.textFeildColor,
     this.width,
     this.isEnabled,
-    this.onChanged,
+    this.validator,
   }) : super(key: key);
 
   @override
@@ -34,6 +34,8 @@ class InputTextFormField extends StatelessWidget {
         borderRadius: BorderRadius.circular(12),
       ),
       child: TextFormField(
+        autovalidateMode: AutovalidateMode.onUserInteraction,
+        validator: validator,
         textCapitalization: TextCapitalization.sentences,
         controller: tController,
         enabled: isEnabled,
@@ -48,10 +50,11 @@ class InputTextFormField extends StatelessWidget {
             fontSize: 16,
             color: hintTextColor ?? Color(0xff8E8E8E),
           ),
+          errorStyle: TextStyle(color: Colors.red),
+          errorBorder: InputBorder.none,
           enabledBorder: InputBorder.none,
           focusedBorder: InputBorder.none,
         ),
-        onChanged: onChanged,
       ),
     );
   }

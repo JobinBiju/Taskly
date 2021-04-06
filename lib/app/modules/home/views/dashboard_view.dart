@@ -22,23 +22,28 @@ class DashboardView extends GetView<HomeController> {
           SizedBox(
             height: size.height * 0.08,
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Text(
-                'Hello, Jobin',
-                style: kSubHeadTextStyle.copyWith(
-                    color: Theme.of(context).primaryColorDark),
-              ),
-              GestureDetector(
-                onTap: () => Get.to(() => ProfileView()),
-                child: UserAvatar(
-                  radius: size.width * 0.062,
-                ),
-              ),
-            ],
-          ),
+          GetBuilder<HomeController>(
+              id: 7,
+              builder: (_) {
+                return Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Text(
+                      'Hello, ${controller.userName}',
+                      style: kSubHeadTextStyle.copyWith(
+                          color: Theme.of(context).primaryColorDark),
+                    ),
+                    GestureDetector(
+                      onTap: () => Get.to(() => ProfileView()),
+                      child: UserAvatar(
+                        ismale: controller.isMale,
+                        radius: size.width * 0.062,
+                      ),
+                    ),
+                  ],
+                );
+              }),
           SizedBox(height: size.height * 0.1),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,

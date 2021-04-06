@@ -40,22 +40,25 @@ class LoginView extends GetView<WelcomeController> {
               ),
               SizedBox(height: size.height * 0.08),
               InputTextFormField(
+                validator: controller.fNameValidator,
                 hintText: 'First name',
                 tController: controller.firstNameController,
               ),
               SizedBox(height: size.height * 0.03),
               InputTextFormField(
+                validator: controller.lNameValidator,
                 hintText: 'Last name (Optional)',
                 tController: controller.lastNameController,
               ),
               SizedBox(height: size.height * 0.03),
               InputTextFormField(
+                validator: controller.emailValidator,
                 hintText: 'Email',
                 tController: controller.emailController,
               ),
               SizedBox(height: size.height * 0.03),
               GetBuilder<WelcomeController>(
-                init: controller,
+                id: 5,
                 builder: (_) => ToggleButtons(
                   children: [
                     Image(image: AssetImage('assets/images/male-user-1.png')),
@@ -76,7 +79,7 @@ class LoginView extends GetView<WelcomeController> {
               ProceedButton(
                 size: size,
                 onPress: () {
-                  Get.offAll(() => HomeView());
+                  controller.userLogin();
                 },
                 title: 'Register',
               ),

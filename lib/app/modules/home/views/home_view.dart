@@ -10,6 +10,7 @@ class HomeView extends GetView<HomeController> {
   final controller = Get.put(HomeController());
   @override
   Widget build(BuildContext context) {
+    controller.getUser();
     return Scaffold(
       body: Obx(() => controller.navBarSwitcher()),
       floatingActionButton: FloatingActionButton(

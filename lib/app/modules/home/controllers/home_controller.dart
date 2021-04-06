@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:hive/hive.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:taskly/app/data/model/task_model.dart';
@@ -20,6 +21,9 @@ class HomeController extends GetxController {
   // Hive DB var
   String taskBox = 'tasks';
   int taskIds = 0;
+
+  // instance of Get Storage
+  final userData = GetStorage();
 
   // variable for expansionTile
   bool isExpanded = false;
@@ -69,6 +73,10 @@ class HomeController extends GetxController {
   // task lists
   List<Task> allTasks = [];
   List<Task> todayTasks = [];
+
+  // userData
+  String userName;
+  bool isMale;
 
   // function to return correct view on bottom navBar switch
   Widget navBarSwitcher() {
@@ -366,6 +374,12 @@ class HomeController extends GetxController {
     update([3, true]);
   }
 
+  getUser() {
+    userName = userData.read('fName');
+    isMale = userData.read('isMale');
+    update([7, true]);
+  }
+
   @override
   void onInit() async {
     super.onInit();
@@ -399,6 +413,7 @@ class HomeController extends GetxController {
 
   @override
   void onClose() {
+    super.onClose();
     titleController.dispose();
     descController.dispose();
     dateController.dispose();

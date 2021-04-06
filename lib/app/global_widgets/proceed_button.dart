@@ -5,14 +5,13 @@ class ProceedButton extends StatelessWidget {
   final String title;
   final Function onPress;
   final Color buttonColor;
+  final Size size;
   const ProceedButton({
     @required this.size,
     @required this.title,
     @required this.onPress,
     this.buttonColor,
   });
-
-  final Size size;
 
   @override
   Widget build(BuildContext context) {
@@ -27,8 +26,8 @@ class ProceedButton extends StatelessWidget {
             color: Theme.of(context).primaryColorLight),
       ),
       color: buttonColor ?? Color(0xffffc045),
-      splashColor: buttonColor.withOpacity(0.8) ?? Color(0xfffdb827),
-      highlightColor: buttonColor.withOpacity(0.8) ?? Color(0xfffdb827),
+      splashColor: buttonColor ?? Color(0xfffdb827),
+      highlightColor: buttonColor ?? Color(0xfffdb827),
       shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(size.width * 0.05)),
     );

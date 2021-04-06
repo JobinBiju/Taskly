@@ -41,9 +41,9 @@ class WelcomeView extends GetView<WelcomeController> {
             ),
             SizedBox(height: size.height * 0.035),
             Text(
-              'Developers\'s life is a Mess',
+              'Professionals\' life is a Mess',
               style: kHeadTextStyle.copyWith(
-                fontSize: 32,
+                fontSize: 30,
                 fontWeight: FontWeight.w900,
                 color: primaryDGrey,
               ),
@@ -64,9 +64,12 @@ class WelcomeView extends GetView<WelcomeController> {
             Align(
               alignment: Alignment.center,
               child: ProceedButton(
-                size: size,
+                size: Get.size,
                 onPress: () {
-                  Get.to(() => LoginView());
+                  Get.to(
+                    () => LoginView(),
+                    transition: Transition.rightToLeft,
+                  );
                 },
                 title: 'Start',
               ),

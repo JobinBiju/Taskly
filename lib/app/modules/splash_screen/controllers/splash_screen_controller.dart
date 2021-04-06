@@ -13,6 +13,7 @@ class SplashScreenController extends GetxController
 
   // initializing userData instance
   final userData = GetStorage();
+  bool isLoggedIn;
 
   // function to set the user saved theme on start
   setTheme() {
@@ -21,11 +22,16 @@ class SplashScreenController extends GetxController
     Get.changeTheme(appThemeData.values.elementAt(n));
   }
 
+  checkLogin() {
+    isLoggedIn = userData.read('loginStatus');
+  }
+
   @override
   void onInit() {
     super.onInit();
     userData.writeIfNull('theme', "Yellow Light");
     userData.writeIfNull('drinkWater', false);
+    userData.writeIfNull('loginStatus', false);
 
     // spalsh animation config
     animationController = AnimationController(
@@ -40,9 +46,10 @@ class SplashScreenController extends GetxController
         animationController.forward();
       }
     });
+    checkLogin();
     Timer(
       Duration(milliseconds: 5400),
-      () => Get.offNamed('/home'),
+      () => Get.offNamed(isLoggedIn ? '/home' : '/welcome'),
     );
   }
 
