@@ -76,7 +76,7 @@ class BottomSheetContent extends GetView<HomeController> {
           ),
           SizedBox(height: Get.height * 0.03),
           InputTextFormField(
-            hintText: 'Tittle',
+            hintText: 'Title',
             tController: controller.titleController,
             textFeildColor: Theme.of(context).primaryColorLight,
             contentTextColor: Theme.of(context).primaryColorDark,
