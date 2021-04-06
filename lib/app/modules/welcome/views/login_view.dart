@@ -3,7 +3,6 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:taskly/app/global_widgets/input_text_feild.dart';
 import 'package:taskly/app/global_widgets/proceed_button.dart';
-import 'package:taskly/app/modules/home/views/home_view.dart';
 import 'package:taskly/app/modules/welcome/controllers/welcome_controller.dart';
 
 class LoginView extends GetView<WelcomeController> {

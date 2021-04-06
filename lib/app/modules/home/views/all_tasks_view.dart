@@ -102,9 +102,7 @@ class AllTasksView extends GetView<HomeController> {
                                     color: Theme.of(context).primaryColorDark,
                                   ),
                                   onPressed: () {
-                                    controller.slideC.activeState?.close();
-                                    Slidable.of(context)?.close();
-                                    controller.deleteTask(task);
+                                    controller.customDialogDel(context, task);
                                   }),
                             ),
                           ),

@@ -48,7 +48,7 @@ class SplashScreenController extends GetxController
     });
     checkLogin();
     Timer(
-      Duration(milliseconds: 5400),
+      Duration(milliseconds: 5500),
       () => Get.offNamed(isLoggedIn ? '/home' : '/welcome'),
     );
   }

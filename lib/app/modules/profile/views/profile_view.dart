@@ -5,7 +5,6 @@ import 'package:taskly/app/global_widgets/user_avatar.dart';
 import 'package:taskly/app/modules/profile/controllers/profile_controller.dart';
 import 'package:taskly/app/modules/settings/controllers/settings_controller.dart';
 import 'package:taskly/app/modules/settings/views/settings_view.dart';
-import 'package:taskly/app/modules/welcome/views/login_view.dart';
 import 'package:taskly/app/theme/text_theme.dart';
 
 class ProfileView extends GetView<ProfileController> {
@@ -116,34 +115,7 @@ class ProfileView extends GetView<ProfileController> {
                 size: size.width * 0.06,
               ),
               onTap: () {
-                Get.defaultDialog(
-                  title: 'Are you sure?',
-                  middleText: 'Are you sure to log out?',
-                  textConfirm: 'Yes',
-                  textCancel: 'No',
-                  titleStyle: kSub2HeadTextStyle,
-                  radius: 15,
-                  backgroundColor: Theme.of(context).primaryColorLight,
-                  buttonColor: Theme.of(context).primaryColor,
-                  confirmTextColor: Theme.of(context).primaryColorDark,
-                  cancelTextColor: Theme.of(context).primaryColorDark,
-                  onConfirm: () {
-                    fController.resetUser();
-                    Get.offAll(() => LoginView(),
-                        transition: Transition.leftToRightWithFade,
-                        duration: Duration(seconds: 1));
-                    secController.changeTheme('Yellow Light');
-                    Get.snackbar(
-                      'Logged out',
-                      'Logged out successfully.',
-                      snackPosition: SnackPosition.BOTTOM,
-                      backgroundColor: Theme.of(context).primaryColorLight,
-                      colorText: Theme.of(context).primaryColorDark,
-                      margin:
-                          EdgeInsets.symmetric(horizontal: 12, vertical: 20),
-                    );
-                  },
-                );
+                fController.customDialogLogOut(context);
               },
             ),
           ],

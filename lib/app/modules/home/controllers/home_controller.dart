@@ -11,6 +11,7 @@ import 'package:taskly/app/modules/home/views/dashboard_view.dart';
 import 'package:taskly/app/modules/home/views/today_task_view.dart';
 import 'package:intl/intl.dart';
 import 'package:date_format/date_format.dart';
+import 'package:taskly/app/theme/text_theme.dart';
 
 class HomeController extends GetxController {
   // bottom nav current index.
@@ -76,7 +77,7 @@ class HomeController extends GetxController {
 
   // userData
   String userName;
-  bool isMale;
+  bool isMale = false;
 
   // function to return correct view on bottom navBar switch
   Widget navBarSwitcher() {
@@ -418,5 +419,101 @@ class HomeController extends GetxController {
     descController.dispose();
     dateController.dispose();
     timeController.dispose();
+  }
+
+  Future<dynamic> customDialogDel(BuildContext context, Task task) {
+    return Get.dialog(Container(
+      margin: EdgeInsets.symmetric(
+          vertical: Get.height * 0.35, horizontal: Get.width * 0.18),
+      padding: EdgeInsets.all(20),
+      width: Get.width * 0.8,
+      height: Get.width * 0.8,
+      decoration: BoxDecoration(
+        color: Theme.of(context).scaffoldBackgroundColor,
+        borderRadius: BorderRadius.circular(20),
+      ),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(20),
+        child: Scaffold(
+          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+          body: Center(
+            child: Column(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Text(
+                  'Delete Task!',
+                  style: kSubHeadTextStyle.copyWith(
+                    fontSize: 20,
+                    color: Theme.of(context).primaryColorDark,
+                  ),
+                ),
+                SizedBox(height: 20),
+                Text(
+                  'Are you sure?',
+                  style: kSubHeadTextStyle.copyWith(
+                    fontSize: 16,
+                    color: Theme.of(context).primaryColorDark,
+                  ),
+                ),
+                SizedBox(height: 40),
+                Container(
+                  width: 140,
+                  child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        GestureDetector(
+                          onTap: () {
+                            Get.back();
+                          },
+                          child: Container(
+                              padding: EdgeInsets.symmetric(
+                                  vertical: 10, horizontal: 15),
+                              child: Text(
+                                'No',
+                                style: kSubHeadTextStyle.copyWith(
+                                  fontSize: 16,
+                                  color: Theme.of(context).primaryColorDark,
+                                ),
+                              ),
+                              decoration: BoxDecoration(
+                                color: Colors.transparent,
+                                border: Border.all(
+                                    color: Theme.of(context).primaryColor),
+                                borderRadius: BorderRadius.circular(10),
+                              )),
+                        ),
+                        SizedBox(width: 20),
+                        GestureDetector(
+                          onTap: () {
+                            slideC.activeState?.close();
+                            Slidable.of(context)?.close();
+                            deleteTask(task);
+                            Get.back();
+                          },
+                          child: Container(
+                              padding: EdgeInsets.symmetric(
+                                  vertical: 10, horizontal: 15),
+                              child: Text(
+                                'Yes',
+                                style: kSubHeadTextStyle.copyWith(
+                                  fontSize: 16,
+                                  color: Theme.of(context).primaryColorDark,
+                                ),
+                              ),
+                              decoration: BoxDecoration(
+                                color: Theme.of(context).primaryColor,
+                                borderRadius: BorderRadius.circular(10),
+                              )),
+                        )
+                      ]),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    ));
   }
 }
