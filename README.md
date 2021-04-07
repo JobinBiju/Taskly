@@ -1,5 +1,5 @@
 <p align="center">
-<img src="https://raw.githubusercontent.com/JobinBiju/Taskly/main/assets/readmeFiles/TasklyCover.png" width=500>
+<img src="https://raw.githubusercontent.com/JobinBiju/Taskly/main/assets/readmeFiles/TasklyCover.png" width=700>
 </p>
 
 A new Flutter app project to manage tasks.
