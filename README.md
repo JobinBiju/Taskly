@@ -24,11 +24,21 @@ samples, guidance on mobile development, and a full API reference.
 - Open the project folder in the IDE where flutter is setup.
 - Connect a physical device or run the app via emulator.
 
+# Features
+
+- Add, Update & Delete tasks.
+- Cool splash screen animation.
+- Colorful task icons.
+- Supports 8 amazing themes.
+- Daily tasks are sorted & shown seperately.
+- Dashboard with current & upcoming tasks shown.
+- Option to repeat tasks daily.
+- Drink Water Notification feature that display a notification to drink water once every hour
+- Fast, Compact & Easy to Use
+
 # App UI
 
-App UI are given below.
-
-## Screens
+## All Screens
 
 <br>
 
@@ -48,7 +58,7 @@ App UI are given below.
 <hr>
 <br>
 
-## Different Themes
+## Themes Available
 
 <br>
 
