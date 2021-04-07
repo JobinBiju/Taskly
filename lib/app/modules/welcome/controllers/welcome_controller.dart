@@ -12,8 +12,13 @@ class WelcomeController extends GetxController {
   TextEditingController lastNameController;
   TextEditingController emailController;
 
+  // instance of Get Storage
   final userData = GetStorage();
+
+  // stire loginStatus
   bool isLoggedIn;
+
+  // instance of userData model
   User user;
 
   @override
@@ -57,6 +62,7 @@ class WelcomeController extends GetxController {
     update([5, true]);
   }
 
+  // FirstName validator
   String fNameValidator(String value) {
     if (value.isEmpty) {
       return 'Enter your first name';
@@ -67,6 +73,7 @@ class WelcomeController extends GetxController {
       return 'Enter a valid name';
   }
 
+  // LastName validator
   String lNameValidator(String value) {
     if (value.isEmpty) {
       return null;
@@ -77,6 +84,7 @@ class WelcomeController extends GetxController {
       return 'Enter a valid name';
   }
 
+  // Email validator
   String emailValidator(String value) {
     if (value.isEmpty) {
       return 'Enter your email';
@@ -87,6 +95,7 @@ class WelcomeController extends GetxController {
       return 'Enter a valid email';
   }
 
+  // function to validate creds
   bool validateCreds() {
     bool validated = false;
     if (fNameValidator(firstNameController.text) == null &&
@@ -100,6 +109,7 @@ class WelcomeController extends GetxController {
     return validated;
   }
 
+  // function to login to app
   userLogin() {
     if (validateCreds()) {
       user = User();

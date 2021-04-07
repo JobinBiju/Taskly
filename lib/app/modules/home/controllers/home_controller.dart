@@ -127,7 +127,7 @@ class HomeController extends GetxController {
     });
   }
 
-  // Funtion to generate dailyTask
+  // Function to generate dailyTask
   dailyTask() {
     todayTasks = [];
     var currDt = DateTime.now();
@@ -261,6 +261,7 @@ class HomeController extends GetxController {
     print(index);
   }
 
+  // function to rewrite all tasks to DB
   reWriteTasks() async {
     var box = await Hive.openBox(taskBox);
     // ignore: unused_local_variable
@@ -273,6 +274,7 @@ class HomeController extends GetxController {
     Hive.close();
   }
 
+  // function to reset all controllers
   controllerReset() {
     titleController.text = '';
     descController.text = '';
@@ -287,7 +289,7 @@ class HomeController extends GetxController {
     isRepeat = false;
   }
 
-  // setDateFuntion bottomSheet
+  // setDateFunction bottomSheet
   Future<Null> selectDate(BuildContext context) async {
     final DateTime picked = await showDatePicker(
       context: context,
@@ -303,7 +305,7 @@ class HomeController extends GetxController {
     }
   }
 
-  // setTimeFuntion bottomSheet
+  // setTimeFunction bottomSheet
   Future<Null> selectTime(BuildContext context) async {
     final TimeOfDay picked = await showTimePicker(
       context: context,
@@ -371,10 +373,10 @@ class HomeController extends GetxController {
         }
       }
     }
-
     update([3, true]);
   }
 
+  // function to get current user
   getUser() {
     userName = userData.read('fName');
     isMale = userData.read('isMale');
@@ -421,6 +423,7 @@ class HomeController extends GetxController {
     timeController.dispose();
   }
 
+  // function to delete confirm dialog
   Future<dynamic> customDialogDel(BuildContext context, Task task) {
     return Get.dialog(Container(
       margin: EdgeInsets.symmetric(

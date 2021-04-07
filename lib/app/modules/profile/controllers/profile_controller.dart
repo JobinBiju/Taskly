@@ -18,6 +18,7 @@ class ProfileController extends GetxController {
   TextEditingController lastNameController;
   TextEditingController emailController;
 
+  // list of state for gender toggleButton
   List<bool> selectedToggleGender;
 
   // userData
@@ -26,6 +27,7 @@ class ProfileController extends GetxController {
   String email;
   bool isMale;
 
+  // instance of user model
   User user;
 
   //function to toggle gender in edit account
@@ -45,6 +47,7 @@ class ProfileController extends GetxController {
     update([5, true]);
   }
 
+  // FirstName validator
   String fNameValidator(String value) {
     if (value.isEmpty) {
       return 'Enter your first name';
@@ -55,6 +58,7 @@ class ProfileController extends GetxController {
       return 'Enter a valid name';
   }
 
+  // LastName validator
   String lNameValidator(String value) {
     if (value.isEmpty) {
       return null;
@@ -65,6 +69,7 @@ class ProfileController extends GetxController {
       return 'Enter a valid name';
   }
 
+  // Email validator
   String emailValidator(String value) {
     if (value.isEmpty) {
       return 'Enter your email';
@@ -75,6 +80,7 @@ class ProfileController extends GetxController {
       return 'Enter a valid email';
   }
 
+  // function to validate creds
   bool validateCreds() {
     bool validated = false;
     if (fNameValidator(firstNameController.text) == null &&
@@ -98,6 +104,7 @@ class ProfileController extends GetxController {
     selectedToggleGender = [false, false];
   }
 
+  // function to get userInfo
   getUser() {
     fName = userData.read('fName');
     lName = userData.read('lName');
@@ -105,6 +112,7 @@ class ProfileController extends GetxController {
     isMale = userData.read('isMale');
   }
 
+  // function to reset userInfo
   resetUser() async {
     var box = await Hive.openBox(taskBox);
     userData.erase();
@@ -112,6 +120,7 @@ class ProfileController extends GetxController {
     Hive.close();
   }
 
+  // function to get current userInfo for edit
   preEditUser() {
     firstNameController.text = fName;
     lastNameController.text = lName;
@@ -125,6 +134,7 @@ class ProfileController extends GetxController {
     }
   }
 
+  // function to apply edited user details
   editUser() {
     if (validateCreds()) {
       HomeController c = Get.put(HomeController());
@@ -152,6 +162,7 @@ class ProfileController extends GetxController {
   @override
   void onClose() {}
 
+  // function to return a customDialog for LogOut confirmation
   Future<dynamic> customDialogLogOut(BuildContext context) {
     return Get.dialog(Container(
       margin: EdgeInsets.symmetric(

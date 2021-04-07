@@ -4,8 +4,13 @@ import 'package:taskly/app/data/services/notification_service.dart';
 import 'package:taskly/app/theme/app_theme.dart';
 
 class SettingsController extends GetxController {
+  // instance of Get Storage
   final userData = GetStorage();
+
+  // store selectedTheme
   String selectedTheme;
+
+  // store state of drinkWaterNotify
   bool drinkWater;
 
   // instance of Notification service

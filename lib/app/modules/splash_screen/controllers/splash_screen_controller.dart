@@ -13,6 +13,8 @@ class SplashScreenController extends GetxController
 
   // initializing userData instance
   final userData = GetStorage();
+
+  // store Login status
   bool isLoggedIn;
 
   // function to set the user saved theme on start
@@ -22,6 +24,7 @@ class SplashScreenController extends GetxController
     Get.changeTheme(appThemeData.values.elementAt(n));
   }
 
+  // function to check loginStatus
   checkLogin() {
     isLoggedIn = userData.read('loginStatus');
   }

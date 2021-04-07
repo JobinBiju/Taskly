@@ -40,7 +40,7 @@ class NotificationPlugin {
       iOS: iOSDetails,
     );
 
-    // Funtion to periodically show notification
+    // Function to periodically show notification
     await fNotification.periodicallyShow(
       1,
       'Drink Water',
