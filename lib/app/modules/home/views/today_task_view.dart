@@ -35,7 +35,7 @@ class TodayTaskView extends GetView<HomeController> {
                     final task = controller.todayTasks[index];
                     return Slidable(
                       actionPane: SlidableDrawerActionPane(),
-                      actionExtentRatio: 0.15,
+                      actionExtentRatio: 0.2,
                       controller: controller.slideC,
                       child: ExpandedContainer(
                         icon: task.taskImage,
@@ -45,7 +45,8 @@ class TodayTaskView extends GetView<HomeController> {
                       ),
                       actions: [
                         Padding(
-                          padding: EdgeInsets.only(bottom: 20, left: 20),
+                          padding: EdgeInsets.only(
+                              bottom: Get.width * 0.05, left: Get.width * 0.07),
                           child: Container(
                             padding: EdgeInsets.all(0),
                             width: 40,
@@ -82,7 +83,9 @@ class TodayTaskView extends GetView<HomeController> {
                       ],
                       secondaryActions: [
                         Padding(
-                          padding: EdgeInsets.only(bottom: 21, right: 18),
+                          padding: EdgeInsets.only(
+                              bottom: Get.width * 0.05,
+                              right: Get.width * 0.07),
                           child: Container(
                             padding: EdgeInsets.all(0),
                             width: 40,

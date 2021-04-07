@@ -100,7 +100,7 @@ class BottomSheetContent extends GetView<HomeController> {
                   tController: controller.dateController,
                   textFeildColor: Theme.of(context).primaryColorLight,
                   contentTextColor: Theme.of(context).primaryColorDark,
-                  width: Get.width * 0.371,
+                  width: Get.width * 0.36,
                   isEnabled: false,
                 ),
               ),
@@ -120,7 +120,7 @@ class BottomSheetContent extends GetView<HomeController> {
                   tController: controller.timeController,
                   textFeildColor: Theme.of(context).primaryColorLight,
                   contentTextColor: Theme.of(context).primaryColorDark,
-                  width: Get.width * 0.371,
+                  width: Get.width * 0.36,
                   isEnabled: false,
                 ),
               ),
@@ -128,7 +128,7 @@ class BottomSheetContent extends GetView<HomeController> {
           ),
           SizedBox(height: Get.height * 0.015),
           Container(
-            width: Get.width * 0.378,
+            width: Get.width * 0.435,
             child: Row(
               children: [
                 Text(
