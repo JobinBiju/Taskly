@@ -17,6 +17,13 @@ For help getting started with Flutter, view our
 [online documentation](https://flutter.dev/docs), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
 
+# Installation
+
+- Install & setup flutter through above documentation.
+- Fork & then clone this repository.
+- Open the project folder in the IDE where flutter is setup.
+- Connect a physical device or run the app via emulator.
+
 # App UI
 
 App UI are given below.
