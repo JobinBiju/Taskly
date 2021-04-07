@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:hive/hive.dart';
+import 'package:taskly/app/data/model/user_model.dart';
+import 'package:taskly/app/modules/home/controllers/home_controller.dart';
 import 'package:taskly/app/theme/text_theme.dart';
 
 class ProfileController extends GetxController {
@@ -11,11 +13,90 @@ class ProfileController extends GetxController {
   // Hive DB
   String taskBox = 'tasks';
 
+  // Text feild controllers for edit account
+  TextEditingController firstNameController;
+  TextEditingController lastNameController;
+  TextEditingController emailController;
+
+  List<bool> selectedToggleGender;
+
   // userData
   String fName;
   String lName;
   String email;
   bool isMale;
+
+  User user;
+
+  //function to toggle gender in edit account
+  onToggledGender(int index) {
+    if (index == 0) {
+      selectedToggleGender[index] = !selectedToggleGender[index];
+      if (selectedToggleGender[index] == true) {
+        selectedToggleGender[1] = false;
+      }
+    }
+    if (index == 1) {
+      selectedToggleGender[index] = !selectedToggleGender[index];
+      if (selectedToggleGender[index] == true) {
+        selectedToggleGender[0] = false;
+      }
+    }
+    update([5, true]);
+  }
+
+  String fNameValidator(String value) {
+    if (value.isEmpty) {
+      return 'Enter your first name';
+    }
+    if (value.isAlphabetOnly) {
+      return null;
+    } else
+      return 'Enter a valid name';
+  }
+
+  String lNameValidator(String value) {
+    if (value.isEmpty) {
+      return null;
+    }
+    if (value.isAlphabetOnly) {
+      return null;
+    } else
+      return 'Enter a valid name';
+  }
+
+  String emailValidator(String value) {
+    if (value.isEmpty) {
+      return 'Enter your email';
+    }
+    if (value.isEmail) {
+      return null;
+    } else
+      return 'Enter a valid email';
+  }
+
+  bool validateCreds() {
+    bool validated = false;
+    if (fNameValidator(firstNameController.text) == null &&
+        lNameValidator(lastNameController.text) == null &&
+        emailValidator(emailController.text) == null &&
+        selectedToggleGender.contains(true)) {
+      validated = true;
+    } else {
+      validated = false;
+    }
+    return validated;
+  }
+
+  @override
+  void onInit() {
+    super.onInit();
+    getUser();
+    firstNameController = TextEditingController();
+    lastNameController = TextEditingController();
+    emailController = TextEditingController();
+    selectedToggleGender = [false, false];
+  }
 
   getUser() {
     fName = userData.read('fName');
@@ -31,10 +112,36 @@ class ProfileController extends GetxController {
     Hive.close();
   }
 
-  @override
-  void onInit() {
-    super.onInit();
-    getUser();
+  preEditUser() {
+    firstNameController.text = fName;
+    lastNameController.text = lName;
+    emailController.text = email;
+    if (isMale) {
+      selectedToggleGender.first = true;
+      selectedToggleGender.last = false;
+    } else {
+      selectedToggleGender.first = false;
+      selectedToggleGender.last = true;
+    }
+  }
+
+  editUser() {
+    if (validateCreds()) {
+      HomeController c = Get.put(HomeController());
+      user = User();
+      user.firstName = firstNameController.text;
+      user.lastName = lastNameController.text;
+      user.email = emailController.text;
+      user.isMale = selectedToggleGender.first;
+      userData.write('fName', user.firstName);
+      userData.write('lName', user.lastName);
+      userData.write('email', user.email);
+      userData.write('isMale', user.isMale);
+      getUser();
+      c.getUser();
+      update([7, true]);
+      Get.back();
+    }
   }
 
   @override
