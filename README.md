@@ -30,6 +30,8 @@ samples, guidance on mobile development, and a full API reference.
 - Cool splash screen animation.
 - Colorful task icons.
 - Supports 8 amazing themes.
+- Uses local database ([Hive](https://docs.hivedb.dev/)).
+- Since it uses local DB, Privacy is ensured.
 - Daily tasks are sorted & shown seperately.
 - Dashboard with current & upcoming tasks shown.
 - Option to repeat tasks daily.
@@ -55,7 +57,7 @@ samples, guidance on mobile development, and a full API reference.
 | ----------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 
 <div> </div>
-<hr>
+<br>
 <br>
 
 ## Themes Available
@@ -79,4 +81,4 @@ samples, guidance on mobile development, and a full API reference.
 
 ## Support
 
-Support this project by giving a star, sharing with your friends.
+Support this project by giving a star and sharing with your friends.
