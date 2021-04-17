@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:get/get.dart';
+import 'package:taskly/app/data/model/task_model.dart';
 
 class NotificationPlugin {
   // Notification controller
@@ -18,8 +19,6 @@ class NotificationPlugin {
   }
 
   Future showNotification() async {
-    //var scheduledTime = DateTime.now().add(Duration(seconds: 5));
-
     var androidDetails = AndroidNotificationDetails(
       'Channel ID 0',
       'Drink Water',
@@ -50,18 +49,55 @@ class NotificationPlugin {
       payload: "Drink Water",
       androidAllowWhileIdle: true,
     );
-
-    // await fNotification.schedule(
-    //   1,
-    //   "Drink",
-    //   "Drink Water",
-    //   scheduledTime,
-    //   generalNotificationDetails,
-    // );
   }
 
   Future cancelDrinkwaterNotifucation() async {
     await fNotification.cancel(1);
+  }
+
+  Future showTaskNotification(Task task) async {
+    var scheduledTime = DateTime.now().add(Duration(seconds: 5));
+
+    var androidDetails = AndroidNotificationDetails(
+      task.taskDesc,
+      task.taskTitle,
+      task.taskDesc,
+      importance: Importance.max,
+      priority: Priority.high,
+      sound: RawResourceAndroidNotificationSound('slow_spring_board'),
+      enableLights: true,
+      enableVibration: true,
+      ledColor: Color.fromARGB(255, 255, 0, 255),
+      ledOnMs: 1000,
+      ledOffMs: 500,
+    );
+    var iOSDetails = IOSNotificationDetails();
+    var generalNotificationDetails = NotificationDetails(
+      android: androidDetails,
+      iOS: iOSDetails,
+    );
+
+    // Function to periodically show notification
+    await fNotification.periodicallyShow(
+      1,
+      task.taskTitle,
+      task.taskDesc,
+      RepeatInterval.hourly,
+      generalNotificationDetails,
+      payload: "Drink Water",
+      androidAllowWhileIdle: true,
+    );
+
+    await fNotification.zonedSchedule(
+      2,
+      task.taskTitle,
+      task.taskDesc,
+      scheduledTime,
+      generalNotificationDetails,
+      uiLocalNotificationDateInterpretation:
+          UILocalNotificationDateInterpretation.absoluteTime,
+      androidAllowWhileIdle: true,
+    );
   }
 
   void init() {
