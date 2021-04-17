@@ -13,7 +13,7 @@ dependencies:
     sdk: flutter
   bubble_bottom_bar: ^1.2.0
   cupertino_icons: ^1.0.2
-  flutter_local_notifications: ^4.0.1+2
+  flutter_local_notifications: ^5.0.0+1
   flutter_native_timezone: ^1.0.10
   flutter_slidable: ^0.5.7
   flutter_svg: ^0.19.3

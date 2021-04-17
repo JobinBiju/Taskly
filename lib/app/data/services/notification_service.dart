@@ -47,7 +47,7 @@ class NotificationPlugin {
       'Keep Yourself Hydrated',
       RepeatInterval.hourly,
       generalNotificationDetails,
-      payload: "Tasks",
+      payload: "Drink Water",
       androidAllowWhileIdle: true,
     );
 
@@ -60,7 +60,7 @@ class NotificationPlugin {
     // );
   }
 
-  Future onCancelNotifucation() async {
+  Future cancelDrinkwaterNotifucation() async {
     await fNotification.cancel(1);
   }
 
