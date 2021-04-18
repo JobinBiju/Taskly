@@ -43,7 +43,7 @@ class NotificationPlugin {
 
     // Function to periodically show notification
     await fNotification.periodicallyShow(
-      1,
+      10001,
       'Drink Water',
       'Keep Yourself Hydrated',
       RepeatInterval.hourly,
@@ -54,14 +54,15 @@ class NotificationPlugin {
   }
 
   Future cancelDrinkwaterNotifucation() async {
-    await fNotification.cancel(1);
+    await fNotification.cancel(10001);
   }
 
   Future showTaskNotification(Task task, int id) async {
     final String currentTimeZone =
         await FlutterNativeTimezone.getLocalTimezone();
     final location = tz.getLocation(currentTimeZone);
-    var scheduledTime = tz.TZDateTime.from(task.taskDate, location).add(const Duration(seconds: 5));
+    var scheduledTime = tz.TZDateTime.from(task.taskDate, location)
+        .add(const Duration(seconds: 5));
 
     var androidDetails = AndroidNotificationDetails(
       "Channel ID 2",
@@ -91,6 +92,7 @@ class NotificationPlugin {
       uiLocalNotificationDateInterpretation:
           UILocalNotificationDateInterpretation.absoluteTime,
       androidAllowWhileIdle: true,
+      payload: task.taskTitle,
       matchDateTimeComponents: DateTimeComponents.dayOfWeekAndTime,
     );
   }

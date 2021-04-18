@@ -181,10 +181,7 @@ class HomeController extends GetxController {
     taskIds = idOfTask;
     Hive.close();
     controllerReset();
-    sortAllTasks();
-    dailyTask();
-    setCurrentTask();
-    setUpcomingTask();
+    taskRoutine();
     update([1, true]);
     Get.back();
   }
@@ -223,11 +220,8 @@ class HomeController extends GetxController {
     tempTask.isRepeat = isRepeat;
     int index = allTasks.indexOf(task);
     allTasks.setAll(index, [tempTask]);
-    sortAllTasks();
+    taskRoutine();
     reWriteTasks();
-    dailyTask();
-    setCurrentTask();
-    setUpcomingTask();
     update([1, true]);
     Get.back();
     print(index);
@@ -256,11 +250,8 @@ class HomeController extends GetxController {
   deleteTask(Task task) async {
     int index = allTasks.indexOf(task);
     allTasks.removeAt(index);
-    sortAllTasks();
+    taskRoutine();
     reWriteTasks();
-    dailyTask();
-    setCurrentTask();
-    setUpcomingTask();
     update([1, true]);
     print(index);
   }
@@ -291,6 +282,16 @@ class HomeController extends GetxController {
     ).toString();
     selectedIcon = icons.first;
     isRepeat = false;
+  }
+
+  // function to do routine on CRUD operations
+  taskRoutine() {
+    sortAllTasks();
+    dailyTask();
+    setCurrentTask();
+    setUpcomingTask();
+    cancellAllTaskNotification();
+    setTaskNotification();
   }
 
   // setDateFunction bottomSheet
@@ -387,6 +388,7 @@ class HomeController extends GetxController {
     update([7, true]);
   }
 
+  // function to set notifications for tasks.
   setTaskNotification() {
     allTasks.forEach((element) {
       if (element.taskDate.isAfter(DateTime.now())) {
@@ -395,6 +397,7 @@ class HomeController extends GetxController {
     });
   }
 
+  // function to cancel notifications for tasks.
   cancellAllTaskNotification() {
     allTasks.forEach((element) {
       nPlugin.cancelTaskNotifucation(allTasks.indexOf(element));
@@ -406,13 +409,10 @@ class HomeController extends GetxController {
     super.onInit();
     Directory appDocDir = await getApplicationDocumentsDirectory();
     Hive.init(appDocDir.path);
-    nPlugin.init();
+    nPlugin = NotificationPlugin();
     allTasks = await getTasks();
-    sortAllTasks();
+    taskRoutine();
     reWriteTasks();
-    dailyTask();
-    setCurrentTask();
-    setUpcomingTask();
     update([1, true]);
     titleController = TextEditingController();
     descController = TextEditingController();
