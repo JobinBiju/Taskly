@@ -133,9 +133,9 @@ class HomeController extends GetxController {
     });
     int x = 0;
     int y = 0;
+    pastTasks.clear();
+    commingTasks.clear();
     allTasks.forEach((element) {
-      pastTasks.clear();
-      commingTasks.clear();
       if (element.taskDate.isBefore(currDt)) {
         x++;
         pastTasks.add(element);
