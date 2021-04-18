@@ -74,6 +74,8 @@ class HomeController extends GetxController {
 
   // task lists
   List<Task> allTasks = [];
+  List<Task> commingTasks = [];
+  List<Task> pastTasks = [];
   List<Task> todayTasks = [];
 
   // userData
@@ -128,6 +130,19 @@ class HomeController extends GetxController {
       var aD = a.taskDate.toString();
       var bD = b.taskDate.toString();
       return aD.compareTo(bD);
+    });
+    int x = 0;
+    int y = 0;
+    allTasks.forEach((element) {
+      pastTasks.clear();
+      commingTasks.clear();
+      if (element.taskDate.isBefore(currDt)) {
+        x++;
+        pastTasks.add(element);
+      } else {
+        y++;
+        commingTasks.add(element);
+      }
     });
   }
 
