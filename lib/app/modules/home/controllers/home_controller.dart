@@ -7,6 +7,7 @@ import 'package:get_storage/get_storage.dart';
 import 'package:hive/hive.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:taskly/app/data/model/task_model.dart';
+import 'package:taskly/app/data/services/notification_service.dart';
 import 'package:taskly/app/modules/home/views/dashboard_view.dart';
 import 'package:taskly/app/modules/home/views/today_task_view.dart';
 import 'package:intl/intl.dart';
@@ -78,6 +79,9 @@ class HomeController extends GetxController {
   // userData
   String userName;
   bool isMale = false;
+
+  // instance of notification Plugin
+  NotificationPlugin nPlugin;
 
   // function to return correct view on bottom navBar switch
   Widget navBarSwitcher() {
@@ -383,11 +387,26 @@ class HomeController extends GetxController {
     update([7, true]);
   }
 
+  setTaskNotification() {
+    allTasks.forEach((element) {
+      if (element.taskDate.isAfter(DateTime.now())) {
+        nPlugin.showTaskNotification(element, allTasks.indexOf(element));
+      }
+    });
+  }
+
+  cancellAllTaskNotification() {
+    allTasks.forEach((element) {
+      nPlugin.cancelTaskNotifucation(allTasks.indexOf(element));
+    });
+  }
+
   @override
   void onInit() async {
     super.onInit();
     Directory appDocDir = await getApplicationDocumentsDirectory();
     Hive.init(appDocDir.path);
+    nPlugin.init();
     allTasks = await getTasks();
     sortAllTasks();
     reWriteTasks();

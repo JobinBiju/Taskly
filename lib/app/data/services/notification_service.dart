@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:flutter_native_timezone/flutter_native_timezone.dart';
 import 'package:get/get.dart';
 import 'package:taskly/app/data/model/task_model.dart';
+import 'package:timezone/data/latest.dart' as tz;
+import 'package:timezone/timezone.dart' as tz;
 
 class NotificationPlugin {
   // Notification controller
@@ -25,7 +28,6 @@ class NotificationPlugin {
       'Drink Water Notification',
       importance: Importance.max,
       priority: Priority.high,
-      timeoutAfter: 3000,
       sound: RawResourceAndroidNotificationSound('slow_spring_board'),
       enableLights: true,
       enableVibration: true,
@@ -55,11 +57,14 @@ class NotificationPlugin {
     await fNotification.cancel(1);
   }
 
-  Future showTaskNotification(Task task) async {
-    var scheduledTime = DateTime.now().add(Duration(seconds: 5));
+  Future showTaskNotification(Task task, int id) async {
+    final String currentTimeZone =
+        await FlutterNativeTimezone.getLocalTimezone();
+    final location = tz.getLocation(currentTimeZone);
+    var scheduledTime = tz.TZDateTime.from(task.taskDate, location).add(const Duration(seconds: 5));
 
     var androidDetails = AndroidNotificationDetails(
-      task.taskDesc,
+      "Channel ID 2",
       task.taskTitle,
       task.taskDesc,
       importance: Importance.max,
@@ -77,19 +82,8 @@ class NotificationPlugin {
       iOS: iOSDetails,
     );
 
-    // Function to periodically show notification
-    await fNotification.periodicallyShow(
-      1,
-      task.taskTitle,
-      task.taskDesc,
-      RepeatInterval.hourly,
-      generalNotificationDetails,
-      payload: "Drink Water",
-      androidAllowWhileIdle: true,
-    );
-
     await fNotification.zonedSchedule(
-      2,
+      id,
       task.taskTitle,
       task.taskDesc,
       scheduledTime,
@@ -97,10 +91,16 @@ class NotificationPlugin {
       uiLocalNotificationDateInterpretation:
           UILocalNotificationDateInterpretation.absoluteTime,
       androidAllowWhileIdle: true,
+      matchDateTimeComponents: DateTimeComponents.dayOfWeekAndTime,
     );
   }
 
+  Future cancelTaskNotifucation(int id) async {
+    await fNotification.cancel(id);
+  }
+
   void init() {
+    tz.initializeTimeZones();
     // notification config
     fNotification = FlutterLocalNotificationsPlugin();
     var androidInitialize = AndroidInitializationSettings('app_icon');
