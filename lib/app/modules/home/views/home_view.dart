@@ -71,12 +71,25 @@ class HomeView extends GetView<HomeController> {
                 style: kSub2HeadTextStyle.copyWith(fontSize: 16),
               ),
               icon: Icon(
-                FontAwesomeIcons.clock,
+                FontAwesomeIcons.listUl,
                 color: Theme.of(context).primaryColorDark,
               ),
-              activeIcon: Icon(FontAwesomeIcons.clock,
+              activeIcon: Icon(FontAwesomeIcons.listUl,
                   color: Theme.of(context).primaryColor),
             ),
+            // BubbleBottomBarItem(
+            //   backgroundColor: Colors.grey,
+            //   title: Text(
+            //     'To-do',
+            //     style: kSub2HeadTextStyle.copyWith(fontSize: 16),
+            //   ),
+            //   icon: Icon(
+            //     FontAwesomeIcons.tasks,
+            //     color: Theme.of(context).primaryColorDark,
+            //   ),
+            //   activeIcon: Icon(FontAwesomeIcons.tasks,
+            //       color: Theme.of(context).primaryColor),
+            // ),
           ],
         ),
       ),

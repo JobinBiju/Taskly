@@ -1,16 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:taskly/app/global_widgets/bottom_sheet.dart';
 import 'package:taskly/app/global_widgets/expandable_container.dart';
 import 'package:taskly/app/modules/home/controllers/home_controller.dart';
-import 'package:taskly/app/modules/home/views/past_tasks_view.dart';
 import 'package:taskly/app/theme/text_theme.dart';
 
-class AllTasksView extends GetView<HomeController> {
+class PastTasksView extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,25 +21,10 @@ class AllTasksView extends GetView<HomeController> {
           children: [
             Padding(
               padding: EdgeInsets.only(top: 50, left: 25, right: 25),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    'All Tasks',
-                    style: kSubHeadTextStyle.copyWith(
-                        color: Theme.of(context).primaryColorDark),
-                  ),
-                  IconButton(
-                    icon: Icon(
-                      FontAwesomeIcons.history,
-                      color: Theme.of(context).primaryColor,
-                      size: 24,
-                    ),
-                    onPressed: () {
-                      Get.to(() => PastTasksView());
-                    },
-                  ),
-                ],
+              child: Text(
+                'Past Tasks',
+                style: kSubHeadTextStyle.copyWith(
+                    color: Theme.of(context).primaryColorDark),
               ),
             ),
             SizedBox(height: Get.height * 0.012),
@@ -52,7 +34,7 @@ class AllTasksView extends GetView<HomeController> {
                 return Expanded(
                   child: ListView.builder(
                     itemBuilder: (context, index) {
-                      final task = controller.commingTasks[index];
+                      final task = controller.pastTasks[index];
                       return Slidable(
                         actionPane: SlidableBehindActionPane(),
                         actionExtentRatio: 0.2,
@@ -132,7 +114,7 @@ class AllTasksView extends GetView<HomeController> {
                         ],
                       );
                     },
-                    itemCount: controller.commingTasks.length,
+                    itemCount: controller.pastTasks.length,
                   ),
                 );
               },

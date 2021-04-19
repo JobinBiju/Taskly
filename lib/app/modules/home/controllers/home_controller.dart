@@ -7,6 +7,7 @@ import 'package:get_storage/get_storage.dart';
 import 'package:hive/hive.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:taskly/app/data/model/task_model.dart';
+import 'package:taskly/app/data/services/notification_service.dart';
 import 'package:taskly/app/modules/home/views/dashboard_view.dart';
 import 'package:taskly/app/modules/home/views/today_task_view.dart';
 import 'package:intl/intl.dart';
@@ -73,11 +74,16 @@ class HomeController extends GetxController {
 
   // task lists
   List<Task> allTasks = [];
+  List<Task> commingTasks = [];
+  List<Task> pastTasks = [];
   List<Task> todayTasks = [];
 
   // userData
   String userName;
   bool isMale = false;
+
+  // instance of notification Plugin
+  NotificationPlugin nPlugin;
 
   // function to return correct view on bottom navBar switch
   Widget navBarSwitcher() {
@@ -125,6 +131,17 @@ class HomeController extends GetxController {
       var bD = b.taskDate.toString();
       return aD.compareTo(bD);
     });
+    pastTasks.clear();
+    commingTasks.clear();
+    List<Task> tmpPastTasks = [];
+    allTasks.forEach((element) {
+      if (element.taskDate.isBefore(currDt)) {
+        tmpPastTasks.add(element);
+      } else {
+        commingTasks.add(element);
+      }
+    });
+    pastTasks = tmpPastTasks.reversed.toList();
   }
 
   // Function to generate dailyTask
@@ -177,10 +194,7 @@ class HomeController extends GetxController {
     taskIds = idOfTask;
     Hive.close();
     controllerReset();
-    sortAllTasks();
-    dailyTask();
-    setCurrentTask();
-    setUpcomingTask();
+    taskRoutine();
     update([1, true]);
     Get.back();
   }
@@ -219,11 +233,8 @@ class HomeController extends GetxController {
     tempTask.isRepeat = isRepeat;
     int index = allTasks.indexOf(task);
     allTasks.setAll(index, [tempTask]);
-    sortAllTasks();
+    taskRoutine();
     reWriteTasks();
-    dailyTask();
-    setCurrentTask();
-    setUpcomingTask();
     update([1, true]);
     Get.back();
     print(index);
@@ -252,11 +263,8 @@ class HomeController extends GetxController {
   deleteTask(Task task) async {
     int index = allTasks.indexOf(task);
     allTasks.removeAt(index);
-    sortAllTasks();
+    taskRoutine();
     reWriteTasks();
-    dailyTask();
-    setCurrentTask();
-    setUpcomingTask();
     update([1, true]);
     print(index);
   }
@@ -287,6 +295,16 @@ class HomeController extends GetxController {
     ).toString();
     selectedIcon = icons.first;
     isRepeat = false;
+  }
+
+  // function to do routine on CRUD operations
+  taskRoutine() {
+    sortAllTasks();
+    dailyTask();
+    setCurrentTask();
+    setUpcomingTask();
+    cancellAllTaskNotification();
+    setTaskNotification();
   }
 
   // setDateFunction bottomSheet
@@ -362,12 +380,17 @@ class HomeController extends GetxController {
   // function to set upcomingTask
   setUpcomingTask() {
     isUpcommingTaskPresent = false;
+    upcomingTask = Task();
     var cDt = DateTime.now();
     if (todayTasks.length != 0) {
-      for (int i = 0; i < todayTasks.length - 1; i++) {
-        if (todayTasks[i + 1].taskDate.isAfter(cDt)) {
-          var index = todayTasks.indexOf(currentTask);
-          upcomingTask = todayTasks.elementAt(index + 1);
+      for (int i = 0; i < todayTasks.length; i++) {
+        if (todayTasks[i].taskDate.compareTo(cDt) > 0) {
+          if (isCurrentTaskPresent) {
+            var index = todayTasks.indexOf(currentTask);
+            upcomingTask = todayTasks.elementAt(index + 1);
+          } else {
+            upcomingTask = todayTasks.first;
+          }
           isUpcommingTaskPresent = true;
           break;
         }
@@ -383,17 +406,31 @@ class HomeController extends GetxController {
     update([7, true]);
   }
 
+  // function to set notifications for tasks.
+  setTaskNotification() {
+    allTasks.forEach((element) {
+      if (element.taskDate.isAfter(DateTime.now())) {
+        nPlugin.showTaskNotification(element, allTasks.indexOf(element));
+      }
+    });
+  }
+
+  // function to cancel notifications for tasks.
+  cancellAllTaskNotification() {
+    allTasks.forEach((element) {
+      nPlugin.cancelTaskNotifucation(allTasks.indexOf(element));
+    });
+  }
+
   @override
   void onInit() async {
     super.onInit();
     Directory appDocDir = await getApplicationDocumentsDirectory();
     Hive.init(appDocDir.path);
+    nPlugin = NotificationPlugin();
     allTasks = await getTasks();
-    sortAllTasks();
+    taskRoutine();
     reWriteTasks();
-    dailyTask();
-    setCurrentTask();
-    setUpcomingTask();
     update([1, true]);
     titleController = TextEditingController();
     descController = TextEditingController();

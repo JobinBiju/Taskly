@@ -44,7 +44,7 @@ class SettingsController extends GetxController {
     if (value == true) {
       await nPlugin.showNotification();
     } else {
-      nPlugin.onCancelNotifucation();
+      nPlugin.cancelDrinkwaterNotifucation();
     }
     update();
   }
