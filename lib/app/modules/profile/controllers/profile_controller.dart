@@ -185,7 +185,7 @@ class ProfileController extends GetxController {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Text(
-                  'Log Out',
+                  'Log Out!',
                   style: kSubHeadTextStyle.copyWith(
                     fontSize: 20,
                     color: Theme.of(context).primaryColorDark,
@@ -193,13 +193,20 @@ class ProfileController extends GetxController {
                 ),
                 SizedBox(height: 20),
                 Text(
+                  'This will erase all data.',
+                  style: kSubHeadTextStyle.copyWith(
+                    fontSize: 16,
+                    color: Theme.of(context).primaryColorDark,
+                  ),
+                ),
+                Text(
                   'Are you sure?',
                   style: kSubHeadTextStyle.copyWith(
                     fontSize: 16,
                     color: Theme.of(context).primaryColorDark,
                   ),
                 ),
-                SizedBox(height: 40),
+                SizedBox(height: 30),
                 Container(
                   width: 140,
                   child: Row(
