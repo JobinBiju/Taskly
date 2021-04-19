@@ -131,19 +131,17 @@ class HomeController extends GetxController {
       var bD = b.taskDate.toString();
       return aD.compareTo(bD);
     });
-    int x = 0;
-    int y = 0;
     pastTasks.clear();
     commingTasks.clear();
+    List<Task> tmpPastTasks = [];
     allTasks.forEach((element) {
       if (element.taskDate.isBefore(currDt)) {
-        x++;
-        pastTasks.add(element);
+        tmpPastTasks.add(element);
       } else {
-        y++;
         commingTasks.add(element);
       }
     });
+    pastTasks = tmpPastTasks.reversed.toList();
   }
 
   // Function to generate dailyTask
@@ -382,12 +380,17 @@ class HomeController extends GetxController {
   // function to set upcomingTask
   setUpcomingTask() {
     isUpcommingTaskPresent = false;
+    upcomingTask = Task();
     var cDt = DateTime.now();
     if (todayTasks.length != 0) {
-      for (int i = 0; i < todayTasks.length - 1; i++) {
-        if (todayTasks[i + 1].taskDate.isAfter(cDt)) {
-          var index = todayTasks.indexOf(currentTask);
-          upcomingTask = todayTasks.elementAt(index + 1);
+      for (int i = 0; i < todayTasks.length; i++) {
+        if (todayTasks[i].taskDate.compareTo(cDt) > 0) {
+          if (isCurrentTaskPresent) {
+            var index = todayTasks.indexOf(currentTask);
+            upcomingTask = todayTasks.elementAt(index + 1);
+          } else {
+            upcomingTask = todayTasks.first;
+          }
           isUpcommingTaskPresent = true;
           break;
         }
