@@ -38,6 +38,10 @@ samples, guidance on mobile development, and a full API reference.
 - Option to repeat tasks daily.
 - Drink Water Notification feature that display a notification to drink water once every hour
 - Fast, Compact & Easy to Use
+- ##### What's New
+  - Added task notification.
+  - Seperated old notification from All Tasks screen.
+  - Fixed bug in upcoming tasks.
 
 # App UI
 
