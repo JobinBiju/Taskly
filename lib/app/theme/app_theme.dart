@@ -16,7 +16,6 @@ final appThemeData = {
   AppTheme.YellowLight: ThemeData(
     brightness: Brightness.light,
     primaryColor: primaryYellow,
-    accentColor: primaryYellow,
     scaffoldBackgroundColor: white1,
     primaryColorLight: white2,
     primaryColorDark: secondaryGrey,
