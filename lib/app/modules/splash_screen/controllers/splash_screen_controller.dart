@@ -10,23 +10,23 @@ class SplashScreenController extends GetxController
     // with SingleGetTickerProviderMixin {
     with
         GetSingleTickerProviderStateMixin {
-  // animation controller for lottie
+  /// [ animation controller for lottie ]
   AnimationController? animationController;
 
-  // initializing userData instance
+  /// [ initializing userData instance ]
   final userData = GetStorage();
 
-  // store Login status
+  /// [ store Login status ]
   bool? isLoggedIn;
 
-  // function to set the user saved theme on start
+  /// [ function to set the user saved theme on start ]
   setTheme() {
     var control = Get.put(SettingsController());
     int n = control.themes.indexOf(userData.read('theme'));
     Get.changeTheme(appThemeData.values.elementAt(n));
   }
 
-  // function to check loginStatus
+  /// [ function to check loginStatus ]
   checkLogin() {
     isLoggedIn = userData.read('loginStatus');
   }
@@ -38,7 +38,7 @@ class SplashScreenController extends GetxController
     userData.writeIfNull('drinkWater', false);
     userData.writeIfNull('loginStatus', false);
 
-    // spalsh animation config
+    /// [ spalsh animation config ]
     animationController = AnimationController(
       duration: Duration(seconds: 3),
       vsync: this,

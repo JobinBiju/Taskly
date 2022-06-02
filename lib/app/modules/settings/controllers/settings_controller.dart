@@ -4,19 +4,19 @@ import 'package:taskly/app/data/services/notification_service.dart';
 import 'package:taskly/app/theme/app_theme.dart';
 
 class SettingsController extends GetxController {
-  // instance of Get Storage
+  /// [ instance of Get Storage ]
   final userData = GetStorage();
 
-  // store selectedTheme
+  /// [ store selectedTheme ]
   String? selectedTheme;
 
-  // store state of drinkWaterNotify
+  /// [ store state of drinkWaterNotify]
   bool? drinkWater;
 
-  // instance of Notification service
+  /// [ instance of Notification service ]
   NotificationPlugin nPlugin = NotificationPlugin();
 
-  // list of available in the respective order of app theme in theme/app_theme.dart
+  /// [ list of available in the respective order of app theme in theme/app_theme.dart ]
   var themes = [
     "Yellow Light",
     "Yellow Dark",
@@ -28,7 +28,7 @@ class SettingsController extends GetxController {
     "Green Dark",
   ];
 
-  // function to change theme on settings
+  /// [ function to change theme on settings ]
   changeTheme(String? newValue) {
     selectedTheme = newValue;
     userData.write('theme', newValue);
@@ -37,7 +37,7 @@ class SettingsController extends GetxController {
     update();
   }
 
-  // Drink water notification toggle
+  /// [ Drink water notification toggle ]
   toggleWater(bool value) async {
     drinkWater = value;
     userData.write('drinkWater', value);

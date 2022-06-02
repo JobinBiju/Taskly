@@ -7,18 +7,18 @@ import 'package:taskly/app/modules/home/views/home_view.dart';
 class WelcomeController extends GetxController {
   late List<bool> selectedToggleGender;
 
-  // Text feild controllers for login.
+  /// [ Text feild controllers for login. ]
   TextEditingController? firstNameController;
   TextEditingController? lastNameController;
   TextEditingController? emailController;
 
-  // instance of Get Storage
+  /// [ instance of Get Storage ]
   final userData = GetStorage();
 
-  // stire loginStatus
+  /// [  stire loginStatus ]
   bool? isLoggedIn;
 
-  // instance of userData model
+  /// [ instance of userData model ]
   late User user;
 
   @override
@@ -45,7 +45,7 @@ class WelcomeController extends GetxController {
     emailController?.dispose();
   }
 
-  //function to toggle gender in log in screen
+  /// [ function to toggle gender in log in screen ]
   onToggledGender(int index) {
     if (index == 0) {
       selectedToggleGender[index] = !selectedToggleGender[index];
@@ -62,7 +62,7 @@ class WelcomeController extends GetxController {
     update([5, true]);
   }
 
-  // FirstName validator
+  /// [ FirstName validator ]
   String? fNameValidator(String value) {
     if (value.isEmpty) {
       return 'Enter your first name';
@@ -73,7 +73,7 @@ class WelcomeController extends GetxController {
       return 'Enter a valid name';
   }
 
-  // LastName validator
+  /// [ LastName validator ]
   String? lNameValidator(String value) {
     if (value.isEmpty) {
       return null;
@@ -84,7 +84,7 @@ class WelcomeController extends GetxController {
       return 'Enter a valid name';
   }
 
-  // Email validator
+  /// [ Email validator ]
   String? emailValidator(String value) {
     if (value.isEmpty) {
       return 'Enter your email';
@@ -95,7 +95,7 @@ class WelcomeController extends GetxController {
       return 'Enter a valid email';
   }
 
-  // function to validate creds
+  /// [ function to validate creds ]
   bool validateCreds() {
     bool validated = false;
     if (fNameValidator(firstNameController!.text) == null &&
@@ -109,7 +109,7 @@ class WelcomeController extends GetxController {
     return validated;
   }
 
-  // function to login to app
+  /// [ function to login to app ]
   userLogin() {
     if (validateCreds()) {
       user = User();

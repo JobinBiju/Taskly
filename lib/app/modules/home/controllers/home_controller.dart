@@ -15,28 +15,28 @@ import 'package:date_format/date_format.dart';
 import 'package:taskly/app/theme/text_theme.dart';
 
 class HomeController extends GetxController {
-  // bottom nav current index.
+  /// [ bottom nav current index ]
   var _currentIndex = 0.obs;
   get currentIndex => this._currentIndex.value;
   set currentIndex(index) => this._currentIndex.value = index;
 
-  // Hive DB var
+  /// [ Hive DB var ]
   String taskBox = 'tasks';
   int taskIds = 0;
 
-  // instance of Get Storage
+  /// [ instance of Get Storage ]
   final userData = GetStorage();
 
-  // variable for expansionTile
+  /// [ variable for expansionTile ]
   bool isExpanded = false;
 
-  // bools for dashboard view
+  /// [ bools for dashboard view ]
   bool isCurrentTaskPresent = false;
   bool isUpcommingTaskPresent = false;
   Task? currentTask;
   Task? upcomingTask;
 
-  // controllers and var for bottomSheet TextFeilds
+  /// [ controllers and var for bottomSheet TextFeilds ]
   TextEditingController? titleController;
   TextEditingController? descController;
   TextEditingController? dateController;
@@ -60,58 +60,58 @@ class HomeController extends GetxController {
     'assets/icons/travel.svg',
   ];
 
-  // allTasks slidable
+  /// [ allTasks slidable ]
   SlidableController? slideC;
 
-  // the list of screens switched by bottom navBar
+  /// [ the list of screens switched by bottom navBar ]
   final List<Widget> homeViews = [
     DashboardView(),
     TodayTaskView(),
   ];
 
-  // temp var to create each task
+  /// [ temp var to create each task ]
   Task? tempTask;
 
-  // task lists
+  /// [ task lists ]
   List<Task?> allTasks = [];
   List<Task?> commingTasks = [];
   List<Task?> pastTasks = [];
   List<Task?> todayTasks = [];
 
-  // userData
+  /// [ userData ]
   String? userName;
   bool? isMale = false;
 
-  // instance of notification Plugin
+  /// [ instance of notification Plugin ]
   late NotificationPlugin nPlugin;
 
-  // function to return correct view on bottom navBar switch
+  /// [ function to return correct view on bottom navBar switch ]
   Widget navBarSwitcher() {
     return homeViews.elementAt(currentIndex);
   }
 
-  // ExpandedContainer
+  /// [ ExpandedContainer ]
   void onExpand(bool value) {
     isExpanded = value;
     update();
   }
 
-  // change icon in bottomSheet
+  /// [ change icon in bottomSheet ]
   changeIcon(String? newIcon) {
     selectedIcon = newIcon;
     update(['dropDownIcon', true]);
   }
 
-  // function to toggle repeat switch in BottomSheet
+  /// [ function to toggle repeat switch in BottomSheet ]
   toggleRepeat(bool newValue) {
     isRepeat = newValue;
     update(['isRepeat', true]);
   }
 
-  // convert time to minutes
+  /// [ convert time to minutes ]
   double toDouble(TimeOfDay myTime) => myTime.hour + myTime.minute / 60.0;
 
-  // function to sort allTasks based on date & time.
+  /// [ function to sort allTasks based on date & time. ]
   sortAllTasks() {
     var currDt = DateTime.now();
     allTasks.forEach((ele) {
@@ -144,7 +144,7 @@ class HomeController extends GetxController {
     pastTasks = tmpPastTasks.reversed.toList();
   }
 
-  // Function to generate dailyTask
+  /// [ Function to generate dailyTask ]
   dailyTask() {
     todayTasks = [];
     var currDt = DateTime.now();
@@ -168,7 +168,7 @@ class HomeController extends GetxController {
     }
   }
 
-  // function to add task via bottomSheet
+  /// [ function to add task via bottomSheet ]
   addTask() async {
     tempTask = Task();
     var box = await Hive.openBox(taskBox);
@@ -199,7 +199,7 @@ class HomeController extends GetxController {
     Get.back();
   }
 
-  // preUpdates
+  /// [ preUpdates ]
   preUpdateTask(Task task) {
     selectedIcon = task.taskImage;
     titleController!.text = task.taskTitle!;
@@ -213,7 +213,7 @@ class HomeController extends GetxController {
     isRepeat = task.isRepeat;
   }
 
-  // function to update task via bottomSheet
+  /// [ function to update task via bottomSheet ]
   updateTask(Task task) async {
     tempTask = Task();
     var modDate = DateTime(
@@ -240,7 +240,7 @@ class HomeController extends GetxController {
     print(index);
   }
 
-  // function to read task from database
+  /// [ function to read task from database ]
   Future<List<Task?>> getTasks() async {
     var box = await Hive.openBox(taskBox);
     List<Task?> taskList = [];
@@ -259,7 +259,7 @@ class HomeController extends GetxController {
     return taskList;
   }
 
-  // function to delete task by ID
+  /// [ function to delete task by ID ]
   deleteTask(Task task) async {
     int index = allTasks.indexOf(task);
     allTasks.removeAt(index);
@@ -269,7 +269,7 @@ class HomeController extends GetxController {
     print(index);
   }
 
-  // function to rewrite all tasks to DB
+  /// [ function to rewrite all tasks to DB ]
   reWriteTasks() async {
     var box = await Hive.openBox(taskBox);
     // ignore: unused_local_variable
@@ -282,7 +282,7 @@ class HomeController extends GetxController {
     Hive.close();
   }
 
-  // function to reset all controllers
+  /// [ function to reset all controllers ]
   controllerReset() {
     titleController!.text = '';
     descController!.text = '';
@@ -297,7 +297,7 @@ class HomeController extends GetxController {
     isRepeat = false;
   }
 
-  // function to do routine on CRUD operations
+  /// [ function to do routine on CRUD operations ]
   taskRoutine() {
     sortAllTasks();
     dailyTask();
@@ -307,7 +307,7 @@ class HomeController extends GetxController {
     setTaskNotification();
   }
 
-  // setDateFunction bottomSheet
+  /// [ setDateFunction bottomSheet ]
   Future<Null> selectDate(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
       context: context,
@@ -323,7 +323,7 @@ class HomeController extends GetxController {
     }
   }
 
-  // setTimeFunction bottomSheet
+  /// [ setTimeFunction bottomSheet ]
   Future<Null> selectTime(BuildContext context) async {
     final TimeOfDay? picked = await showTimePicker(
       context: context,
@@ -342,7 +342,7 @@ class HomeController extends GetxController {
     }
   }
 
-  // function to convert time from string to TimeOfDay
+  /// [ function to convert time from string to TimeOfDay ]
   TimeOfDay timeConvert(String normTime) {
     int hour;
     int minute;
@@ -362,7 +362,7 @@ class HomeController extends GetxController {
     return TimeOfDay(hour: hour, minute: minute);
   }
 
-  // function to set currentTask
+  /// [ function to set currentTask ]
   setCurrentTask() {
     var cDt = DateTime.now();
     isCurrentTaskPresent = false;
@@ -377,7 +377,7 @@ class HomeController extends GetxController {
     }
   }
 
-  // function to set upcomingTask
+  /// [ function to set upcomingTask ]
   setUpcomingTask() {
     isUpcommingTaskPresent = false;
     upcomingTask = Task();
@@ -399,14 +399,14 @@ class HomeController extends GetxController {
     update([3, true]);
   }
 
-  // function to get current user
+  /// [ function to get current user ]
   getUser() {
     userName = userData.read('fName');
     isMale = userData.read('isMale');
     update([7, true]);
   }
 
-  // function to set notifications for tasks.
+  /// [ function to set notifications for tasks. ]
   setTaskNotification() {
     allTasks.forEach((element) {
       if (element!.taskDate!.isAfter(DateTime.now())) {
@@ -415,7 +415,7 @@ class HomeController extends GetxController {
     });
   }
 
-  // function to cancel notifications for tasks.
+  /// [ function to cancel notifications for tasks. ]
   cancellAllTaskNotification() {
     allTasks.forEach((element) {
       nPlugin.cancelTaskNotifucation(allTasks.indexOf(element));
@@ -460,7 +460,7 @@ class HomeController extends GetxController {
     timeController!.dispose();
   }
 
-  // function to delete confirm dialog
+  /// [ function to delete confirm dialog ]
   Future<dynamic> customDialogDel(BuildContext context, Task task) {
     return Get.dialog(Container(
       margin: EdgeInsets.symmetric(
