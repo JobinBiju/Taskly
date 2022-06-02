@@ -47,10 +47,10 @@ class SettingsView extends GetView<SettingsController> {
                         underline: Container(color: Colors.transparent),
                         hint: Text('Select'),
                         items: controller.themes.map(
-                          (String value) {
+                          (String? value) {
                             return DropdownMenuItem<String>(
                               value: value,
-                              child: Text(value),
+                              child: Text(value!),
                             );
                           },
                         ).toList(),
@@ -79,7 +79,7 @@ class SettingsView extends GetView<SettingsController> {
                 init: controller,
                 builder: (_) {
                   return Switch(
-                    value: controller.drinkWater,
+                    value: controller.drinkWater!,
                     onChanged: controller.toggleWater,
                     activeTrackColor:
                         Theme.of(context).primaryColor.withOpacity(0.5),

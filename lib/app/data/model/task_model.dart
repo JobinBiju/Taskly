@@ -1,10 +1,10 @@
 class Task {
-  String taskImage;
-  String taskTitle;
-  String taskDesc;
-  String startTime;
-  DateTime taskDate;
-  bool isRepeat;
+  String? taskImage;
+  String? taskTitle;
+  String? taskDesc;
+  String? startTime;
+  DateTime? taskDate;
+  bool? isRepeat;
 
   Task({
     this.taskImage,

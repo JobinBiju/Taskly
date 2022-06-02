@@ -56,7 +56,7 @@ class ProfileView extends GetView<ProfileController> {
                               ),
                               SizedBox(height: size.height * 0.007),
                               Text(
-                                fController.email,
+                                fController.email!,
                                 style: kSub2HeadTextStyle.copyWith(
                                   color: Theme.of(context).primaryColorDark,
                                   fontSize: 16,
@@ -84,7 +84,8 @@ class ProfileView extends GetView<ProfileController> {
                 ),
               ),
               leading: Icon(
-                FontAwesomeIcons.userEdit,
+                // FontAwesomeIcons.userEdit,
+                FontAwesomeIcons.userPen,
                 color: Theme.of(context).primaryColorDark,
                 size: size.width * 0.06,
               ),
@@ -102,7 +103,8 @@ class ProfileView extends GetView<ProfileController> {
                 ),
               ),
               leading: Icon(
-                FontAwesomeIcons.cog,
+                // FontAwesomeIcons.cog,
+                FontAwesomeIcons.gear,
                 color: Theme.of(context).primaryColorDark,
                 size: size.width * 0.06,
               ),
@@ -117,7 +119,8 @@ class ProfileView extends GetView<ProfileController> {
                 ),
               ),
               leading: Icon(
-                FontAwesomeIcons.signOutAlt,
+                // FontAwesomeIcons.signOutAlt,
+                FontAwesomeIcons.rightFromBracket,
                 color: Theme.of(context).primaryColorDark,
                 size: size.width * 0.06,
               ),

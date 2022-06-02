@@ -58,11 +58,15 @@ class HomeView extends GetView<HomeController> {
                 style: kSub2HeadTextStyle.copyWith(fontSize: 16),
               ),
               icon: Icon(
-                FontAwesomeIcons.home,
+                // FontAwesomeIcons.home,
+                FontAwesomeIcons.house,
                 color: Theme.of(context).primaryColorDark,
               ),
-              activeIcon: Icon(FontAwesomeIcons.home,
-                  color: Theme.of(context).primaryColor),
+              // activeIcon: Icon(FontAwesomeIcons.home,
+              activeIcon: Icon(
+                FontAwesomeIcons.house,
+                color: Theme.of(context).primaryColor,
+              ),
             ),
             BubbleBottomBarItem(
               backgroundColor: Colors.grey,

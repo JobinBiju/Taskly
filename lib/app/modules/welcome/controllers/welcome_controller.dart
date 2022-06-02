@@ -5,21 +5,21 @@ import 'package:taskly/app/data/model/user_model.dart';
 import 'package:taskly/app/modules/home/views/home_view.dart';
 
 class WelcomeController extends GetxController {
-  List<bool> selectedToggleGender;
+  late List<bool> selectedToggleGender;
 
   // Text feild controllers for login.
-  TextEditingController firstNameController;
-  TextEditingController lastNameController;
-  TextEditingController emailController;
+  TextEditingController? firstNameController;
+  TextEditingController? lastNameController;
+  TextEditingController? emailController;
 
   // instance of Get Storage
   final userData = GetStorage();
 
   // stire loginStatus
-  bool isLoggedIn;
+  bool? isLoggedIn;
 
   // instance of userData model
-  User user;
+  late User user;
 
   @override
   void onInit() {
@@ -63,7 +63,7 @@ class WelcomeController extends GetxController {
   }
 
   // FirstName validator
-  String fNameValidator(String value) {
+  String? fNameValidator(String value) {
     if (value.isEmpty) {
       return 'Enter your first name';
     }
@@ -74,7 +74,7 @@ class WelcomeController extends GetxController {
   }
 
   // LastName validator
-  String lNameValidator(String value) {
+  String? lNameValidator(String value) {
     if (value.isEmpty) {
       return null;
     }
@@ -85,7 +85,7 @@ class WelcomeController extends GetxController {
   }
 
   // Email validator
-  String emailValidator(String value) {
+  String? emailValidator(String value) {
     if (value.isEmpty) {
       return 'Enter your email';
     }
@@ -98,9 +98,9 @@ class WelcomeController extends GetxController {
   // function to validate creds
   bool validateCreds() {
     bool validated = false;
-    if (fNameValidator(firstNameController.text) == null &&
-        lNameValidator(lastNameController.text) == null &&
-        emailValidator(emailController.text) == null &&
+    if (fNameValidator(firstNameController!.text) == null &&
+        lNameValidator(lastNameController!.text) == null &&
+        emailValidator(emailController!.text) == null &&
         selectedToggleGender.contains(true)) {
       validated = true;
     } else {
@@ -113,9 +113,9 @@ class WelcomeController extends GetxController {
   userLogin() {
     if (validateCreds()) {
       user = User();
-      user.firstName = firstNameController.text;
-      user.lastName = lastNameController.text;
-      user.email = emailController.text;
+      user.firstName = firstNameController!.text;
+      user.lastName = lastNameController!.text;
+      user.email = emailController!.text;
       user.isMale = selectedToggleGender.first;
       userData.write('fName', user.firstName);
       userData.write('lName', user.lastName);

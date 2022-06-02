@@ -8,10 +8,10 @@ class SettingsController extends GetxController {
   final userData = GetStorage();
 
   // store selectedTheme
-  String selectedTheme;
+  String? selectedTheme;
 
   // store state of drinkWaterNotify
-  bool drinkWater;
+  bool? drinkWater;
 
   // instance of Notification service
   NotificationPlugin nPlugin = NotificationPlugin();
@@ -29,10 +29,10 @@ class SettingsController extends GetxController {
   ];
 
   // function to change theme on settings
-  changeTheme(String newValue) {
+  changeTheme(String? newValue) {
     selectedTheme = newValue;
     userData.write('theme', newValue);
-    int n = themes.indexOf(newValue);
+    int n = themes.indexOf(newValue!);
     Get.changeTheme(appThemeData.values.elementAt(n));
     update();
   }

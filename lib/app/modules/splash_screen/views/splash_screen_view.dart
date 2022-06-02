@@ -22,7 +22,7 @@ class SplashScreenView extends GetView<SplashScreenController> {
                   frameRate: FrameRate(60),
                   repeat: true,
                   onLoaded: (composition) {
-                    _.animationController..duration = composition.duration;
+                    _.animationController!..duration = composition.duration;
                   },
                 ),
               ),

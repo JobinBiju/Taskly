@@ -2,26 +2,26 @@ import 'package:flutter/material.dart';
 import 'package:taskly/app/theme/text_theme.dart';
 
 class ProceedButton extends StatelessWidget {
-  final String title;
-  final Function onPress;
-  final Color buttonColor;
+  final String? title;
+  final Function? onPress;
+  final Color? buttonColor;
   final Size size;
   const ProceedButton({
-    @required this.size,
-    @required this.title,
-    @required this.onPress,
+    required this.size,
+    required this.title,
+    required this.onPress,
     this.buttonColor,
   });
 
   @override
   Widget build(BuildContext context) {
     return MaterialButton(
-      onPressed: onPress,
+      onPressed: onPress as void Function()?,
       height: size.height * 0.066,
       minWidth: size.width * 0.4,
       elevation: 0,
       child: Text(
-        title,
+        title!,
         style: kSub2HeadTextStyle.copyWith(
             color: Theme.of(context).primaryColorLight),
       ),

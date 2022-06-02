@@ -76,9 +76,9 @@ class DashboardView extends GetView<HomeController> {
                     ? DecoratedContainer(
                         margin: EdgeInsets.only(bottom: 20),
                         color: Theme.of(context).primaryColor.withOpacity(0.85),
-                        svgAsset: controller.currentTask.taskImage,
-                        title: controller.currentTask.taskTitle,
-                        time: controller.currentTask.startTime,
+                        svgAsset: controller.currentTask!.taskImage,
+                        title: controller.currentTask!.taskTitle,
+                        time: controller.currentTask!.startTime,
                       )
                     : Center(
                         child: Text(
@@ -121,9 +121,9 @@ class DashboardView extends GetView<HomeController> {
                     ? DecoratedContainer(
                         margin: EdgeInsets.only(bottom: 20),
                         color: Theme.of(context).primaryColor.withOpacity(0.85),
-                        svgAsset: controller.upcomingTask.taskImage,
-                        title: controller.upcomingTask.taskTitle,
-                        time: controller.upcomingTask.startTime,
+                        svgAsset: controller.upcomingTask!.taskImage,
+                        title: controller.upcomingTask!.taskTitle,
+                        time: controller.upcomingTask!.startTime,
                       )
                     : Center(
                         child: Text(

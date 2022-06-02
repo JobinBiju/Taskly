@@ -5,14 +5,14 @@ import 'package:taskly/app/modules/home/controllers/home_controller.dart';
 import 'package:taskly/app/theme/text_theme.dart';
 
 class ExpandedContainer extends GetView<HomeController> {
-  final String icon;
-  final String title;
-  final String time;
-  final String date;
-  final String desc;
+  final String? icon;
+  final String? title;
+  final String? time;
+  final String? date;
+  final String? desc;
   final bool ifDate;
   const ExpandedContainer({
-    Key key,
+    Key? key,
     this.title,
     this.icon,
     this.time,
@@ -60,10 +60,10 @@ class ExpandedContainer extends GetView<HomeController> {
                   decoration: BoxDecoration(
                       color: Colors.transparent,
                       borderRadius: BorderRadius.circular(5)),
-                  child: SvgPicture.asset(icon),
+                  child: SvgPicture.asset(icon!),
                 ),
                 title: Text(
-                  title,
+                  title!,
                   maxLines: 2,
                   style: kSub2HeadTextStyle.copyWith(
                     fontSize: 16,
@@ -75,7 +75,7 @@ class ExpandedContainer extends GetView<HomeController> {
                   children: [
                     ifDate
                         ? Text(
-                            date,
+                            date!,
                             style: kSub2HeadTextStyle.copyWith(
                                 fontSize: 14,
                                 color:
@@ -84,7 +84,7 @@ class ExpandedContainer extends GetView<HomeController> {
                         : SizedBox(),
                     ifDate ? SizedBox(height: 5) : SizedBox(),
                     Text(
-                      time,
+                      time!,
                       style: kSub2HeadTextStyle.copyWith(
                           fontSize: 14,
                           color: Theme.of(context).scaffoldBackgroundColor),
@@ -93,7 +93,7 @@ class ExpandedContainer extends GetView<HomeController> {
                 ),
                 children: [
                   Text(
-                    desc,
+                    desc!,
                     style: kSub2HeadTextStyle.copyWith(
                         fontSize: 12,
                         color: Theme.of(context).scaffoldBackgroundColor),

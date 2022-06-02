@@ -7,8 +7,8 @@ import 'package:taskly/app/modules/home/controllers/home_controller.dart';
 import 'package:taskly/app/theme/text_theme.dart';
 
 class BottomSheetContent extends GetView<HomeController> {
-  final Function onSubmit;
-  final String buttonText;
+  final Function? onSubmit;
+  final String? buttonText;
 
   BottomSheetContent({this.onSubmit, this.buttonText});
 
@@ -144,7 +144,7 @@ class BottomSheetContent extends GetView<HomeController> {
                   initState: (_) {},
                   builder: (_) {
                     return Switch(
-                      value: controller.isRepeat,
+                      value: controller.isRepeat!,
                       onChanged: controller.toggleRepeat,
                       activeTrackColor:
                           Theme.of(context).primaryColor.withOpacity(0.5),

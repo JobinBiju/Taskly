@@ -33,20 +33,20 @@ class HomeController extends GetxController {
   // bools for dashboard view
   bool isCurrentTaskPresent = false;
   bool isUpcommingTaskPresent = false;
-  Task currentTask;
-  Task upcomingTask;
+  Task? currentTask;
+  Task? upcomingTask;
 
   // controllers and var for bottomSheet TextFeilds
-  TextEditingController titleController;
-  TextEditingController descController;
-  TextEditingController dateController;
-  TextEditingController timeController;
-  String selectedIcon;
-  DateTime selectedDate;
-  TimeOfDay selectedTime;
-  String setTime, setDate;
-  String hour, minute, time;
-  bool isRepeat = false;
+  TextEditingController? titleController;
+  TextEditingController? descController;
+  TextEditingController? dateController;
+  TextEditingController? timeController;
+  String? selectedIcon;
+  DateTime? selectedDate;
+  late TimeOfDay selectedTime;
+  String? setTime, setDate;
+  String? hour, minute, time;
+  bool? isRepeat = false;
   List<String> icons = [
     'assets/icons/alarm-clock.svg',
     'assets/icons/breakfast.svg',
@@ -61,7 +61,7 @@ class HomeController extends GetxController {
   ];
 
   // allTasks slidable
-  SlidableController slideC;
+  SlidableController? slideC;
 
   // the list of screens switched by bottom navBar
   final List<Widget> homeViews = [
@@ -70,20 +70,20 @@ class HomeController extends GetxController {
   ];
 
   // temp var to create each task
-  Task tempTask;
+  Task? tempTask;
 
   // task lists
-  List<Task> allTasks = [];
-  List<Task> commingTasks = [];
-  List<Task> pastTasks = [];
-  List<Task> todayTasks = [];
+  List<Task?> allTasks = [];
+  List<Task?> commingTasks = [];
+  List<Task?> pastTasks = [];
+  List<Task?> todayTasks = [];
 
   // userData
-  String userName;
-  bool isMale = false;
+  String? userName;
+  bool? isMale = false;
 
   // instance of notification Plugin
-  NotificationPlugin nPlugin;
+  late NotificationPlugin nPlugin;
 
   // function to return correct view on bottom navBar switch
   Widget navBarSwitcher() {
@@ -97,7 +97,7 @@ class HomeController extends GetxController {
   }
 
   // change icon in bottomSheet
-  changeIcon(String newIcon) {
+  changeIcon(String? newIcon) {
     selectedIcon = newIcon;
     update(['dropDownIcon', true]);
   }
@@ -115,8 +115,8 @@ class HomeController extends GetxController {
   sortAllTasks() {
     var currDt = DateTime.now();
     allTasks.forEach((ele) {
-      if (ele.isRepeat == true) {
-        var tmp = ele.taskDate;
+      if (ele!.isRepeat == true) {
+        var tmp = ele.taskDate!;
         ele.taskDate = DateTime(
           currDt.year,
           currDt.month,
@@ -127,15 +127,15 @@ class HomeController extends GetxController {
       }
     });
     allTasks.sort((a, b) {
-      var aD = a.taskDate.toString();
-      var bD = b.taskDate.toString();
+      var aD = a!.taskDate.toString();
+      var bD = b!.taskDate.toString();
       return aD.compareTo(bD);
     });
     pastTasks.clear();
     commingTasks.clear();
-    List<Task> tmpPastTasks = [];
+    List<Task?> tmpPastTasks = [];
     allTasks.forEach((element) {
-      if (element.taskDate.isBefore(currDt)) {
+      if (element!.taskDate!.isBefore(currDt)) {
         tmpPastTasks.add(element);
       } else {
         commingTasks.add(element);
@@ -150,19 +150,19 @@ class HomeController extends GetxController {
     var currDt = DateTime.now();
     if (allTasks.length != 0) {
       allTasks.forEach((element) {
-        if (element.taskDate.day == currDt.day &&
-            element.taskDate.month == currDt.month &&
-            element.taskDate.year == currDt.year) {
+        if (element!.taskDate!.day == currDt.day &&
+            element.taskDate!.month == currDt.month &&
+            element.taskDate!.year == currDt.year) {
           todayTasks.add(element);
         }
       });
       todayTasks.sort((a, b) {
-        var aT = toDouble(timeConvert(a.startTime));
-        var bT = toDouble(timeConvert(b.startTime));
+        var aT = toDouble(timeConvert(a!.startTime!));
+        var bT = toDouble(timeConvert(b!.startTime!));
         return aT.compareTo(bT);
       });
       todayTasks.forEach((element) {
-        print(element.startTime);
+        print(element!.startTime);
       });
       update([1, true]);
     }
@@ -173,23 +173,23 @@ class HomeController extends GetxController {
     tempTask = Task();
     var box = await Hive.openBox(taskBox);
     var modDate = DateTime(
-      selectedDate.year,
-      selectedDate.month,
-      selectedDate.day,
+      selectedDate!.year,
+      selectedDate!.month,
+      selectedDate!.day,
       selectedTime.hour,
       selectedTime.minute,
     );
-    tempTask.taskImage = selectedIcon;
-    tempTask.taskTitle = titleController.text;
-    tempTask.taskDesc = descController.text;
-    tempTask.taskDate = modDate;
-    tempTask.startTime = formatDate(
+    tempTask!.taskImage = selectedIcon;
+    tempTask!.taskTitle = titleController!.text;
+    tempTask!.taskDesc = descController!.text;
+    tempTask!.taskDate = modDate;
+    tempTask!.startTime = formatDate(
         DateTime(2020, 08, 1, selectedTime.hour, selectedTime.minute),
         [hh, ':', nn, " ", am]).toString();
-    tempTask.isRepeat = isRepeat;
+    tempTask!.isRepeat = isRepeat;
     print(modDate.toString());
     allTasks.add(tempTask);
-    Map<String, dynamic> taskMap = tempTask.toJson();
+    Map<String, dynamic> taskMap = tempTask!.toJson();
     int idOfTask = await box.add(taskMap);
     taskIds = idOfTask;
     Hive.close();
@@ -202,14 +202,14 @@ class HomeController extends GetxController {
   // preUpdates
   preUpdateTask(Task task) {
     selectedIcon = task.taskImage;
-    titleController.text = task.taskTitle;
-    descController.text = task.taskDesc;
-    selectedTime = timeConvert(task.startTime);
-    timeController.text = formatDate(
+    titleController!.text = task.taskTitle!;
+    descController!.text = task.taskDesc!;
+    selectedTime = timeConvert(task.startTime!);
+    timeController!.text = formatDate(
         DateTime(2020, 08, 1, selectedTime.hour, selectedTime.minute),
         [hh, ':', nn, " ", am]).toString();
     selectedDate = task.taskDate;
-    dateController.text = DateFormat.yMMMd().format(selectedDate);
+    dateController!.text = DateFormat.yMMMd().format(selectedDate!);
     isRepeat = task.isRepeat;
   }
 
@@ -217,20 +217,20 @@ class HomeController extends GetxController {
   updateTask(Task task) async {
     tempTask = Task();
     var modDate = DateTime(
-      selectedDate.year,
-      selectedDate.month,
-      selectedDate.day,
+      selectedDate!.year,
+      selectedDate!.month,
+      selectedDate!.day,
       selectedTime.hour,
       selectedTime.minute,
     );
-    tempTask.taskImage = selectedIcon;
-    tempTask.taskTitle = titleController.text;
-    tempTask.taskDesc = descController.text;
-    tempTask.taskDate = modDate;
-    tempTask.startTime = formatDate(
+    tempTask!.taskImage = selectedIcon;
+    tempTask!.taskTitle = titleController!.text;
+    tempTask!.taskDesc = descController!.text;
+    tempTask!.taskDate = modDate;
+    tempTask!.startTime = formatDate(
         DateTime(2020, 08, 1, selectedTime.hour, selectedTime.minute),
         [hh, ':', nn, " ", am]).toString();
-    tempTask.isRepeat = isRepeat;
+    tempTask!.isRepeat = isRepeat;
     int index = allTasks.indexOf(task);
     allTasks.setAll(index, [tempTask]);
     taskRoutine();
@@ -241,9 +241,9 @@ class HomeController extends GetxController {
   }
 
   // function to read task from database
-  Future<List<Task>> getTasks() async {
+  Future<List<Task?>> getTasks() async {
     var box = await Hive.openBox(taskBox);
-    List<Task> taskList = [];
+    List<Task?> taskList = [];
     for (int i = 0; i < box.length; i++) {
       var taskMap = box.getAt(i).map((k, e) => MapEntry(k.toString(), e));
       Task tmp = Task();
@@ -275,7 +275,7 @@ class HomeController extends GetxController {
     // ignore: unused_local_variable
     int id = await box.clear();
     allTasks.forEach((element) async {
-      Map<String, dynamic> newTaskMap = element.toJson();
+      Map<String, dynamic> newTaskMap = element!.toJson();
       // ignore: unused_local_variable
       int idOfTask = await box.add(newTaskMap);
     });
@@ -284,12 +284,12 @@ class HomeController extends GetxController {
 
   // function to reset all controllers
   controllerReset() {
-    titleController.text = '';
-    descController.text = '';
+    titleController!.text = '';
+    descController!.text = '';
     selectedDate = DateTime.now();
-    dateController.text = DateFormat.yMMMd().format(selectedDate);
+    dateController!.text = DateFormat.yMMMd().format(selectedDate!);
     selectedTime = TimeOfDay(hour: 00, minute: 00);
-    timeController.text = formatDate(
+    timeController!.text = formatDate(
       DateTime(2020, 08, 1, selectedTime.hour, selectedTime.minute),
       [hh, ':', nn, " ", am],
     ).toString();
@@ -309,23 +309,23 @@ class HomeController extends GetxController {
 
   // setDateFunction bottomSheet
   Future<Null> selectDate(BuildContext context) async {
-    final DateTime picked = await showDatePicker(
+    final DateTime? picked = await showDatePicker(
       context: context,
-      initialDate: selectedDate,
+      initialDate: selectedDate!,
       initialDatePickerMode: DatePickerMode.day,
       firstDate: DateTime(2015),
       lastDate: DateTime(2101),
     );
     if (picked != null) {
       selectedDate = picked;
-      dateController.text = DateFormat.yMMMd().format(selectedDate);
+      dateController!.text = DateFormat.yMMMd().format(selectedDate!);
       update();
     }
   }
 
   // setTimeFunction bottomSheet
   Future<Null> selectTime(BuildContext context) async {
-    final TimeOfDay picked = await showTimePicker(
+    final TimeOfDay? picked = await showTimePicker(
       context: context,
       initialTime: selectedTime,
     );
@@ -333,9 +333,9 @@ class HomeController extends GetxController {
       selectedTime = picked;
       hour = selectedTime.hour.toString();
       minute = selectedTime.minute.toString();
-      time = hour + ' : ' + minute;
-      timeController.text = time;
-      timeController.text = formatDate(
+      time = hour! + ' : ' + minute!;
+      timeController!.text = time!;
+      timeController!.text = formatDate(
           DateTime(2020, 08, 1, selectedTime.hour, selectedTime.minute),
           [hh, ':', nn, " ", am]).toString();
       update();
@@ -368,7 +368,7 @@ class HomeController extends GetxController {
     isCurrentTaskPresent = false;
     if (todayTasks.length != 0) {
       todayTasks.forEach((element) {
-        if (element.taskDate.compareTo(cDt) <= 0) {
+        if (element!.taskDate!.compareTo(cDt) <= 0) {
           currentTask = element;
           isCurrentTaskPresent = true;
         } else {}
@@ -384,7 +384,7 @@ class HomeController extends GetxController {
     var cDt = DateTime.now();
     if (todayTasks.length != 0) {
       for (int i = 0; i < todayTasks.length; i++) {
-        if (todayTasks[i].taskDate.compareTo(cDt) > 0) {
+        if (todayTasks[i]!.taskDate!.compareTo(cDt) > 0) {
           if (isCurrentTaskPresent) {
             var index = todayTasks.indexOf(currentTask);
             upcomingTask = todayTasks.elementAt(index + 1);
@@ -409,7 +409,7 @@ class HomeController extends GetxController {
   // function to set notifications for tasks.
   setTaskNotification() {
     allTasks.forEach((element) {
-      if (element.taskDate.isAfter(DateTime.now())) {
+      if (element!.taskDate!.isAfter(DateTime.now())) {
         nPlugin.showTaskNotification(element, allTasks.indexOf(element));
       }
     });
@@ -436,11 +436,11 @@ class HomeController extends GetxController {
     descController = TextEditingController();
     dateController = TextEditingController();
     timeController = TextEditingController();
-    slideC = SlidableController();
+    // slideC = SlidableController();
     selectedDate = DateTime.now();
-    dateController.text = DateFormat.yMMMd().format(selectedDate);
+    dateController!.text = DateFormat.yMMMd().format(selectedDate!);
     selectedTime = TimeOfDay(hour: 00, minute: 00);
-    timeController.text = formatDate(
+    timeController!.text = formatDate(
         DateTime(2020, 08, 1, selectedTime.hour, selectedTime.minute),
         [hh, ':', nn, " ", am]).toString();
     selectedIcon = icons.first;
@@ -454,10 +454,10 @@ class HomeController extends GetxController {
   @override
   void onClose() {
     super.onClose();
-    titleController.dispose();
-    descController.dispose();
-    dateController.dispose();
-    timeController.dispose();
+    titleController!.dispose();
+    descController!.dispose();
+    dateController!.dispose();
+    timeController!.dispose();
   }
 
   // function to delete confirm dialog
@@ -527,7 +527,7 @@ class HomeController extends GetxController {
                         SizedBox(width: 20),
                         GestureDetector(
                           onTap: () {
-                            slideC.activeState?.close();
+                            // slideC.activeState?.close();
                             Slidable.of(context)?.close();
                             deleteTask(task);
                             Get.back();
