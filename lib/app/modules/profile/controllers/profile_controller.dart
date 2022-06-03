@@ -7,30 +7,30 @@ import 'package:taskly/app/modules/home/controllers/home_controller.dart';
 import 'package:taskly/app/theme/text_theme.dart';
 
 class ProfileController extends GetxController {
-  // instance of Get Storage
+  /// [ instance of Get Storage ]
   final userData = GetStorage();
 
-  // Hive DB
+  /// [ Hive DB ]
   String taskBox = 'tasks';
 
-  // Text feild controllers for edit account
-  TextEditingController firstNameController;
-  TextEditingController lastNameController;
-  TextEditingController emailController;
+  /// [ Text feild controllers for edit account ]
+  TextEditingController? firstNameController;
+  TextEditingController? lastNameController;
+  TextEditingController? emailController;
 
-  // list of state for gender toggleButton
-  List<bool> selectedToggleGender;
+  /// [ list of state for gender toggleButton ]
+  late List<bool> selectedToggleGender;
 
-  // userData
-  String fName;
-  String lName;
-  String email;
-  bool isMale;
+  /// [ userData ]
+  String? fName;
+  String? lName;
+  String? email;
+  bool? isMale;
 
-  // instance of user model
-  User user;
+  /// [ instance of user model ]
+  late User user;
 
-  //function to toggle gender in edit account
+  /// [ function to toggle gender in edit account ]
   onToggledGender(int index) {
     if (index == 0) {
       selectedToggleGender[index] = !selectedToggleGender[index];
@@ -47,8 +47,8 @@ class ProfileController extends GetxController {
     update([5, true]);
   }
 
-  // FirstName validator
-  String fNameValidator(String value) {
+  /// [ FirstName validator ]
+  String? fNameValidator(String value) {
     if (value.isEmpty) {
       return 'Enter your first name';
     }
@@ -58,8 +58,8 @@ class ProfileController extends GetxController {
       return 'Enter a valid name';
   }
 
-  // LastName validator
-  String lNameValidator(String value) {
+  /// [ LastName validator ]
+  String? lNameValidator(String value) {
     if (value.isEmpty) {
       return null;
     }
@@ -69,8 +69,8 @@ class ProfileController extends GetxController {
       return 'Enter a valid name';
   }
 
-  // Email validator
-  String emailValidator(String value) {
+  /// [ Email validator ]
+  String? emailValidator(String value) {
     if (value.isEmpty) {
       return 'Enter your email';
     }
@@ -80,12 +80,12 @@ class ProfileController extends GetxController {
       return 'Enter a valid email';
   }
 
-  // function to validate creds
+  /// [ function to validate creds ]
   bool validateCreds() {
     bool validated = false;
-    if (fNameValidator(firstNameController.text) == null &&
-        lNameValidator(lastNameController.text) == null &&
-        emailValidator(emailController.text) == null &&
+    if (fNameValidator(firstNameController!.text) == null &&
+        lNameValidator(lastNameController!.text) == null &&
+        emailValidator(emailController!.text) == null &&
         selectedToggleGender.contains(true)) {
       validated = true;
     } else {
@@ -104,7 +104,7 @@ class ProfileController extends GetxController {
     selectedToggleGender = [false, false];
   }
 
-  // function to get userInfo
+  /// [ function to get userInfo ]
   getUser() {
     fName = userData.read('fName');
     lName = userData.read('lName');
@@ -112,7 +112,7 @@ class ProfileController extends GetxController {
     isMale = userData.read('isMale');
   }
 
-  // function to reset userInfo
+  /// [ function to reset userInfo ]
   resetUser() async {
     var box = await Hive.openBox(taskBox);
     userData.erase();
@@ -120,12 +120,12 @@ class ProfileController extends GetxController {
     Hive.close();
   }
 
-  // function to get current userInfo for edit
+  /// [ function to get current userInfo for edit ]
   preEditUser() {
-    firstNameController.text = fName;
-    lastNameController.text = lName;
-    emailController.text = email;
-    if (isMale) {
+    firstNameController!.text = fName!;
+    lastNameController!.text = lName!;
+    emailController!.text = email!;
+    if (isMale!) {
       selectedToggleGender.first = true;
       selectedToggleGender.last = false;
     } else {
@@ -134,14 +134,14 @@ class ProfileController extends GetxController {
     }
   }
 
-  // function to apply edited user details
+  /// [ function to apply edited user details ]
   editUser() {
     if (validateCreds()) {
       HomeController c = Get.put(HomeController());
       user = User();
-      user.firstName = firstNameController.text;
-      user.lastName = lastNameController.text;
-      user.email = emailController.text;
+      user.firstName = firstNameController!.text;
+      user.lastName = lastNameController!.text;
+      user.email = emailController!.text;
       user.isMale = selectedToggleGender.first;
       userData.write('fName', user.firstName);
       userData.write('lName', user.lastName);
@@ -162,7 +162,7 @@ class ProfileController extends GetxController {
   @override
   void onClose() {}
 
-  // function to return a customDialog for LogOut confirmation
+  /// [ function to return a customDialog for LogOut confirmation ]
   Future<dynamic> customDialogLogOut(BuildContext context) {
     return Get.dialog(Container(
       margin: EdgeInsets.symmetric(

@@ -1,8 +1,8 @@
 class User {
-  String firstName;
-  String lastName;
-  String email;
-  bool isMale;
+  String? firstName;
+  String? lastName;
+  String? email;
+  bool? isMale;
 
   User({
     this.firstName,

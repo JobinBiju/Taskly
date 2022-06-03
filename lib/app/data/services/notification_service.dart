@@ -8,14 +8,14 @@ import 'package:timezone/timezone.dart' as tz;
 
 class NotificationPlugin {
   // Notification controller
-  FlutterLocalNotificationsPlugin fNotification;
+  late FlutterLocalNotificationsPlugin fNotification;
 
   NotificationPlugin() {
     init();
   }
-  Future onNotificationSelected(String payload) {
+  Future onNotificationSelected(String? payload) {
     return showDialog(
-        context: Get.context,
+        context: Get.context!,
         builder: (context) => AlertDialog(
               content: Text('Notify $payload'),
             ));
@@ -25,7 +25,8 @@ class NotificationPlugin {
     var androidDetails = AndroidNotificationDetails(
       'Channel ID 0',
       'Drink Water',
-      'Drink Water Notification',
+      // 'Drink Water Notification',
+      channelDescription: 'Drink Water Notification',
       importance: Importance.max,
       priority: Priority.high,
       sound: RawResourceAndroidNotificationSound('slow_spring_board'),
@@ -61,13 +62,14 @@ class NotificationPlugin {
     final String currentTimeZone =
         await FlutterNativeTimezone.getLocalTimezone();
     final location = tz.getLocation(currentTimeZone);
-    var scheduledTime = tz.TZDateTime.from(task.taskDate, location)
+    var scheduledTime = tz.TZDateTime.from(task.taskDate!, location)
         .add(const Duration(seconds: 5));
 
     var androidDetails = AndroidNotificationDetails(
       "Channel ID 2",
-      task.taskTitle,
-      task.taskDesc,
+      task.taskTitle!,
+      //  task.taskDesc,
+      channelDescription: task.taskDesc,
       importance: Importance.max,
       priority: Priority.high,
       sound: RawResourceAndroidNotificationSound('slow_spring_board'),

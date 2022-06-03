@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
@@ -58,9 +57,9 @@ class WelcomeView extends GetView<WelcomeController> {
             SizedBox(height: size.height * 0.045),
             SvgPicture.asset(
               'assets/icons/laptopPerson2.svg',
-              height: size.height * 0.5,
+              height: size.height * 0.45,
             ),
-            SizedBox(height: size.height * 0.07),
+            SizedBox(height: size.height * 0.06),
             Align(
               alignment: Alignment.center,
               child: ProceedButton(

@@ -12,11 +12,11 @@ class DecoratedContainer extends StatelessWidget {
     this.time,
   });
 
-  final EdgeInsetsGeometry margin;
-  final Color color;
-  final String svgAsset;
-  final String title;
-  final String time;
+  final EdgeInsetsGeometry? margin;
+  final Color? color;
+  final String? svgAsset;
+  final String? title;
+  final String? time;
 
   @override
   Widget build(BuildContext context) {
@@ -51,12 +51,12 @@ class DecoratedContainer extends StatelessWidget {
               decoration: BoxDecoration(
                   color: Colors.transparent,
                   borderRadius: BorderRadius.circular(5)),
-              child: SvgPicture.asset(svgAsset),
+              child: SvgPicture.asset(svgAsset!),
             ),
             Container(
               width: size.width * 0.4,
               child: Text(
-                title,
+                title!,
                 maxLines: 2,
                 style: kSub2HeadTextStyle.copyWith(
                   fontSize: 16,
@@ -66,7 +66,7 @@ class DecoratedContainer extends StatelessWidget {
             ),
             SizedBox(width: 10),
             Text(
-              time,
+              time!,
               style: kSub2HeadTextStyle.copyWith(
                   fontSize: 14,
                   color: Theme.of(context).scaffoldBackgroundColor),

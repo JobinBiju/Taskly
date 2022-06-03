@@ -4,16 +4,16 @@ import 'package:taskly/app/theme/text_theme.dart';
 
 class InputTextFormField extends StatelessWidget {
   final String hintText;
-  final TextEditingController tController;
-  final Color hintTextColor;
-  final Color contentTextColor;
-  final Color textFeildColor;
-  final double width;
-  final bool isEnabled;
-  final Function validator;
+  final TextEditingController? tController;
+  final Color? hintTextColor;
+  final Color? contentTextColor;
+  final Color? textFeildColor;
+  final double? width;
+  final bool? isEnabled;
+  final Function? validator;
   InputTextFormField({
-    Key key,
-    @required this.hintText,
+    Key? key,
+    required this.hintText,
     this.tController,
     this.hintTextColor,
     this.contentTextColor,
@@ -35,7 +35,7 @@ class InputTextFormField extends StatelessWidget {
       ),
       child: TextFormField(
         autovalidateMode: AutovalidateMode.onUserInteraction,
-        validator: validator,
+        // validator: validator as String? Function(String?)?,
         textCapitalization: TextCapitalization.sentences,
         controller: tController,
         enabled: isEnabled,
